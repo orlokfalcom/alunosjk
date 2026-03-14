@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Detetive de Bugs Python</title>
+<title>Detetive de Bugs Python PRO</title>
 
 <style>
 
@@ -22,10 +23,23 @@ height:100vh;
 
 .container{
 width:95%;
-max-width:900px;
+max-width:950px;
 background:#1e293b;
 padding:20px;
 border-radius:10px;
+box-shadow:0 0 25px rgba(0,0,0,0.4);
+}
+
+h1,h2{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:6px;
+border:none;
 }
 
 button{
@@ -37,14 +51,15 @@ border-radius:6px;
 background:#22c55e;
 color:white;
 font-weight:bold;
+cursor:pointer;
 }
 
-.choice{
-background:#334155;
-padding:10px;
-margin-top:8px;
-border-radius:6px;
-cursor:pointer;
+button:hover{
+background:#16a34a;
+}
+
+.home{
+background:#3b82f6;
 }
 
 .code{
@@ -56,17 +71,32 @@ white-space:pre-wrap;
 margin-top:10px;
 }
 
+.choice{
+background:#334155;
+padding:12px;
+margin-top:8px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.choice:hover{
+background:#475569;
+}
+
 .hidden{
 display:none;
 }
 
-.home{
-background:#3b82f6;
+.timer{
+text-align:center;
+font-size:18px;
+margin-top:10px;
+color:#facc15;
 }
 
-.timer{
-color:#facc15;
+.progress{
 text-align:center;
+margin-top:10px;
 }
 
 </style>
@@ -77,6 +107,8 @@ text-align:center;
 
 <div class="container">
 
+<!-- LOGIN -->
+
 <div id="login">
 
 <h1>🐍 Detetive de Bugs Python</h1>
@@ -84,8 +116,11 @@ text-align:center;
 <input id="playerName" placeholder="Digite seu nome">
 
 <button onclick="login()">Entrar</button>
+<button onclick="teacherMode()">Modo Professor</button>
 
 </div>
+
+<!-- MENU -->
 
 <div id="menu" class="hidden">
 
@@ -96,20 +131,34 @@ text-align:center;
 <button onclick="startGame('dificil')">Difícil</button>
 <button onclick="startGame('inferno')">🔥 Inferno</button>
 
-<h3>Ranking</h3>
 <div id="ranking"></div>
 
 </div>
 
+<!-- GAME -->
+
 <div id="game" class="hidden">
 
-<button class="home" onclick="goHome()">Home</button>
+<button class="home" onclick="goHome()">🏠 Home</button>
 
 <h2 id="player"></h2>
 
 <div class="timer" id="timer"></div>
+<div class="progress" id="progress"></div>
 
 <div id="questionBox"></div>
+
+</div>
+
+<!-- PROFESSOR -->
+
+<div id="teacher" class="hidden">
+
+<h2>Painel do Professor</h2>
+
+<div id="teacherRanking"></div>
+
+<button onclick="exitTeacher()">Voltar</button>
 
 </div>
 
@@ -117,19 +166,129 @@ text-align:center;
 
 <script>
 
-var player=""
-var score=0
-var questionIndex=0
-var questions=[]
+"use strict"
+
+let player=""
+let score=0
+let current=0
+let maxQuestions=10
+let time=0
+let timerInterval
+let currentQuestion=null
+let currentLevel=""
+let usadas=[]
+
+let bancoQuestoes={
+facil:[],
+medio:[],
+dificil:[],
+inferno:[]
+}
+
+function gerarQuestoes(){
+
+for(let i=0;i<250;i++){
+
+bancoQuestoes.facil.push({
+
+code:`nome="Ana"
+idade=${Math.floor(Math.random()*20)}
+print(nome+idade)`,
+
+choices:[
+"Erro ao somar texto com número",
+"Erro no print",
+"Erro na variável"
+],
+
+answer:0,
+
+explicacao:"Python não permite somar string com número."
+
+})
+
+}
+
+for(let i=0;i<250;i++){
+
+let n=Math.floor(Math.random()*10)
+
+bancoQuestoes.medio.push({
+
+code:`for i in range(${n})
+ print(i)`,
+
+choices:[
+"Falta : no for",
+"range inválido",
+"print não funciona"
+],
+
+answer:0,
+
+explicacao:"Laços for precisam de ':' no final."
+
+})
+
+}
+
+for(let i=0;i<250;i++){
+
+let n=Math.floor(Math.random()*6)+3
+
+bancoQuestoes.dificil.push({
+
+code:`lista=[1,2,3]
+print(lista[${n}])`,
+
+choices:[
+"Índice inválido",
+"Erro de sintaxe",
+"Lista começa em 1"
+],
+
+answer:0,
+
+explicacao:"Listas começam em índice 0."
+
+})
+
+}
+
+for(let i=0;i<250;i++){
+
+let n=Math.floor(Math.random()*10)
+
+bancoQuestoes.inferno.push({
+
+code:`x=[1,2,3]
+y=x
+y.append(${n})
+print(x)`,
+
+choices:[
+"[1,2,3]",
+"Lista modificada por referência",
+"Erro de append"
+],
+
+answer:1,
+
+explicacao:"Listas são passadas por referência."
+
+})
+
+}
+
+}
+
+gerarQuestoes()
 
 function login(){
 
 player=document.getElementById("playerName").value
 
-if(player==""){
-alert("Digite seu nome")
-return
-}
+if(player==="")return
 
 document.getElementById("login").classList.add("hidden")
 document.getElementById("menu").classList.remove("hidden")
@@ -138,19 +297,150 @@ updateRanking()
 
 }
 
+function teacherMode(){
+
+document.getElementById("login").classList.add("hidden")
+document.getElementById("teacher").classList.remove("hidden")
+
+showTeacherRanking()
+
+}
+
+function exitTeacher(){
+
+document.getElementById("teacher").classList.add("hidden")
+document.getElementById("login").classList.remove("hidden")
+
+}
+
 function startGame(level){
+
+currentLevel=level
+score=0
+current=0
+usadas=[]
+
+if(level==="facil")maxQuestions=5
+if(level==="medio")maxQuestions=8
+if(level==="dificil")maxQuestions=10
+if(level==="inferno")maxQuestions=15
 
 document.getElementById("menu").classList.add("hidden")
 document.getElementById("game").classList.remove("hidden")
 
-document.getElementById("player").innerHTML="Jogador: "+player+" | Nível: "+level
+document.getElementById("player").innerText="Jogador: "+player
 
-score=0
-questionIndex=0
+startTimer()
 
-questions=generateQuestions(level)
+loadQuestion()
 
-nextQuestion()
+}
+
+function startTimer(){
+
+time=0
+
+timerInterval=setInterval(()=>{
+
+time++
+
+document.getElementById("timer").innerText="Tempo: "+time+"s"
+
+},1000)
+
+}
+
+function stopTimer(){
+
+clearInterval(timerInterval)
+
+}
+
+function randomBug(){
+
+let lista=bancoQuestoes[currentLevel]
+
+let disponiveis=lista.filter((q,i)=>!usadas.includes(i))
+
+let index=Math.floor(Math.random()*disponiveis.length)
+
+let pergunta=disponiveis[index]
+
+usadas.push(lista.indexOf(pergunta))
+
+return pergunta
+
+}
+
+function loadQuestion(){
+
+if(current>=maxQuestions){
+
+finishGame()
+return
+
+}
+
+currentQuestion=randomBug()
+
+document.getElementById("progress").innerText=
+"Questão "+(current+1)+" de "+maxQuestions
+
+let html=`<div class="code">${currentQuestion.code}</div>`
+
+currentQuestion.choices.forEach((c,i)=>{
+
+html+=`<div class="choice" onclick="answer(${i})">${c}</div>`
+
+})
+
+document.getElementById("questionBox").innerHTML=html
+
+}
+
+function answer(i){
+
+if(i===currentQuestion.answer){
+
+score++
+
+alert("✔ Correto\n\n"+currentQuestion.explicacao)
+
+}else{
+
+alert("✖ Errado\n\n"+currentQuestion.explicacao)
+
+}
+
+current++
+
+loadQuestion()
+
+}
+
+function medalha(score){
+
+if(score>=14)return "🥇 Mestre Python"
+if(score>=10)return "🥈 Programador"
+if(score>=5)return "🥉 Iniciante"
+
+return "🐣 Novato"
+
+}
+
+function finishGame(){
+
+stopTimer()
+
+saveScore()
+
+alert(
+"Pontuação: "+score+
+"\nTempo: "+time+"s"+
+"\nClassificação: "+medalha(score)
+)
+
+goHome()
 
 }
 
@@ -163,166 +453,18 @@ updateRanking()
 
 }
 
-function nextQuestion(){
-
-if(questionIndex>=questions.length){
-
-saveScore()
-
-alert("Fim! Pontuação: "+score)
-
-goHome()
-
-return
-
-}
-
-var q=questions[questionIndex]
-
-var html=""
-
-html+="<div class='code'>"+q.code+"</div>"
-
-for(var i=0;i<q.choices.length;i++){
-
-html+="<div class='choice' onclick='answer("+i+")'>"+q.choices[i]+"</div>"
-
-}
-
-document.getElementById("questionBox").innerHTML=html
-
-}
-
-function answer(i){
-
-var q=questions[questionIndex]
-
-if(i==q.correct){
-score++
-}
-
-questionIndex++
-
-nextQuestion()
-
-}
-
-function generateQuestions(level){
-
-var arr=[]
-
-for(var i=0;i<250;i++){
-
-if(level=="facil"){
-
-arr.push({
-
-code:"print('Olá mundo'",
-choices:[
-"Falta )",
-"Erro de indentação",
-"Erro no print",
-"Variável inexistente"
-],
-correct:0
-
-})
-
-}
-
-if(level=="medio"){
-
-arr.push({
-
-code:"for i in range(5)\n print(i)",
-choices:[
-"Falta :",
-"Erro de variável",
-"range errado",
-"print errado"
-],
-correct:0
-
-})
-
-}
-
-if(level=="dificil"){
-
-arr.push({
-
-code:"lista=[1,2,3]\nprint(lista[3])",
-choices:[
-"Índice fora da lista",
-"Erro de variável",
-"Erro de print",
-"Erro de sintaxe"
-],
-correct:0
-
-})
-
-}
-
-if(level=="inferno"){
-
-arr.push({
-
-code:"def soma(a,b)\nreturn a+b\n\nprint(soma(2))",
-choices:[
-"Falta argumento",
-"Erro de lista",
-"Erro de indentação",
-"Erro de print"
-],
-correct:0
-
-})
-
-}
-
-}
-
-return shuffle(arr)
-
-}
-
-function shuffle(array){
-
-for(var i=array.length-1;i>0;i--){
-
-var j=Math.floor(Math.random()*(i+1))
-
-var temp=array[i]
-
-array[i]=array[j]
-
-array[j]=temp
-
-}
-
-return array
-
-}
-
 function saveScore(){
 
-var ranking=JSON.parse(localStorage.getItem("ranking")||"[]")
+let ranking=JSON.parse(localStorage.getItem("ranking")||"[]")
 
 ranking.push({
-
 name:player,
-score:score
-
+score:score,
+time:time,
+level:currentLevel
 })
 
-ranking.sort(function(a,b){
-
-return b.score-a.score
-
-})
-
-ranking=ranking.slice(0,10)
+ranking.sort((a,b)=>b.score-a.score||a.time-b.time)
 
 localStorage.setItem("ranking",JSON.stringify(ranking))
 
@@ -330,17 +472,33 @@ localStorage.setItem("ranking",JSON.stringify(ranking))
 
 function updateRanking(){
 
-var ranking=JSON.parse(localStorage.getItem("ranking")||"[]")
+let ranking=JSON.parse(localStorage.getItem("ranking")||"[]")
 
-var html=""
+let html="<h3>Ranking</h3>"
 
-for(var i=0;i<ranking.length;i++){
+ranking.slice(0,5).forEach(r=>{
 
-html+= (i+1)+". "+ranking[i].name+" - "+ranking[i].score+"<br>"
+html+=`<div>${r.name} — ${r.score} pts — ${r.level} — ${r.time}s</div>`
+
+})
+
+document.getElementById("ranking").innerHTML=html
 
 }
 
-document.getElementById("ranking").innerHTML=html
+function showTeacherRanking(){
+
+let ranking=JSON.parse(localStorage.getItem("ranking")||"[]")
+
+let html="<h3>Ranking Completo</h3>"
+
+ranking.forEach(r=>{
+
+html+=`<div>${r.name} — ${r.score} pts — ${r.level} — ${r.time}s</div>`
+
+})
+
+document.getElementById("teacherRanking").innerHTML=html
 
 }
 
