@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Detetive de Bugs Python</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+.container{
+width:95%;
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:6px;
+background:#22c55e;
+color:white;
+font-size:16px;
+}
+
+.code{
+background:#020617;
+padding:15px;
+border-radius:6px;
+font-family:monospace;
+white-space:pre;
+margin-top:15px;
+text-align:left;
+}
+
+.choice{
+background:#334155;
+padding:12px;
+margin-top:8px;
+border-radius:6px;
+}
+
+.hidden{
+display:none;
+}
+
+#feedback{
+margin-top:15px;
+padding:10px;
+background:#111827;
+border-radius:6px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="login">
+
+<h1>🐍 Detetive de Bugs Python</h1>
+
+<input id="playerName" placeholder="Digite seu nome">
+
+<button onclick="login()">Entrar</button>
+
+</div>
+
+<div id="menu" class="hidden">
+
+<h2>Nível</h2>
+
+<button onclick="startGame('facil')">Fácil</button>
+<button onclick="startGame('medio')">Médio</button>
+<button onclick="startGame('dificil')">Difícil</button>
+<button onclick="startGame('inferno')">Inferno</button>
+
+</div>
+
+<div id="game" class="hidden">
+
+<button onclick="goHome()">Home</button>
+
+<h2 id="player"></h2>
+
+<div id="question"></div>
+
+<div id="feedback"></div>
+
+</div>
+
+</div>
+
+<script>
+
+var player="";
+var score=0;
+var current=0;
+var maxQuestions=5;
+var questionData=null;
+
+var bugs=[
+
+{
+code:"nome='Ana'\nidade=15\nprint(nome+idade)",
+
+choices:[
+"Erro ao somar texto com número",
+"print não existe",
+"Erro de indentação"
+],
+
+answer:0
+},
+
+{
+code:"for i in range(5)\n print(i)",
+
+choices:[
+"Falta dois pontos",
+"range não existe",
+"print errado"
+],
+
+answer:0
+},
+
+{
+code:"lista=[1,2,3]\nprint(lista[3])",
+
+choices:[
+"Índice inválido",
+"print não aceita lista",
+"Lista começa em 1"
+],
+
+answer:0
+},
+
+{
+code:"x=[1,2,3]\ny=x\ny.append(4)\nprint(x)",
+
+choices:[
+"[1,2,3]",
+"[1,2,3,4]",
+"Erro"
+],
+
+answer:1
+},
+
+{
+code:"def soma(a,b):\n return a+b\n\nprint(soma(2))",
+
+choices:[
+"Falta argumento",
+"return errado",
+"print errado"
+],
+
+answer:0
+}
+
+];
+
+function show(id){
+
+document.getElementById("login").className="hidden";
+document.getElementById("menu").className="hidden";
+document.getElementById("game").className="hidden";
+
+document.getElementById(id).className="";
+
+}
+
+function login(){
+
+player=document.getElementById("playerName").value;
+
+if(player==="")return;
+
+show("menu");
+
+}
+
+function startGame(level){
+
+score=0;
+current=0;
+
+if(level==="facil")maxQuestions=5;
+if(level==="medio")maxQuestions=8;
+if(level==="dificil")maxQuestions=10;
+if(level==="inferno")maxQuestions=15;
+
+document.getElementById("player").innerHTML="Jogador: "+player;
+
+show("game");
+
+loadQuestion();
+
+}
+
+function randomBug(){
+
+var i=Math.floor(Math.random()*bugs.length);
+
+return bugs[i];
+
+}
+
+function loadQuestion(){
+
+if(current>=maxQuestions){
+
+finishGame();
+return;
+
+}
+
+questionData=randomBug();
+
+var html="";
+html+="<div class='code'>"+questionData.code+"</div>";
+
+var i;
+
+for(i=0;i<questionData.choices.length;i++){
+
+html+="<div class='choice' ontouchstart='answer("+i+")' onclick='answer("+i+")'>";
+html+=questionData.choices[i];
+html+="</div>";
+
+}
+
+document.getElementById("question").innerHTML=html;
+
+document.getElementById("feedback").innerHTML="";
+
+}
+
+function answer(i){
+
+if(i===questionData.answer){
+
+score++;
+document.getElementById("feedback").innerHTML="Correto";
+
+}else{
+
+document.getElementById("feedback").innerHTML="Errado";
+
+}
+
+current++;
+
+setTimeout(function(){
+
+loadQuestion();
+
+},1000);
+
+}
+
+function finishGame(){
+
+document.getElementById("feedback").innerHTML="Pontuação: "+score;
+
+}
+
+function goHome(){
+
+show("menu");
+
+}
+
+</script>
+
+</body>
+
+</html>
