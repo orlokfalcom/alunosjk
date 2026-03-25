@@ -1,508 +1,490 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Detetive de Bugs Python PRO</title>
-
-<style>
-
-body{
-margin:0;
-font-family:Arial;
-background:#0f172a;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-.container{
-width:95%;
-max-width:950px;
-background:#1e293b;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 25px rgba(0,0,0,0.4);
-}
-
-h1,h2{
-text-align:center;
-}
-
-input{
-width:100%;
-padding:10px;
-margin-top:10px;
-border-radius:6px;
-border:none;
-}
-
-button{
-width:100%;
-padding:12px;
-margin-top:10px;
-border:none;
-border-radius:6px;
-background:#22c55e;
-color:white;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:hover{
-background:#16a34a;
-}
-
-.home{
-background:#3b82f6;
-}
-
-.code{
-background:#020617;
-padding:15px;
-border-radius:6px;
-font-family:monospace;
-white-space:pre-wrap;
-margin-top:10px;
-}
-
-.choice{
-background:#334155;
-padding:12px;
-margin-top:8px;
-border-radius:6px;
-cursor:pointer;
-}
-
-.choice:hover{
-background:#475569;
-}
-
-.hidden{
-display:none;
-}
-
-.timer{
-text-align:center;
-font-size:18px;
-margin-top:10px;
-color:#facc15;
-}
-
-.progress{
-text-align:center;
-margin-top:10px;
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#00d1ff">
+    <link rel="manifest" href="manifest.json">
+    <title>Python Detective | Elite Bug Hunting</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        :root {
+            --brand-primary: #15a3ff;
+            --brand-secondary: #0a123e;
+            --text-light: #edf2ff;
+            --glass-bg: rgba(20, 28, 58, 0.62);
+            --primary: #15a3ff;
+            --primary-glow: rgba(21, 163, 255, 0.5);
+            --secondary: #48ff9c;
+            --warning: #ffb800;
+            --text-high: #ffffff;
+            --text-med: #c0c0c0;
+            --text-low: #888888;
+            --font-heading: 'Orbitron', monospace;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            color: #ffffff;
+            background: radial-gradient(circle at 20% 20%, #141b42 0%, #080e29 40%, #02050f 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        header {
+            background: rgba(5, 8, 25, 0.86);
+            backdrop-filter: blur(14px);
+        }
+        header h1 {
+            letter-spacing: 0.08em;
+            color: #ffffff;
+        }
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            background-image: radial-gradient(circle at top right, rgba(21,163,255,0.6), rgba(0,0,0,0) 40%), radial-gradient(circle at 80% 30%, rgba(72,255,156,0.25), rgba(0,0,0,0) 35%), linear-gradient(100deg, #081542 0%, #081b38 100%);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 18px 40px rgba(2,5,19,0.55);
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(2,6,22,0.45), rgba(2,5,19,0.74));
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .features .card {
+            background-color: rgba(10, 19, 52, 0.78);
+            border: 1px solid rgba(42, 95, 190, 0.26);
+            color: #ffffff;
+        }
+        .glow-text {
+            color: #ffffff;
+            text-shadow: 0 0 24px rgba(21,163,255,0.9), 0 0 32px rgba(72,255,156,0.6);
+        }
+        .hud-panel {
+            background: rgba(2, 10, 30, 0.8);
+            border: 1px solid rgba(59, 144, 255, 0.45);
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 10px 28px rgba(2, 8, 24, 0.65);
+            margin-bottom: 1.5rem;
+            padding: 0.85rem 1rem;
+        }
+        .hud-pill {
+            background: rgba(12, 35, 80, 0.95);
+            border: 1px solid rgba(117, 189, 255, 0.4);
+            color: #a7c7ff;
+            border-radius: 999px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .progress-game {
+            height: 12px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(21,163,255,0.17), rgba(20,183,255,0.04));
+            overflow: hidden;
+        }
+        .progress-game .progress-bar {
+            background: linear-gradient(90deg, #1da8ff, #54e8ff);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(84, 232, 255, 0.7);
+        }
+        .pulse {
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+        .orbit {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px dashed rgba(113, 210, 255, 0.4);
+            animation: orbit-move 10s linear infinite;
+        }
+        @keyframes orbit-move {
+            0% { transform: rotate(0deg) translate(0, 0); }
+            100% { transform: rotate(360deg) translate(0, 0); }
+        }
+        .features .card:hover {
+            transform: translateY(-3px);
+            transition: transform 0.2s ease;
+            box-shadow: 0 14px 36px rgba(0,0,0,0.28);
+        }
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            animation: floatText 4.5s ease-in-out infinite;
+        }
+        .hero-content p {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            animation: pulseText 3.8s ease-in-out infinite;
+        }
+        .challenge-icon {
+            font-size: 1.1rem;
+            animation: heartbeat 1.1s ease-in-out infinite;
+            margin-right: 0.5rem;
+        }
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 12px rgba(29, 168, 255, 0.46)); }
+            50% { transform: translateY(-5px) rotate(-0.1deg); filter: drop-shadow(0 0 18px rgba(84, 232, 255, 0.75)); }
+        }
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.95; }
+            50% { opacity: 1; letter-spacing: 0.02em; }
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.08); }
+            40% { transform: scale(0.98); }
+        }
+        .cta-chip {
+            background: linear-gradient(120deg, rgba(21,163,255,0.92), rgba(64, 161, 255,0.84));
+            border-radius: 999px;
+            padding: 0.35rem 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 0 22px rgba(21,163,255,.38);
+            animation: glowchip 2.2s ease-in-out infinite;
+        }
+        @keyframes glowchip {
+            0%, 100% { box-shadow: 0 0 22px rgba(21,163,255,0.35); transform: translateY(0) scale(1); }
+            50% { box-shadow: 0 0 36px rgba(55,210,255,0.85); transform: translateY(-2px) scale(1.02); }
+        }
+        .hero-shimmer {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.12) 55%, transparent 100%);
+            transform: translateX(-100%);
+            animation: shimmer-slide 3.8s ease-in-out infinite;
+            pointer-events: none;
+            border-radius: 24px;
+        }
+        @keyframes shimmer-slide {
+            0% { transform: translateX(-100%); }
+            65% { transform: translateX(120%); }
+            100% { transform: translateX(120%); }
+        }
+        a.btn-primary {
+            border: 1px solid #1da8ff;
+        }
+        a.btn-outline-primary {
+            color: #bbd8ff;
+            border-color: #4f8eff;
+        }
+        a.btn-outline-primary:hover {
+            background-color: rgba(21,163,255,0.14);
+            color: #f7fbff;
+        }
+        .text-muted {
+            color: #c0c0c0 !important;
+        }
+        .text-white-50 {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+        .alert-primary {
+            background-color: rgba(21,163,255,0.1);
+            color: #ffffff;
+            border-color: rgba(21,163,255,0.3);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/offline.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker registrado!', reg))
+                    .catch(err => console.log('Erro ao registrar Service Worker', err));
+            });
+        }
+    </script>
 </head>
-
 <body>
 
-<div class="container">
-
-<!-- LOGIN -->
-
-<div id="login">
-
-<h1>🐍 Detetive de Bugs Python</h1>
-
-<input id="playerName" placeholder="Digite seu nome">
-
-<button onclick="login()">Entrar</button>
-<button onclick="teacherMode()">Modo Professor</button>
-
-</div>
-
-<!-- MENU -->
-
-<div id="menu" class="hidden">
-
-<h2>Escolha o nível</h2>
-
-<button onclick="startGame('facil')">Fácil</button>
-<button onclick="startGame('medio')">Médio</button>
-<button onclick="startGame('dificil')">Difícil</button>
-<button onclick="startGame('inferno')">🔥 Inferno</button>
-
-<div id="ranking"></div>
-
-</div>
-
-<!-- GAME -->
-
-<div id="game" class="hidden">
-
-<button class="home" onclick="goHome()">🏠 Home</button>
-
-<h2 id="player"></h2>
-
-<div class="timer" id="timer"></div>
-<div class="progress" id="progress"></div>
-
-<div id="questionBox"></div>
-
-</div>
-
-<!-- PROFESSOR -->
-
-<div id="teacher" class="hidden">
-
-<h2>Painel do Professor</h2>
-
-<div id="teacherRanking"></div>
-
-<button onclick="exitTeacher()">Voltar</button>
-
-</div>
-
-</div>
-
-<script>
-
-"use strict"
-
-let player=""
-let score=0
-let current=0
-let maxQuestions=10
-let time=0
-let timerInterval
-let currentQuestion=null
-let currentLevel=""
-let usadas=[]
-
-let bancoQuestoes={
-facil:[],
-medio:[],
-dificil:[],
-inferno:[]
-}
-
-function gerarQuestoes(){
-
-for(let i=0;i<250;i++){
-
-bancoQuestoes.facil.push({
-
-code:`nome="Ana"
-idade=${Math.floor(Math.random()*20)}
-print(nome+idade)`,
-
-choices:[
-"Erro ao somar texto com número",
-"Erro no print",
-"Erro na variável"
-],
-
-answer:0,
-
-explicacao:"Python não permite somar string com número."
-
-})
-
-}
-
-for(let i=0;i<250;i++){
-
-let n=Math.floor(Math.random()*10)
-
-bancoQuestoes.medio.push({
-
-code:`for i in range(${n})
- print(i)`,
-
-choices:[
-"Falta : no for",
-"range inválido",
-"print não funciona"
-],
-
-answer:0,
-
-explicacao:"Laços for precisam de ':' no final."
-
-})
-
-}
-
-for(let i=0;i<250;i++){
-
-let n=Math.floor(Math.random()*6)+3
-
-bancoQuestoes.dificil.push({
-
-code:`lista=[1,2,3]
-print(lista[${n}])`,
-
-choices:[
-"Índice inválido",
-"Erro de sintaxe",
-"Lista começa em 1"
-],
-
-answer:0,
-
-explicacao:"Listas começam em índice 0."
-
-})
-
-}
-
-for(let i=0;i<250;i++){
-
-let n=Math.floor(Math.random()*10)
-
-bancoQuestoes.inferno.push({
-
-code:`x=[1,2,3]
-y=x
-y.append(${n})
-print(x)`,
-
-choices:[
-"[1,2,3]",
-"Lista modificada por referência",
-"Erro de append"
-],
-
-answer:1,
-
-explicacao:"Listas são passadas por referência."
-
-})
-
-}
-
-}
-
-gerarQuestoes()
-
-function login(){
-
-player=document.getElementById("playerName").value
-
-if(player==="")return
-
-document.getElementById("login").classList.add("hidden")
-document.getElementById("menu").classList.remove("hidden")
-
-updateRanking()
-
-}
-
-function teacherMode(){
-
-document.getElementById("login").classList.add("hidden")
-document.getElementById("teacher").classList.remove("hidden")
-
-showTeacherRanking()
-
-}
-
-function exitTeacher(){
-
-document.getElementById("teacher").classList.add("hidden")
-document.getElementById("login").classList.remove("hidden")
-
-}
-
-function startGame(level){
-
-currentLevel=level
-score=0
-current=0
-usadas=[]
-
-if(level==="facil")maxQuestions=5
-if(level==="medio")maxQuestions=8
-if(level==="dificil")maxQuestions=10
-if(level==="inferno")maxQuestions=15
-
-document.getElementById("menu").classList.add("hidden")
-document.getElementById("game").classList.remove("hidden")
-
-document.getElementById("player").innerText="Jogador: "+player
-
-startTimer()
-
-loadQuestion()
-
-}
-
-function startTimer(){
-
-time=0
-
-timerInterval=setInterval(()=>{
-
-time++
-
-document.getElementById("timer").innerText="Tempo: "+time+"s"
-
-},1000)
-
-}
-
-function stopTimer(){
-
-clearInterval(timerInterval)
-
-}
-
-function randomBug(){
-
-let lista=bancoQuestoes[currentLevel]
-
-let disponiveis=lista.filter((q,i)=>!usadas.includes(i))
-
-let index=Math.floor(Math.random()*disponiveis.length)
-
-let pergunta=disponiveis[index]
-
-usadas.push(lista.indexOf(pergunta))
-
-return pergunta
-
-}
-
-function loadQuestion(){
-
-if(current>=maxQuestions){
-
-finishGame()
-return
-
-}
-
-currentQuestion=randomBug()
-
-document.getElementById("progress").innerText=
-"Questão "+(current+1)+" de "+maxQuestions
-
-let html=`<div class="code">${currentQuestion.code}</div>`
-
-currentQuestion.choices.forEach((c,i)=>{
-
-html+=`<div class="choice" onclick="answer(${i})">${c}</div>`
-
-})
-
-document.getElementById("questionBox").innerHTML=html
-
-}
-
-function answer(i){
-
-if(i===currentQuestion.answer){
-
-score++
-
-alert("✔ Correto\n\n"+currentQuestion.explicacao)
-
-}else{
-
-alert("✖ Errado\n\n"+currentQuestion.explicacao)
-
-}
-
-current++
-
-loadQuestion()
-
-}
-
-function medalha(score){
-
-if(score>=14)return "🥇 Mestre Python"
-if(score>=10)return "🥈 Programador"
-if(score>=5)return "🥉 Iniciante"
-
-return "🐣 Novato"
-
-}
-
-function finishGame(){
-
-stopTimer()
-
-saveScore()
-
-alert(
-"Pontuação: "+score+
-"\nTempo: "+time+"s"+
-"\nClassificação: "+medalha(score)
-)
-
-goHome()
-
-}
-
-function goHome(){
-
-document.getElementById("game").classList.add("hidden")
-document.getElementById("menu").classList.remove("hidden")
-
-updateRanking()
-
-}
-
-function saveScore(){
-
-let ranking=JSON.parse(localStorage.getItem("ranking")||"[]")
-
-ranking.push({
-name:player,
-score:score,
-time:time,
-level:currentLevel
-})
-
-ranking.sort((a,b)=>b.score-a.score||a.time-b.time)
-
-localStorage.setItem("ranking",JSON.stringify(ranking))
-
-}
-
-function updateRanking(){
-
-let ranking=JSON.parse(localStorage.getItem("ranking")||"[]")
-
-let html="<h3>Ranking</h3>"
-
-ranking.slice(0,5).forEach(r=>{
-
-html+=`<div>${r.name} — ${r.score} pts — ${r.level} — ${r.time}s</div>`
-
-})
-
-document.getElementById("ranking").innerHTML=html
-
-}
-
-function showTeacherRanking(){
-
-let ranking=JSON.parse(localStorage.getItem("ranking")||"[]")
-
-let html="<h3>Ranking Completo</h3>"
-
-ranking.forEach(r=>{
-
-html+=`<div>${r.name} — ${r.score} pts — ${r.level} — ${r.time}s</div>`
-
-})
-
-document.getElementById("teacherRanking").innerHTML=html
-
-}
-
-</script>
-
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary sticky-top">
+        <!-- <div class="container-fluid px-3 px-md-4">
+           <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
+                <span class="badge bg-primary me-2 fs-6">🐛</span>
+                <span class="text-primary d-none d-sm-inline">Python Detective</span>
+                <span class="text-primary d-inline d-sm-none">PD</span>
+                <small class="text-muted ms-2 d-none d-md-inline">v2.0</small>
+            </a>
+
+             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                 <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#features">
+                            <i class="fas fa-tools me-1 d-lg-none"></i>
+                            <span class="d-none d-lg-inline">🛠️ </span>
+                            Ferramentas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">
+                            <i class="fas fa-info-circle me-1 d-lg-none"></i>
+                            Sobre
+                        </a>
+                    </li>
+                </ul> 
+
+                <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+                    <button class="btn btn-outline-primary btn-sm w-100 w-lg-auto" onclick="startOfflineGame()">
+                        <i class="fas fa-play me-1"></i>
+                        <span class="d-none d-sm-inline">INICIAR JOGO</span>
+                        <span class="d-inline d-sm-none">JOGAR</span>
+                    </button>
+                </div>
+            </div> -->
+        </div>
+    </header>
+
+    <main class="w-100">
+        <section class="hero-section bg-gradient-primary text-white py-5 position-relative overflow-hidden">
+            <div class="hero-overlay"></div>
+            <div class="hero-shimmer"></div>
+            <div class="container-fluid px-3 px-md-4">
+                <div class="row align-items-center min-vh-75">
+                    <div class="col-12 col-lg-6 order-2 order-lg-1">
+                        <div class="hero-content text-center text-lg-start">
+                            <div class="d-flex justify-content-center justify-content-lg-start mb-3">
+                                <span class="badge bg-warning text-dark px-2 px-md-3 py-2 fs-6 fw-bold">
+                                    <span class="challenge-icon">🔥</span>
+                                    <span id="challengeTitle" data-i18n="challenge_level">Nível 1: Desafio Inicial</span>
+                                </span>
+                            </div>
+                            <h1 id="heroHeadline" class="display-4 fw-bold glow-text mb-3 mb-md-4" data-i18n="title">
+                                🐛 Python Detective
+                            </h1>
+                            <p id="heroSubline" class="lead mb-3 mb-md-4 text-white-50" data-i18n="hero_desc">
+                                Jogue, encontre bugs e suba no ranking. Simples, rápido e viciante.
+                            </p>
+                            <div class="d-flex flex-column flex-sm-row gap-2 gap-md-3 mb-3 mb-md-4 justify-content-center justify-content-lg-start">
+                                <button class="btn btn-warning btn-lg px-3 px-md-4 fw-bold pulse" onclick="startOfflineGame()">
+                                    <i class="fas fa-play-circle me-2"></i>
+                                    <span data-i18n="btn_start">INICIAR AGORA</span>
+                                </button>
+                                <button class="btn btn-outline-light btn-lg px-3 px-md-4" onclick="scrollToFeatures()">
+                                    <i class="fas fa-search me-2"></i>
+                                    <span data-i18n="Recussos Investigativos">EXPLORAR RECURSOS</span>
+                                </button>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-2 gap-md-4 text-muted flex-wrap">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-users me-2 text-primary"></i>
+                                    <span class="small">+1000 Detetives</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-star me-2 text-warning"></i>
+                                    <span class="small">4.8/5 Avaliação</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-clock me-2 text-success"></i>
+                                    <span class="small">5 min/jogo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 order-1 order-lg-2">
+                        <div class="hero-image-container position-relative mb-4 mb-lg-0">
+                            <div class="card bg-dark border-secondary shadow-lg">
+                                <div class="card-header bg-secondary border-secondary">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-danger rounded-circle p-1 me-2">
+                                            <i class="fas fa-terminal text-white fs-6"></i>
+                                        </div>
+                                        <span class="text-white fw-bold small">Terminal Python</span>
+                                        <div class="ms-auto">
+                                            <span class="badge bg-success small">Online</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-4">
+                                    <div class="bg-secondary rounded p-3 mb-3 font-monospace small">
+                                        <div class="text-success">>>> def investigar_evidencia(evidencia):</div>
+                                        <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;if evidencia.tipo == "digital":</div>
+                                        <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Analisar metadados"</div>
+                                        <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;return "Coletar amostras"</div>
+                                        <div class="text-info">>>> resultado = investigar_evidencia(evidencia)</div>
+                                        <div class="text-warning">>>> print(f"Resultado: {resultado}")</div>
+                                    </div>
+                                    <div class="progress mb-2" style="height: 8px;">
+                                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between small text-muted">
+                                        <span>Investigação em andamento...</span>
+                                        <span>75%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="floating-elements">
+                                <div class="floating-badge badge bg-primary position-absolute top-0 end-0 p-2">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="floating-badge badge bg-danger position-absolute top-50 end-0 translate-middle-y p-2">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="floating-badge badge bg-success position-absolute bottom-0 start-0 p-2">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-4 py-md-5 bg-dark">
+            <div class="container px-3 px-md-4">
+                <div class="row justify-content-center mb-4 mb-md-5">
+                    <div class="col-12 col-lg-8 text-center">
+                        <h2 class="display-5 fw-bold text-white mb-3">Recursos Investigativos</h2>
+                        <p class="lead text-muted mb-4 mb-md-0">Ferramentas avançadas para desvendar os mistérios do Python</p>
+                    </div>
+                </div>
+
+                <div class="row g-3 g-md-4 justify-content-center">
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card h-100 bg-secondary border-secondary features-card">
+                            <div class="card-body text-center p-3 p-md-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-bug text-danger fs-1"></i>
+                                </div>
+                                <h5 class="card-title text-white fw-bold mb-3">Detecção de Bugs</h5>
+                                <p class="card-text text-muted mb-3">Identifique e corrija erros em códigos Python de forma interativa e educativa.</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-danger">Essencial</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card h-100 bg-secondary border-secondary features-card">
+                            <div class="card-body text-center p-3 p-md-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-trophy text-warning fs-1"></i>
+                                </div>
+                                <h5 class="card-title text-white fw-bold mb-3">Sistema de Ranking</h5>
+                                <p class="card-text text-muted mb-3">Compita com outros detetives e suba no ranking resolvendo casos complexos.</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-warning">Competitivo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card h-100 bg-secondary border-secondary features-card">
+                            <div class="card-body text-center p-3 p-md-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-brain text-primary fs-1"></i>
+                                </div>
+                                <h5 class="card-title text-white fw-bold mb-3">Aprendizado Progressivo</h5>
+                                <p class="card-text text-muted mb-3">Desafios que evoluem com seu conhecimento, desde básico até avançado.</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-primary">Progressivo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card h-100 bg-secondary border-secondary features-card">
+                            <div class="card-body text-center p-3 p-md-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-mobile-alt text-success fs-1"></i>
+                                </div>
+                                <h5 class="card-title text-white fw-bold mb-3">PWA Responsiva</h5>
+                                <p class="card-text text-muted mb-3">Jogue em qualquer dispositivo com experiência otimizada para mobile e desktop.</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-success">Multiplataforma</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card h-100 bg-secondary border-secondary features-card">
+                            <div class="card-body text-center p-3 p-md-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-language text-info fs-1"></i>
+                                </div>
+                                <h5 class="card-title text-white fw-bold mb-3">Multi-idioma</h5>
+                                <p class="card-text text-muted mb-3">Interface disponível em português, inglês e espanhol para alcance global.</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-info">Internacional</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="card h-100 bg-secondary border-secondary features-card">
+                            <div class="card-body text-center p-3 p-md-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-shield-alt text-secondary fs-1"></i>
+                                </div>
+                                <h5 class="card-title text-white fw-bold mb-3">Modo Offline</h5>
+                                <p class="card-text text-muted mb-3">Jogue sem conexão com a internet, sincronizando progresso quando online.</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-secondary">Offline</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center mt-4 mt-md-5">
+                    <div class="col-12 col-md-8 col-lg-6 text-center">
+                        <div class="alert alert-primary border-0 mx-3 mx-md-0" role="alert">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Dica:</strong> Comece com casos simples e evolua para desafios mais complexos!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white py-3">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2026 Python Detective System. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // PWA install prompt mantido mas sem botão estático direto; ativavia snackbar/alert se necessário
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('PWA install prompt disponível.');
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

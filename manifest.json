@@ -1,0 +1,16 @@
+{
+    "name": "Python Detective",
+    "short_name": "PythonDet",
+    "description": "Elite Bug Hunting and Python mastery.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#00d1ff",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
