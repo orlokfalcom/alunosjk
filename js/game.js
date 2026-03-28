@@ -68,12 +68,26 @@ function loadQuestion(){
     let options = [...q.choices]
     options.sort(() => Math.random() - 0.5)
 
+    // Determina dificuldade baseada na categoria
+    let difficultyClass = 'difficulty-iniciante';
+    if (q.category === 'massiva') difficultyClass = 'difficulty-massiva';
+    else if (q.category === 'logica') difficultyClass = 'difficulty-logica';
+
+    // Syntax highlighting básico
+    let highlightedCode = q.code
+        .replace(/\b(def|if|else|for|while|return|import|from|class|try|except|with)\b/g, '<span class="syntax-keyword">$1</span>')
+        .replace(/(["'`])(.*?)\1/g, '<span class="syntax-string">$&</span>')
+        .replace(/#(.*)$/gm, '<span class="syntax-comment">#$1</span>')
+        .replace(/\b\d+\b/g, '<span class="syntax-number">$&</span>')
+        .replace(/\b(print|len|range|int|str|float)\b/g, '<span class="syntax-function">$1</span>');
+
     let html=`
-    <div class="glass" style="max-width: 800px; margin: 0 auto; border-color: var(--primary-glow);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <div class="question-container glass" style="max-width: 900px; margin: 0 auto; border-color: var(--primary-glow);">
+        <div class="question-header">
             <div>
                 <span class="badge" style="background: var(--primary-glow); color: var(--primary); margin-right: 1rem;">PROTOCOLO #00${current + 1}</span>
-                <span style="font-family: var(--font-heading); font-size: 0.8rem; color: var(--text-low);">${modeName.toUpperCase()} MISSION</span>
+                <span class="question-difficulty ${difficultyClass}">DIFICULDADE: ${q.category.toUpperCase()}</span>
+                <span style="font-family: var(--font-heading); font-size: 0.8rem; color: var(--text-low); margin-left: 1rem;">${modeName.toUpperCase()} MISSION</span>
                 <span id="gameTimer" style="margin-left: 1.5rem; font-family: var(--font-heading); font-size: 0.9rem; color: var(--primary);"></span>
             </div>
             <div style="display: flex; gap: 0.8rem;">
@@ -84,7 +98,9 @@ function loadQuestion(){
         
         <p style="margin-bottom: 1.5rem; font-size: 1rem; color: var(--text-high); font-weight: 600;">${q.description}</p>
         
-        <code>${q.code}</code>
+        <div class="question-code">
+            <pre><code>${highlightedCode}</code></pre>
+        </div>
 
         <div id="hintBox" class="glass hidden" style="margin: 1.5rem 0; border-color: var(--warning); padding: 1rem; background: rgba(255, 184, 0, 0.05);">
             <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem;">
@@ -94,11 +110,14 @@ function loadQuestion(){
             <p id="hintText" style="font-size: 0.85rem; color: var(--text-med); font-style: italic;"></p>
         </div>
 
-        <div id="options" class="grid-3" style="grid-template-columns: 1fr 1fr; margin-top: 2rem;">
+        <div class="question-options">
     `
 
-    options.forEach((c)=>{
-        html+=`<button class="choice-btn" onclick="check('${c.replace(/'/g, "\\'")}')">${c}</button>`
+    options.forEach((c, index)=>{
+        html+=`<button class="choice-btn" onclick="check('${c.replace(/'/g, "\\'")}')">
+            <span>${String.fromCharCode(65 + index)}</span>
+            <span>${c}</span>
+        </button>`
     })
 
     html += `</div></div>`
