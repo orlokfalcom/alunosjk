@@ -1,9 +1,6 @@
-# Expansão Massiva (A.I Offline + Cyber Market)
+# Deploy Curadoria de Questões
 
-- [x] 1. Atualizar criação de usuários (Adicionar inventário base: hints e skips).
-- [x] 2. Modificar matemática do `saveScore` (Multiplicadores de Streak e Bônus de Velocidade).
-- [x] 3. Criar a Dificuldade Estratégica `ia` (Muda de nível dinamicamente baseado na precisão recente).
-- [x] 4. Atualizar o `showDashboard()` (Adicionar botão de seleção IA e acesso ao Cyber Market).
-- [x] 5. Desenvolver Interface da Loja `showStore()` (Lógica de compras no localStorage).
-- [x] 6. Inserir botões de uso de Itens na partida (Dica 50/50 e Bypass) no `loadGameInterface()`.
-- [x] 7. Inserir geração de Frases Dinâmicas da "IA Analista" no painel de fim de questão.
+- [x] 1. Analisar vazamento de conteúdo e inchaços do banco de dados antigo (`questions.js`).
+- [ ] 2. Reescrever o banco de dados principal do jogo (`QUESTIONS_DATA`).
+- [ ] 3. Fornecer 4 alternativas por questão (Equilíbrio de Grid A/B/C/D).
+- [ ] 4. Aprofundar as explicações da IA com jargões analíticos em português, ensinando armadilhas avançadas de Python (Type Conversions, Mutable Defaults, Memory Binding).

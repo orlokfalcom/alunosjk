@@ -8,30 +8,43 @@
     <title>Python Detective | Elite Bug Hunting</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Orbitron:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         html {
             scroll-behavior: smooth;
         }
         :root {
-            --brand-primary: #15a3ff;
-            --brand-secondary: #0a123e;
-            --text-light: #edf2ff;
-            --glass-bg: rgba(20, 28, 58, 0.62);
-            --primary: #15a3ff;
-            --primary-glow: rgba(21, 163, 255, 0.5);
-            --secondary: #48ff9c;
-            --warning: #ffb800;
-            --text-high: #ffffff;
-            --text-med: #c0c0c0;
-            --text-low: #888888;
-            --font-heading: 'Orbitron', monospace;
+            /* Premium Void & Slate Palette */
+            --void-0: #020617;
+            --void-1: #0f172a;
+            --void-2: #1e293b;
+            --neon-cyan: #00f2ff;
+            --neon-purple: #8b5cf6;
+            --neon-amber: #f59e0b;
+
+            --brand-primary: var(--neon-cyan);
+            --brand-secondary: var(--void-1);
+            --text-light: #f8fafc;
+            --text-med: #94a3b8;
+            --text-low: #475569;
+            
+            --glass-bg: rgba(15, 23, 42, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.08);
+
+            --primary: var(--neon-cyan);
+            --primary-glow: rgba(0, 242, 255, 0.6);
+            --secondary: var(--neon-purple);
+            --warning: var(--neon-amber);
+            --font-heading: 'Outfit', sans-serif;
+            --font-mono: 'Fira Code', monospace;
         }
         body {
             font-family: 'Inter', sans-serif;
+            font-size: 1rem;
             min-height: 100vh;
-            color: #ffffff;
-            background: radial-gradient(circle at 20% 20%, #141b42 0%, #080e29 40%, #02050f 100%);
+            color: var(--text-light);
+            background: #020617; /* Fallback */
+            background: radial-gradient(circle at 15% 15%, var(--void-1) 0%, var(--void-0) 60%, #000000 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -123,6 +136,37 @@
             transition: transform 0.2s ease;
             box-shadow: 0 14px 36px rgba(0,0,0,0.28);
         }
+        
+        /* Typography Clamp Scaling - Softened */
+        h1, .h1 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
+        h2, .h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+        h3, .h3 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); }
+        h4, .h4 { font-size: clamp(1.1rem, 2vw, 1.5rem); }
+        h5, .h5 { font-size: clamp(1rem, 1.5vw, 1.25rem); }
+        h6, .h6 { font-size: clamp(0.9rem, 1.2vw, 1rem); }
+        
+        /* App Layout Constraint */
+        main > .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .cyber-title {
+            font-family: var(--font-heading);
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(21, 163, 255, 0.4);
+            font-size: clamp(1.6rem, 3vw, 2.2rem) !important;
+        }
+
+        .stats-card .display-4 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+        }
+        
+        .stats-card .display-6 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+        }
+
         .hero-content h1 {
             font-size: clamp(3rem, 8vw, 6rem);
             line-height: 1.1;
@@ -134,7 +178,7 @@
             animation: pulseText 3.8s ease-in-out infinite;
         }
         .challenge-icon {
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
             animation: heartbeat 1.1s ease-in-out infinite;
             margin-right: 0.5rem;
         }
@@ -200,9 +244,75 @@
             color: rgba(255, 255, 255, 0.9) !important;
         }
         .alert-primary {
-            background-color: rgba(21,163,255,0.1);
-            color: #ffffff;
-            border-color: rgba(21,163,255,0.3);
+            background-color: rgba(0,242,255,0.1);
+            color: var(--text-light);
+            border-color: rgba(0,242,255,0.3);
+        }
+        
+        /* Premium Anim & Cyber Classes */
+        .fade-in-up {
+            animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .premium-glass {
+            background: var(--glass-bg) !important;
+            backdrop-filter: blur(24px) !important;
+            -webkit-backdrop-filter: blur(24px) !important;
+            border: 1px solid var(--glass-border) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
+            border-radius: 16px !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .premium-glass:hover {
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .btn-cyber {
+            position: relative;
+            background: var(--void-1);
+            color: var(--text-light);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        .btn-cyber::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-cyber:hover:not(:disabled)::before {
+            left: 150%;
+        }
+
+        .btn-cyber:hover:not(:disabled) {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.25), inset 0 0 10px rgba(0, 242, 255, 0.1);
+            color: var(--neon-cyan);
+            transform: translateY(-2px);
+        }
+        
+        .hud-pill {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
     </style>
     <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>

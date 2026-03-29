@@ -1,32 +1,31 @@
-# Planejamento: Expansão Massiva (A.I Offline + Cyber Market) 🧠🛒
+# Aprimoramento do Banco de Dados Escolar/Hacking
 
-Para abranger tanto o seu pedido da **Inteligência Artificial que se adapta offline**, quanto o pedido do **aprimoramento de ganhos e da criação da Loja Online (Cyber Market)**, unifiquei os recursos em um único plano de ação arquitetural grandioso:
-
-## 1. Motor Heurístico "IA Analista" (Offline AI)
-- **Dificuldade Adaptativa ("Auto IA")**: Nova opção no seletor de dificuldades que calibra as questões oferecidas conforme as métricas do usuário (ex: Sobe de Fácil para Médio após precisão >80%).
-- **Análise Dinâmica de Desempenho**: O painel de feedback da resposta não dirá apenas "Certo/Errado", mas fornecerá comentários sintéticos. Respondendo em menos de 5 segundos de forma correta, a IA elogiará sua precisão cirúrgica. Errando de forma veloz, dirá que você foi precipitado.
-
-## 2. Nova Economia In-Game e Multiplicadores
-- Ganhos antes fixos em +10 XP vão escalar de acordo com o Nível de Dificuldade (Iniciante=10, Lógica=20, Massiva=30).
-- **Speed Run Bonus (Agilidade)**: Resolver código rapidamente (<6s) vai conceder `+5 XP` de bônus.
-- **Combo Multiplier**: Cada acerto em sua Sequência/Streak atual fornecerá `+5%` cumulativo e infinito de ganho absoluto nas moedas de cada rodada.
-
-## 3. Cyber Market (A Loja Clandestina de Detetives)
-Uma interface exclusiva onde as **Moedas** valem de verdade e impulsionam o seu jogo através de um sistema de Inventário (`inventory: { hints: 0, skips: 0 }`).
-- **Módulo Decodificador (Dica / 50-50)** - `Preço: 15 Moedas`
-  - *No Jogo*: Ao ativado, retira 2 das opções incorretas de cara para facilitar acertos em níveis complexos.
-- **Bypass Root (Pular Bug)** - `Preço: 30 Moedas`
-  - *No Jogo*: O botão pula para a próxima Questão instantaneamente, salvando quem não quer perder um valioso "Streak of 20" em uma questão `Inferno`.
-
-## Impactos no Sistema (`js/offline.js`) [MODIFY]
-1. `saveScore()` passará a incorporar as complexas matemáticas de ganhos em % da `IA`.
-2. A injeção da Nova Tela de Dashboard incluirá o banner `"🛒 Cyber Market"`.
-3. Para garantir que sistemas desatualizados de localStorage não crashem com `inventory` faltando, injetaremos um "safe merge" ao resgatar `user` (preenchendo a chave retroativamente).
-4. O `loadGameInterface` terá injetado 2 botões de Inventário consumíveis durante as partidas, visíveis desde que o saldo no inventário seja > 0.
+O usuário solicitou o aprimoramento das questões do jogo. Após investigar o arquivo `data/questions.js` (que atualmente possui 2200 linhas), identifiquei que ele sofre de **"Inchaço por Repetição"**: a categoria "lógica" está cheia de perguntas geradas por robô mudando apenas um número (ex: *Quero contar até 19*, *Quero contar até 35*...). Isso torna o jogo monótono e destrói o engajamento.
 
 ## User Review Required
 
-> [!WARNING]
-> Esse update gigante modificará todo o conceito do jogo, transformando de um quiz offline em um genuíno App de Aprendizado Gamificado, com Economia Completa e IA Causal! As pontuações se tornarão maiores sob as novas regras dinâmicas e exigirão rebalanceamento mínimo nos cálculos de Nível.
+> [!WARNING]  
+> Eu vou sobreescrever totalmente o arquivo de banco de dados (`data/questions.js`). Vou deletar as 2200 linhas de questões repetitivas e construir um Banco Analítico Menor, porém infinitamente mais inteligente e focado no tema *Detective*.  
+> **Você autoriza essa limpeza drástica e a injeção do novo currículo?**
 
-Está pronto para a construção dupla deste super sistema (A.I + Sistema de Loja offline)? Autoriza a injeção do código?
+## 📚 Proposed Changes
+
+### [Component 1] Formatação do Array de Questões
+- **Padronização:** Toda questão terá exatamente **4 alternativas**. O código antigo tinha apenas 3 opções em várias questões, o que não preenchia perfeitamente os 4 botões (A, B, C, D) desenhados na UI.
+- **Dificuldade Crescente Real:** 
+   - `Iniciante:` Erros de sintaxe (`IndentationError`, falha de aspas, `=` ao invés de `==`).
+   - `Lógica (Médio):` Erros de laços, tratamento de strings, manipulação básica de lista.
+   - `Massiva (Difícil):` Erros conceituais violentos que caem em entrevistas de emprego (ex: *Default Mutable Arguments*, *Late Binding Closures*, *Scope Leak*, falhas de cópia rasa de matrizes).
+
+### [Component 2] O Contexto "Narrativo"
+- Os comentários das explicações da IA ganharão um tom mais profissional e cibernético. Ao invés de *"Falta aspas na maçã"*, a explicação será: *"Anomalia de Sintaxe: O interpretador encontrou um EOF inesperado. Todas as declarações de String exigem fechamento de aspas."*
+
+### [Component 3] Reescrita (Target Files)
+
+#### [MODIFY] `data/questions.js`
+- Redução de 2200 linhas repetitivas para um JSON limpo, estruturado, e contendo cerca de 45 a 50 questões únicas e artesanais, divididas perfeitamente nos 3 tiers de dificuldade (Iniciante, Lógica, Massiva) exigidas pelo `offline.js`.
+
+## Verification Plan
+1. Injetar o novo código e recarregar a aplicação.
+2. Iniciar um jogo no modo Auto IA ou Lógica.
+3. Conferir se 4 opções são renderizadas na tela invés de 3, garantindo que a matriz visual fique perfeitamente simétrica.

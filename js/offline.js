@@ -618,7 +618,7 @@ function selectUser(username) {
 function showDashboard() {
     const user = getCurrentUser();
     const dashboardHTML = `
-        <div class="container py-5">
+        <div class="container py-5 fade-in-up">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="cyber-title mb-4">🐛 Python Detective - Dashboard</h2>
                 <button class="btn btn-outline-primary" onclick="showLoginModal()">Trocar Usuário</button>
@@ -626,34 +626,34 @@ function showDashboard() {
 
             <div class="row mb-4">
                 <div class="col-md-3 mb-3">
-                    <div class="card stats-card text-center h-100">
+                    <div class="card stats-card text-center h-100 premium-glass border-0">
                         <div class="card-body d-flex flex-column justify-content-center">
                             <h4 class="display-4 mb-2 text-primary">${user.level}</h4>
-                            <p class="mb-0 text-light">NÍVEL</p>
+                            <p class="mb-0 text-light fw-bold">NÍVEL</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <div class="card stats-card text-center h-100">
+                    <div class="card stats-card text-center h-100 premium-glass border-0">
                         <div class="card-body d-flex flex-column justify-content-center">
                             <h4 class="display-4 mb-2 text-success">${user.xp}</h4>
-                            <p class="mb-0 text-light">XP TOTAL</p>
+                            <p class="mb-0 text-light fw-bold">XP TOTAL</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <div class="card stats-card text-center h-100">
+                    <div class="card stats-card text-center h-100 premium-glass border-0">
                         <div class="card-body d-flex flex-column justify-content-center">
                             <h4 class="display-4 mb-2 text-warning">${user.coins}</h4>
-                            <p class="mb-0 text-light">MOEDAS</p>
+                            <p class="mb-0 text-light fw-bold">MOEDAS</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <div class="card stats-card text-center h-100">
+                    <div class="card stats-card text-center h-100 premium-glass border-0">
                         <div class="card-body d-flex flex-column justify-content-center">
                             <h4 class="display-4 mb-2 text-info">${user.streak}</h4>
-                            <p class="mb-0 text-light">SEQUÊNCIA</p>
+                            <p class="mb-0 text-light fw-bold">SEQUÊNCIA</p>
                         </div>
                     </div>
                 </div>
@@ -661,29 +661,28 @@ function showDashboard() {
 
             <div class="row mb-4">
                 <div class="col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="card-header bg-dark text-primary">
-                            <h5 class="mb-0">📊 Estatísticas Gerais</h5>
+                    <div class="card h-100 premium-glass border-0">
+                        <div class="card-header border-0 bg-transparent text-primary pb-0">
+                            <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i> Estatísticas Gerais</h5>
                         </div>
                         <div class="card-body">
-                            <div class="row text-center">
+                            <div class="row text-center mb-3">
                                 <div class="col-6">
-                                    <h6 class="text-success display-6">${user.totalCorrect}</h6>
-                                    <small class="text-muted">Corretos</small>
+                                    <h6 class="text-success display-6 mb-0">${user.totalCorrect}</h6>
+                                    <small class="text-muted fw-bold">Corretos</small>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="text-danger display-6">${user.totalWrong}</h6>
-                                    <small class="text-muted">Errados</small>
+                                    <h6 class="text-danger display-6 mb-0">${user.totalWrong}</h6>
+                                    <small class="text-muted fw-bold">Errados</small>
                                 </div>
                             </div>
-                            <hr class="my-3 border-secondary">
-                            <div class="row text-center">
-                                <div class="col-6">
-                                    <h6 class="text-primary display-6">${user.bestStreak}</h6>
+                            <div class="row text-center rounded p-2" style="background: rgba(0,0,0,0.3);">
+                                <div class="col-6 border-end border-secondary">
+                                    <h6 class="text-primary fs-3 mb-0">${user.bestStreak}</h6>
                                     <small class="text-muted">Melhor Seq.</small>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="text-info display-6">${user.averageTime.toFixed(1)}s</h6>
+                                    <h6 class="text-info fs-3 mb-0">${user.averageTime.toFixed(1)}s</h6>
                                     <small class="text-muted">Tempo Médio</small>
                                 </div>
                             </div>
@@ -692,16 +691,16 @@ function showDashboard() {
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="card-header bg-dark text-success">
-                            <h5 class="mb-0">🏆 Conquistas</h5>
+                    <div class="card h-100 premium-glass border-0">
+                        <div class="card-header border-0 bg-transparent text-success pb-0">
+                            <h5 class="mb-0"><i class="fas fa-trophy me-2"></i> Conquistas</h5>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-wrap gap-2 align-items-start">
                             ${user.achievements.length > 0 ? 
                                 user.achievements.map(achievement => `
-                                    <span class="badge badge-primary me-2 mb-2">${achievement}</span>
+                                    <span class="badge bg-success bg-opacity-25 text-success border border-success p-2 px-3 rounded-pill"><i class="fas fa-star me-1"></i> ${achievement}</span>
                                 `).join('') :
-                                '<p class="text-muted mb-0">Nenhuma conquista ainda</p>'
+                                '<p class="text-muted mb-0 w-100 text-center py-4 opacity-50"><i class="fas fa-ghost fs-3 d-block mb-2"></i>Nenhuma conquista ainda</p>'
                             }
                         </div>
                     </div>
@@ -720,9 +719,9 @@ function showDashboard() {
                 <p class="mt-2 mb-0">Dificuldade atual: <strong id="currentDifficultyLabel" class="text-primary">Fácil</strong></p>
             </div>
 
-            <div class="d-flex justify-content-center flex-wrap gap-3">
-                <button class="btn btn-primary btn-lg px-4 pulse" onclick="loadGameInterface()">🎮 Iniciar Jogo</button>
-                <button class="btn btn-warning btn-lg text-dark fw-bold px-4" onclick="showStore()">🛒 Cyber Market</button>
+            <div class="d-flex justify-content-center flex-wrap gap-3 mt-5">
+                <button class="btn btn-cyber py-3 px-5 text-uppercase pulse fs-5" onclick="loadGameInterface()"><i class="fas fa-gamepad me-2 text-primary"></i> Iniciar Jogo</button>
+                <button class="btn btn-cyber py-3 px-5 text-warning fs-5" onclick="showStore()"><i class="fas fa-shopping-cart me-2"></i> Cyber Market</button>
             </div>
         </div>
     `;
@@ -753,7 +752,7 @@ function loadGameInterface() {
     gameStartTime = Date.now(); // Start timer
 
     const gameHTML = `
-        <div class="container py-4 py-md-5">
+        <div class="container py-4 py-md-5 fade-in-up">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
                 <h2 class="cyber-title mb-0 fs-3 d-flex align-items-center">
                     <span class="badge bg-primary me-2">🐛</span> Python Detective
@@ -768,13 +767,13 @@ function loadGameInterface() {
                 </div>
             </div>
 
-            <div class="card mb-4 border-primary shadow-lg" style="background-color: var(--glass-bg);">
-                <div class="card-header bg-dark border-primary d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 text-primary"><i class="fas fa-search me-2"></i> Analise o Código Abaixo:</h5>
-                    <span class="badge bg-secondary border border-secondary">${currentDifficulty.toUpperCase()}</span>
+            <div class="card mb-4 premium-glass border-0">
+                <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center pb-0">
+                    <h5 class="mb-0 text-primary fw-bold"><i class="fas fa-search me-2"></i> Analise o Código Abaixo:</h5>
+                    <span class="badge border border-secondary text-secondary" style="background: rgba(255,255,255,0.05);">${currentDifficulty.toUpperCase()}</span>
                 </div>
-                <div class="card-body p-0 position-relative">
-                    <div class="code-display bg-dark p-3 p-md-4 rounded-bottom" style="font-family: 'Fira Code', monospace; font-size: 1.1rem; overflow-x: auto; border: 1px inset rgba(21,163,255,0.2);">
+                <div class="card-body p-3 p-md-4 position-relative">
+                    <div class="code-display bg-dark p-3 p-md-4 rounded shadow-inner" style="font-family: 'Fira Code', monospace; font-size: 1.1rem; overflow-x: auto; border: 1px inset rgba(255,255,255,0.1);">
                         <pre class="mb-0 text-light"><code>${highlightPython(bug.code)}</code></pre>
                     </div>
                 </div>
@@ -783,10 +782,9 @@ function loadGameInterface() {
             <div class="row g-3 mb-4" id="optionsContainer">
                 ${bug.options.map((opt, i) => `
                     <div class="col-12 col-md-6">
-                        <button class="btn btn-outline-info w-100 py-3 fw-bold text-start px-4 position-relative overflow-hidden option-btn" 
-                                onclick="checkAnswer(${i}, ${bug.correct})" 
-                                style="transition: all 0.2s; border-radius: 8px; border-width: 2px;">
-                            <span class="badge bg-dark text-info border border-info me-2 fs-6">${String.fromCharCode(65 + i)}</span> 
+                        <button class="btn btn-cyber w-100 py-3 fw-bold text-start px-4 option-btn" 
+                                onclick="checkAnswer(${i}, ${bug.correct})">
+                            <span class="badge bg-dark text-primary border border-primary me-2 fs-6 shadow-sm">${String.fromCharCode(65 + i)}</span> 
                             ${opt}
                         </button>
                     </div>
@@ -796,13 +794,13 @@ function loadGameInterface() {
             <div id="feedbackContainer" class="d-none"></div>
             
             <div class="text-center mt-4 d-flex justify-content-center gap-4 flex-wrap">
-                <button class="btn btn-outline-info btn-sm position-relative px-3 py-2" onclick="useHint()" ${user.inventory.hints > 0 ? '' : 'disabled'}>
-                    <i class="fas fa-lightbulb"></i> Módulo Dica 
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-dark">${user.inventory.hints}</span>
+                <button class="btn btn-cyber position-relative px-4 py-2" onclick="useHint()" ${user.inventory.hints > 0 ? '' : 'disabled'}>
+                    <i class="fas fa-lightbulb text-info"></i> Módulo Dica 
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-dark shadow">${user.inventory.hints}</span>
                 </button>
-                <button class="btn btn-outline-danger btn-sm position-relative px-3 py-2" onclick="useSkip()" ${user.inventory.skips > 0 ? '' : 'disabled'}>
-                    <i class="fas fa-forward"></i> Bypass Root 
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">${user.inventory.skips}</span>
+                <button class="btn btn-cyber position-relative px-4 py-2" onclick="useSkip()" ${user.inventory.skips > 0 ? '' : 'disabled'}>
+                    <i class="fas fa-forward text-danger"></i> Bypass Root 
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger shadow">${user.inventory.skips}</span>
                 </button>
             </div>
         </div>
@@ -869,13 +867,12 @@ function checkAnswer(selected, correct) {
     buttons.forEach((btn, idx) => {
         btn.disabled = true;
         if (idx === correct) {
-            btn.classList.remove('btn-outline-info', 'opacity-50');
-            btn.classList.add('btn-success', 'text-white', 'border-success');
+            btn.classList.add('active-cyber', 'border-success');
             // ensure text is visible in case it was disabled by hint
             if (btn.innerHTML.includes('Ocultado')) btn.innerHTML = bug.options[idx]; 
         } else if (idx === selected && !isCorrect) {
-            btn.classList.remove('btn-outline-info');
-            btn.classList.add('btn-danger', 'text-white', 'border-danger');
+            btn.classList.add('border-danger');
+            btn.style.color = 'var(--bs-danger)';
         }
     });
 
@@ -913,13 +910,13 @@ function checkAnswer(selected, correct) {
     }
 
     const feedbackHTML = `
-        <div class="alert ${alertClass} mt-4 shadow-lg p-3 p-md-4" role="alert" style="background-color: var(--glass-bg); backdrop-filter: blur(10px);">
+        <div class="alert ${alertClass} mt-4 fade-in-up p-3 p-md-4 premium-glass" role="alert">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
                 <h4 class="alert-heading fw-bold mb-2 mb-md-0 text-white">${titleStr}</h4>
-                <span class="badge bg-dark border border-light fs-6 text-white">${xpStr}</span>
+                <span class="badge bg-dark border border-light fs-6 text-white shadow">${xpStr}</span>
             </div>
             
-            <div class="mb-3 p-2 bg-dark rounded border border-warning">
+            <div class="mb-3 p-3 bg-dark rounded border border-warning shadow-inner">
                 <p class="mb-0 text-warning" style="font-family: var(--font-heading); font-size: 0.9rem;">${aiComment}</p>
             </div>
             
@@ -953,13 +950,13 @@ function showStore() {
     if (!user.inventory) user.inventory = { hints: 0, skips: 0 };
 
     const storeHTML = `
-        <div class="container py-4 py-md-5 fade-in">
+        <div class="container py-4 py-md-5 fade-in-up">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
                 <h2 class="cyber-title mb-0 d-flex align-items-center">
                     <span class="badge bg-warning text-dark me-2">🛒</span> Cyber Market
                 </h2>
-                <div class="d-flex align-items-center gap-2">
-                    <div class="hud-panel p-2 mb-0">
+                <div class="d-flex gx-2 align-items-center flex-wrap justify-content-center">
+                    <div class="hud-panel p-2 me-2 mb-0 d-flex gap-2">
                         <span class="hud-pill fs-6"><i class="fas fa-coins text-warning me-1"></i> Saldo: <span id="storeBalance" class="text-white">${user.coins}</span></span>
                     </div>
                     <button class="btn btn-outline-danger" onclick="showDashboard()"><i class="fas fa-arrow-left"></i> Voltar</button>
@@ -968,31 +965,31 @@ function showStore() {
 
             <div class="row g-4">
                 <div class="col-md-6">
-                    <div class="card h-100 border-info shadow-lg" style="background-color: var(--glass-bg);">
+                    <div class="card h-100 premium-glass border-0">
                         <div class="card-body text-center p-4">
-                            <i class="fas fa-lightbulb text-info mb-3" style="font-size: 3rem; text-shadow: 0 0 15px rgba(23,162,184,0.5);"></i>
-                            <h4 class="text-white">Módulo Decodificador (50/50)</h4>
-                            <p class="text-muted mb-4">Use durante a investigação para eliminar 2 opções incorretas instantaneamente.</p>
-                            <div class="d-flex justify-content-between align-items-center bg-dark p-3 rounded mb-3 border border-secondary">
-                                <span class="text-light">Em Estoque: <strong class="fs-5 text-info" id="inv-hints">${user.inventory.hints}</strong></span>
-                                <span class="badge bg-warning text-dark fs-6 px-3 py-2">15 Moedas</span>
+                            <i class="fas fa-lightbulb text-info mb-3" style="font-size: 3.5rem; filter: drop-shadow(0 0 15px rgba(23,162,184,0.6));"></i>
+                            <h4 class="text-white fw-bold">Módulo Decodificador</h4>
+                            <p class="text-muted mb-4 opacity-75">Use durante a investigação para eliminar 2 opções incorretas instantaneamente (50/50).</p>
+                            <div class="d-flex justify-content-between align-items-center bg-dark p-3 rounded mb-4 shadow-inner" style="border: 1px inset rgba(255,255,255,0.05);">
+                                <span class="text-light">Em Estoque: <strong class="fs-4 text-info" id="inv-hints">${user.inventory.hints}</strong></span>
+                                <span class="badge bg-warning text-dark fs-6 px-3 py-2 fw-bold shadow">15 Moedas</span>
                             </div>
-                            <button class="btn btn-info w-100 fw-bold border-2" onclick="buyItem('hints', 15, event)">COMPRAR (-15 <i class="fas fa-coins text-dark ms-1"></i>)</button>
+                            <button class="btn btn-cyber w-100 py-3 fs-5" onclick="buyItem('hints', 15, event)"><i class="fas fa-shopping-cart text-primary me-2"></i> COMPRAR</button>
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-md-6">
-                    <div class="card h-100 border-danger shadow-lg" style="background-color: var(--glass-bg);">
+                    <div class="card h-100 premium-glass border-0">
                         <div class="card-body text-center p-4">
-                            <i class="fas fa-forward text-danger mb-3" style="font-size: 3rem; text-shadow: 0 0 15px rgba(220,53,69,0.5);"></i>
-                            <h4 class="text-white">Bypass Root (Pular Bug)</h4>
-                            <p class="text-muted mb-4">Pule um bug suspeito de ser armadilha sem perder a sua cobiçada Sequência (Streak).</p>
-                            <div class="d-flex justify-content-between align-items-center bg-dark p-3 rounded mb-3 border border-secondary">
-                                <span class="text-light">Em Estoque: <strong class="fs-5 text-danger" id="inv-skips">${user.inventory.skips}</strong></span>
-                                <span class="badge bg-warning text-dark fs-6 px-3 py-2">30 Moedas</span>
+                            <i class="fas fa-forward text-danger mb-3" style="font-size: 3.5rem; filter: drop-shadow(0 0 15px rgba(220,53,69,0.6));"></i>
+                            <h4 class="text-white fw-bold">Bypass Root</h4>
+                            <p class="text-muted mb-4 opacity-75">Pule um bug suspeito de ser armadilha letal sem perder a sua cobiçada Sequência (Streak).</p>
+                            <div class="d-flex justify-content-between align-items-center bg-dark p-3 rounded mb-4 shadow-inner" style="border: 1px inset rgba(255,255,255,0.05);">
+                                <span class="text-light">Em Estoque: <strong class="fs-4 text-danger" id="inv-skips">${user.inventory.skips}</strong></span>
+                                <span class="badge bg-warning text-dark fs-6 px-3 py-2 fw-bold shadow">30 Moedas</span>
                             </div>
-                            <button class="btn btn-danger w-100 fw-bold border-2" onclick="buyItem('skips', 30, event)">COMPRAR (-30 <i class="fas fa-coins text-dark ms-1"></i>)</button>
+                            <button class="btn btn-cyber w-100 py-3 fs-5" onclick="buyItem('skips', 30, event)"><i class="fas fa-shopping-cart text-primary me-2"></i> COMPRAR</button>
                         </div>
                     </div>
                 </div>

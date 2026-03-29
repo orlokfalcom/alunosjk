@@ -1,2209 +1,338 @@
 const QUESTIONS_DATA = {
   iniciante: [
-  {
-    "code": "print(Olá Mundo!)",
-    "choices": [
-      "Faltam aspas na frase",
-      "Falta espaço",
-      "Print deve ser maiúsculo"
-    ],
-    "answer": 0,
-    "explain": "Textos (Strings) em Python precisam estar sempre entre aspas simples ('') ou duplas (\"\"). Ex: print(\"Olá Mundo!\")"
-  },
-  {
-    "code": "nome = 'Carlos'\nidade = 16\nprint(nome + idade)",
-    "choices": [
-      "Erro de soma (String e Número)",
-      "Variável sem Letras",
-      "Espaços incorretos"
-    ],
-    "answer": 0,
-    "explain": "Não se pode 'somar' um texto com um número diretamente. O Python não sabe se faz conta ou se junta palavras!"
-  },
-  {
-    "code": "if x = 10:\n  print('X vale dez')",
-    "choices": [
-      "Falta o duplo igual (==)",
-      "Letra maiúscula em X",
-      "Erro no print"
-    ],
-    "answer": 0,
-    "explain": "Um sinal de igual (=) serve para dar valor a uma variável. Para fazer perguntas (comparar), devemos usar o sinal duplo matemático (==)."
-  },
-  {
-    "code": "For i in range(5):\n  print(i)",
-    "choices": [
-      "Python não tem 'For' maiúsculo",
-      "Falta dois pontos",
-      "range não aceita 5"
-    ],
-    "answer": 0,
-    "explain": "Python é 'Case Sensitive' (sensível a maiúsculas). A palavra-chave de Loop certa é toda minúscula: 'for'."
-  },
-  {
-    "code": "def saudacao():\nprint('Bom dia!')",
-    "choices": [
-      "Erro de Indentação (espaço)",
-      "Falta o nome do 'def'",
-      "Faltam parâmetros ()"
-    ],
-    "answer": 0,
-    "explain": "O código dentro de funções (def), ifs e fors PRECISA estar 'empurrado' pra direita usando espaços ou TAB. O Python trava se não ver a indentação!"
-  },
-  {
-    "code": "alunos = ['Bia', 'João', 'Ana']\nprint(alunos[3])",
-    "choices": [
-      "Índice 3 não existe",
-      "Falta vírgula",
-      "A Ana é número 3"
-    ],
-    "answer": 0,
-    "explain": "Listas começam a contar do ZERO! 0=Bia, 1=João, 2=Ana. O índice [3] tentou buscar uma 4ª pessoa fantasma."
-  },
-  {
-    "code": "while True\n  print('Loop Infinito!')",
-    "choices": [
-      "Faltam os dois-pontos (:)",
-      "A palavra True tem que ser minúscula",
-      "Loop está bugado"
-    ],
-    "answer": 0,
-    "explain": "Todo loop (`while`, `for`) e toda função (`def`, `if`) precisa obrigatoriamente terminar a linha do comando com os dois-pontos (:)!"
-  },
-  {
-    "code": "mensagem = 'Boa prova!\nprint(mensagem)",
-    "choices": [
-      "Faltou fechar as aspas '",
-      "Variável muito longa",
-      "Falta crase"
-    ],
-    "answer": 0,
-    "explain": "Toda aspa que você abre em um texto (String), você NUNCA pode esquecer de fechar no final!"
-  },
-  {
-    "code": "Print('Funcionou?')",
-    "choices": [
-      "print deve ser minúsculo",
-      "Interrogação não pode",
-      "Tira os parênteses"
-    ],
-    "answer": 0,
-    "explain": "Comandos nativos do Python são todos minúsculos. 'Print' não existe, apenas 'print'."
-  },
-  {
-    "code": "if nota >= 7:\n  print('Passou')\nElse:\n  print('Recuperação')",
-    "choices": [
-      "Else deve ser minúsculo",
-      "Falta End if",
-      "Maior ou igual está errado"
-    ],
-    "answer": 0,
-    "explain": "Palavras reservadas do sistema também são sensíveis. É 'else' com 'e' minúsculo!"
-  },
-  {
-    "code": "cidade = \"Manaus'\nprint(cidade)",
-    "choices": [
-      "As aspas estão diferentes nas pontas",
-      "Cidade não foi encontrada",
-      "Variável tá vazia"
-    ],
-    "answer": 0,
-    "explain": "Você começou a frase com aspas duplas (\") e terminou com simples ('). Você precisa escolher uma das duas e usar igual nas duas bordas!"
-  },
-  {
-    "code": "numero = input('Digite um número')\nresultado = numero * 2\nprint(resultado)",
-    "choices": [
-      "Tudo que vem do input é String (texto)",
-      "Ninguém digitou",
-      "Asterisco não é vezes"
-    ],
-    "answer": 0,
-    "explain": "O comando input() sempre captura o que a pessoa digita e entrega em formato de Letras (String). Para multiplicar matematicamente você precisava convertê-lo com int() ou float() primeiro."
-  },
-  {
-    "code": "if chuva == True:\nprint('Pegue o guarda chuva')",
-    "choices": [
-      "Erro de Indentação",
-      "Sinal de == tá errado",
-      "O If tá escrito certo"
-    ],
-    "answer": 0,
-    "explain": "Lembre-se: tudo que está DENTRO do if tem que ser digitado um pouco mais para a direita (indentedo com TAB)."
-  },
-  {
-    "code": "import radon\nmath.sqrt(9)",
-    "choices": [
-      "Importou a biblioteca errada! (math)",
-      "sqrt não existe",
-      "Faltou criar a variável 9"
-    ],
-    "answer": 0,
-    "explain": "Como ele poderia usar o math se ele importou a biblioteca radon (que inclusive nem existe no Python puro)? Ele tinha que fazer 'import math'."
-  },
-  {
-    "code": "lista_compras = ['Maçã, 'Banana', 'Pera']",
-    "choices": [
-      "Faltou aspa na Maçã",
-      "Não usamos vírgula em listas",
-      "Pera não tem acento"
-    ],
-    "answer": 0,
-    "explain": "Faltou fechar a aspa depois da palavra Maçã. O sistema achou que a  vírgula e todo o resto faziam parte do texto dela."
-  }
+    {
+      "code": "nome = 'CyberAdmin'\nidade = 22\nprint(nome + idade)",
+      "choices": [
+        "Variável idade não declarada globalmente.",
+        "O operador '+' não soma (TypeError) Inteiro com String sem Cast Explícito.",
+        "O nome 'CyberAdmin' estoura o limite de Buffer (Overflow).",
+        "A função print() exige parênteses duplos em strings."
+      ],
+      "answer": 1,
+      "explain": "🤖 IA: Exceção [TypeError]. Ao contrário de JS, Python possui Tipagem Forte. O operador '+' concatenar String com String, mas falha ao engolir Inteiros. Você deve aplicar `str(idade)`."
+    },
+    {
+      "code": "while True\n    scan_ports()",
+      "choices": [
+        "O laço infinito trava o compilador, precisa de um Break.",
+        "A indentação dentro do While está usando TABs em vez de espaços.",
+        "A sintaxe carece rigorosamente de DOIS:PONTOS (:) ao final da declaração.",
+        "True precisa ser escrito com letras minúsculas em CPython."
+      ],
+      "answer": 2,
+      "explain": "🤖 IA: Falha de Sistema [SyntaxError]. Estruturas de controle (if, for, while, def, class) em Python dependem do fechamento da linha declarativa com dois-pontos `:` antes de iniciar um bloco indentado."
+    },
+    {
+      "code": "def invadir():\nprint(\"Firewall derrubado!\")",
+      "choices": [
+        "A função não tem argumentos (vazia).",
+        "Erro Crítico de Indentação (IndentationError) pós-cláusula.",
+        "Faltou aspas simples; as aspas duplas são inválidas no print.",
+        "O interpretador exige a palavra-chave 'function' em vez de 'def'."
+      ],
+      "answer": 1,
+      "explain": "🤖 IA: [IndentationError]. Python não utiliza chaves `{ }` para englobar comandos. Toda instrução interna pertence à função SE E SOMENTE SE estiver recuada (geralmente 4 espaços)."
+    },
+    {
+      "code": "pontuacao = input(\"Insira os XP: \")\nif pontuacao > 5000:\n    print(\"Hacker Elite\")",
+      "choices": [
+        "A string do print precisa ser armazenada antes.",
+        "A função input() retorna 'String', tornando a comparação matemática ilegal.",
+        "Não existe a porta 'input' na biblioteca padrão.",
+        "Variáveis sem 'var' ou 'let' travam o comparador estrito."
+      ],
+      "answer": 1,
+      "explain": "🤖 IA: Alarme de Tipagem! A função `input()` nativa varre STDIN e entrega TEXTO ('str'). Comparar texto diretamente contra o número 5000 lança `TypeError`. Você precisa aplicar um cast: `int(input(...))`."
+    },
+    {
+      "code": "servidores = ['Alpha', 'Beta', 'Gama']\nprint(servidores[3])",
+      "choices": [
+        "A lista tem aspas misturadas no terminal de compilação.",
+        "Arrays em Python baseiam-se em índice 1.",
+        "A sintaxe para obter arrays é servidores(3).",
+        "Índice fora das dimensões do Array (IndexError)."
+      ],
+      "answer": 3,
+      "explain": "🤖 IA: Vazamento de Memória Abortado [IndexError]. Arrays começam contando do zero (0=Alpha, 1=Beta, 2=Gama). Tentar varrer a casa [3] é acessar o abismo do disco."
+    },
+    {
+      "code": "for i in range(5):\nprint(\"Ping \", i)",
+      "choices": [
+        "Falta um vírgula após 'range(5)'.",
+        "O Python não conhece a função 'range' na versão 3.",
+        "Bloco de repetição desprovido de recuo (IndentationError).",
+        "O 'for' em Python exige uso de 'let i = 0'."
+      ],
+      "answer": 2,
+      "explain": "🤖 IA: Violação de Espaçamento Mínimo. Assim como funções `def`, o comando que está sob um loop `for ...:` precisa nascer um TAB à direita."
+    },
+    {
+      "code": "arquivo = \"payload.exe'\nrun(arquivo)",
+      "choices": [
+        "String inválida: Incoerência de aspas Duplas e Simples nas bordas.",
+        "Arquivos .exe só funcionam via módulo 'os.system()'.",
+        "Palavras em minúsculo falham em identificadores globais.",
+        "As variáveis precisam predefinir tamanho em bytes."
+      ],
+      "answer": 0,
+      "explain": "🤖 IA: Falha Léxica Crassa (SyntaxError). Você abriu a string com aspas duplas (\") e a fechou com aspas simples ('). O interpretador não entende o fechamento do bloco (EOL)."
+    },
+    {
+      "code": "If is_admin == True:\n    drop_database()",
+      "choices": [
+        "Drop de database nunca funciona offline.",
+        "Operação maliciosa barrada pelo interpretador.",
+        "O nome da variável deve usar CamelCase estrito.",
+        "Palavras-chave como 'if' e booleanos são Case-Sensitive ('if' minúsculo)."
+      ],
+      "answer": 3,
+      "explain": "🤖 IA: [NameError/Syntax]. 'If' com 'I' maiúsculo é visto como uma variável maluca qualquer, e não uma condição de sistema. As Keywords de controle de fluxo são totalmente minúsculas."
+    },
+    {
+      "code": "pi = 3.14\npi = 3,14\nprint(pi)",
+      "choices": [
+        "Ele vai imprimir 3.14 flutuante estático.",
+        "Vírgula redefine a variável como uma Tupla Numérica `(3, 14)` e não Decimal.",
+        "Erro Fatal: Constantes não podem sofrer override em tempo real.",
+        "A linha quebra na conversão de string."
+      ],
+      "answer": 1,
+      "explain": "🤖 IA: Estranheza Matemática (Type Mismatch). No ecossistema internacional computacional, separador decimal é PONTO (3.14). Ao digitar VÍRGULA, o Python o tratou como uma coleção de múltiplos valores genérica: uma Tupla!"
+    },
+    {
+      "code": "dano_arma = 1500\nif dano_arma = 1500:\n    print(\"One Shot!\")",
+      "choices": [
+        "O operador `=` designa um valor (Atribuição, SyntaxError), e não faz a comparação Lógica (==).",
+        "A string \"One Shot!\" quebra o escopo global do condicional.",
+        "If só aceita valores booleanos literais (True/False).",
+        "Comparadores numéricos só funcionam com bibliotecas math."
+      ],
+      "answer": 0,
+      "explain": "🤖 IA: Erro de Identidade Binária. Usa-se `=` para definir o peso na caixa da memória. Para interrogar a memória matemática *(ele é idêntico a?)* exigimos o uso militar do sinal eqüitativo duplo: `==`."
+    }
+  ],
+  logica: [
+    {
+      "code": "for frame in range(1, 10):\n    renderizar(frame)\n# Exige exatamente 10 frames!",
+      "choices": [
+        "O range() do Python é exclusivo na ponta; loop morrerá no frame 9.",
+        "A renderização pulará ímpares.",
+        "Loop infinito! O ponteiro jamais alcançará 10 no compilador lógico.",
+        "Faltou encapsular o passo: range(1, 10, 2)."
+      ],
+      "answer": 0,
+      "explain": "🤖 IA: Lógica Estilhaçada. Funções de `range(start, stop)` param ANTES de tocar a parede. Se instruiu range(1, 10), o loop cessará suas operações dolorosamente no número 9."
+    },
+    {
+      "code": "acesso = \"Hacker\"\nif acesso == 'Admin' or 'Hacker':\n    sistema.liberar()",
+      "choices": [
+        "Strings vazias destroem o verificador OR.",
+        "Uma string não vazia ('Hacker') é Truthy. A condição OR cega SEMPRE autorizará a entrada.",
+        "O comando exige parênteses: (acesso == 'Admin' or 'Hacker').",
+        "Comparação incompatível entre tipos Boolean e Strings."
+      ],
+      "answer": 1,
+      "explain": "🤖 IA: Brecha de Segurança Crítica. Na lógica booleana, você perguntou: `(acesso é 'Admin')` OU `('Hacker' possui texto?)`. O lado direito sempre retorna True. O correto exigiria: `... or acesso == 'Hacker'`."
+    },
+    {
+      "code": "bateria = 100\nif bateria > 50:\n    status = 'Saudável'\nelse if bateria < 20:\n    status = 'Critico!'",
+      "choices": [
+        "O CPython não entende strings com aspas simples sob escopos complexos.",
+        "Você não está cobrindo a lacuna entre 21 e 50.",
+        "O interpretador Pythonic não usa 'else if'. Usa-se obrigatoriamente 'elif'.",
+        "A variável 'status' não está tipada estaticamente para String!"
+      ],
+      "answer": 2,
+      "explain": "🤖 IA: Falha Estrutural [SyntaxError]. O cérebro em blocos do C, Java e JS entendem 'else if', mas a serpente Python é agressiva por economia de keystrokes: o comando legal aninhado contra-condicional chama-se unicamente `elif`."
+    },
+    {
+      "code": "def processar_pacotes(lista):\n    quadrados = []\n    for n in lista:\n    quadrados.append(n ** 2)\n    return quadrados",
+      "choices": [
+        "Operador matemático (**) não é de potência.",
+        "Colchetes das Arrays causam stack limit.",
+        "Falta o comando 'extend()', o append só adiciona strings.",
+        "O loop e o bloco de código de adição falham miseravelmente pela falta de Indentação aninhada dentro do 'for'."
+      ],
+      "answer": 3,
+      "explain": "🤖 IA: Camadas de Endereçamento Destruídas [IndentationError]. Tudo atrelado ao loop 'for' precisa de espaço extra relativo ao loop da função principal. Cuidado com o espaço de blocos no design."
+    },
+    {
+      "code": "bits = 8\nwhile bits < 100:\n    enviar_pacote(bits)",
+      "choices": [
+        "Loop infinito letal; o ponteiro numérico (bits) jamais recebe incremento (+1)!",
+        "100 não é uma potência legal de 2 (base binária).",
+        "O interpretador proibe variáveis matemáticas sob escopo de loop While.",
+        "Excede o limite máximo de iteração restrita do hardware nativo."
+      ],
+      "answer": 0,
+      "explain": "🤖 IA: Congelamento de Núcleos [Infinite Loop]. Você aciona a máquina mas nunca instrui as engrenagens `bits` a avançarem `bits += X` para encontrarem a saída `< 100`. A máquina fritará a rede global."
+    },
+    {
+      "code": "import socket\nimport requests\n\ndef obter_ip():\n    return '192.168.0.1'",
+      "choices": [
+        "Socket é depreciado do CPython atual.",
+        "Obter IPv4 sem SSL lança exceção grave.",
+        "Aviso Lógico (Warning): Módulos brutos consumindo memória preciosa e sequer instanciados / não utilizados dentro da arquitetura do script.",
+        "Falta retorno dinâmico na thread assíncrona."
+      ],
+      "answer": 2,
+      "explain": "🤖 IA: Lentidão Estrutural (Linters detectam: F401 imported but unused). Você requisita pacotes gigantes pelo sistema ('socket', 'requests') alocando RAM pesada, e seu código ignora solenemente que eles existem."
+    },
+    {
+      "code": "palavra = \"CYBER\"\nmetade = palavra[1:4]\nprint(metade)",
+      "choices": [
+        "Retorna 'YYY', pois há loop malicioso de repetição.",
+        "Fatia retorna 'YBE'; lembre-se: Índices começam em 0 e Slice em Python detém o ponteiro de encerramento do bloco anterior.",
+        "Causará KeyError, palavra não é Dicionário de endereçamento.",
+        "Fatia retorna 'CYB', por erro de string char array."
+      ],
+      "answer": 1,
+      "explain": "🤖 IA: Dedutibilidade dos Slices Embutidos: O índice [0] é 'C', o índice [1] começa no 'Y'. Ele varre os índices 1, 2 e 3 mas SEMPRE esbarra fechando sua extração antes mesmo de encostar na casa de index 4."
+    },
+    {
+      "code": "caminho_arquivo = \"C:\novos\tarefas.txt\"\nprint(caminho_arquivo)",
+      "choices": [
+        "Sistemas baseados em Unix falharão no terminal de caminhos absolutos locais.",
+        "O interpretador consome `\n` como Nova Linha e `\t` como TAB, desintegrando o endereço.",
+        "Não existe a letra drive 'C' virtual validada no compilador.",
+        "Path limit excede contagem de chars de byte único."
+      ],
+      "answer": 1,
+      "explain": "🤖 IA: Quebra Lógica de String Escapada. A contrabarra (\\) num texto significa fuga técnica pra injetar comandos invisíveis. O \\n vira [Enter] e \\t um [TAB] horizontal imenso. Adicione `r` no prefixo: `r\"C:\novos...\"` (Raw String) para neutralizar os mísseis!"
+    },
+    {
+      "code": "saldo = \"450.00\"\nif type(saldo) is int:\n    print('Aprovado')",
+      "choices": [
+        "O type() tem um limite de bytes no parâmetro lógico.",
+        "Causará vazamento, pois a classe decimal de 450 é double em C.",
+        "O texto \"450.00\" está imerso em The Matrix Strings. Ele nunca vai cair no `is int` pois não é tipagem inteira, e ponto não serve.",
+        "Erro sintático: is obrigatoriamente deve ser ==."
+      ],
+      "answer": 2,
+      "explain": "🤖 IA: O motor heurístico acusa: O número possui Aspas (class: str). Pior, mesmo que decodificado com `float(saldo)`, ele jamais passaria no `is int`. O bloco if sempre permanecerá esquecido."
+    },
+    {
+      "code": "chaves = [1, 2, 3]\ndecriptores = [4, 5]\nmaster = chaves.append(decriptores)\nprint(master)",
+      "choices": [
+        "O interpretador imprime None, pois o `append` modifica os dados in-place e retorna silêncio espectral Vazio.",
+        "A impressão resulta de Arrays em colusão [1, 2, 3, 4, 5].",
+        "A junção matemática entretece matrizes tridimensionais, quebrando o hardware gráfico.",
+        "Erro Lógico, Append não aceita colchetes genéricos como parâmetro atômico."
+      ],
+      "answer": 0,
+      "explain": "🤖 IA: Armadilha Mutável Pythonica Clássica! Funções em coleções puras (como list.append() ou list.sort()) aplicam cirurgia na raiz do bloco e retornam `None`. A variável 'master' foi instanciada contendo uma alma vazia literal."
+    }
   ],
   massiva: [
     {
-      "code": "matriz = [[1, 2], [3, 4]]\nprint(matriz[2][0])",
+      "code": "def interceptar(alvo, rastreio=[]):\n    rastreio.append(alvo)\n    return rastreio\n\nprint(interceptar('A'))\nprint(interceptar('B'))",
       "choices": [
-        "A matriz não possui a linha [2]",
-        "Arrays aninhados não são suportados",
-        "A sintaxe correta é matriz(2,0)"
+        "A saída do segundo esquadrão de print jorra um erro Recursivo de Buffer.",
+        "O terminal printa: ['A'] e ['B'] ordenadamente em matriz independente limpa.",
+        "A lista Default na declaração da função persiste no compilador C. O segundo print retornará ['A', 'B'] num vazamento de estados brutal.",
+        "Arrays via parâmetro requerem o uso intenso do cast 'list(alvo)'."
       ],
-      "answer": 0,
-      "explain": "A matriz só tem linha 0: [1,2] e linha 1: [3,4]. Tentar acessar a linha índice 2 causa o famoso IndexError (Out of Bounds)."
+      "answer": 2,
+      "explain": "🤖 IA: Defeito Primordial: Valores Mutáveis Padrão (Default Mutable Arguments). Os escopos list `[]` não cravam uma array nova em cada execução! Eles são mapeados em disco no carregamento único do script e todas as chamadas sofrem assédio cumulativo no mesmo buraco de memória."
     },
     {
-      "code": "def dobrar(x=[]):\n  x.append(2)\n  return x\n\nprint(dobrar())\nprint(dobrar())",
+      "code": "import copy\nkeys = [[1, 2], [3, 4]]\nfake_keys = copy.copy(keys)\nfake_keys[0][0] = 99\nprint(keys[0][0])",
       "choices": [
-        "O segundo print retorna [2, 2]",
-        "A função exige um argumento obrigatoriamente",
-        "Append 2 causa erro de compilação"
+        "O valor exibido é 1. O copy isolou a ameaça do endereço local.",
+        "Erro de Compilação: Módulo de matriz não importa shallow copies.",
+        "O terminal ecoará 99. Shallow Copy vaza as referências aninhadas! Ele copiou uma casca fantasma, mas suas correntes profundas continuam amarradas à fonte.",
+        "Python barra atalhos matemáticos sobrepostas com Index Limit."
       ],
-      "answer": 0,
-      "explain": "Cuidado com 'Default Mutable Arguments'. O array 'x=[]' é criado apenas UMA vez na memória ao rodar a função. A segunda passada vai simplesmente usar a mesma lista que já continha o [2]."
+      "answer": 2,
+      "explain": "🤖 IA: Homicídio Criptográfico (Shallow Copy Shadow Leak). Ferramenta `copy()` copia a estrutura por cima, não o intestino profundo. Listas que injetam listas são varridas pelo mesmo ponteiro amaldiçoado de C. Apenas o salvaguarda `deepcopy()` destrói a amarra dos endereçamentos independentes."
     },
     {
-      "code": "nomes = ('Ana', 'Bia')\nnomes[0] = 'Carlos'\nprint(nomes)",
+      "code": "nodos_rede = [x for x in range(5)]\nfunc = [lambda: nodo for nodo in nodos_rede]\nprint([f() for f in func])",
       "choices": [
-        "Tuplas (Tupples) são imutáveis",
-        "Troca de tipo String indesejada",
-        "Listas usam parênteses, não funciona"
+        "Resultará no output exato: [0, 1, 2, 3, 4].",
+        "A variável Nodo no Lambda Late Binding aprisiona a maldição do último estado em vez do iterador. A saída real jorra lixo genérico: [4, 4, 4, 4, 4].",
+        "Retorna referências brutais abstratas: [<function <lambda> at 0x...>, ...]",
+        "Laço de descompressão list comprehesion corrompe CPU com Timeout."
       ],
-      "answer": 0,
-      "explain": "Diferente de Listas `[]`, variáveis entre parênteses em Python são Tuplas! Elas são constantes, você NÃO PODE alterar um de seus valores depois de ciadas (TypeError)."
+      "answer": 1,
+      "explain": "🤖 IA: Arquitetura Avançada 'Late Binding Closures'. Quando lambdas ou defs vivem num for intróprio apontando para o pivô da iteração (nodo), ninguém varre os cálculos. Na engrenagem da avaliação Tardia (posterior) quando invocadas as lambdas olham a memória exausta e só acham ela fixada no 4."
     },
     {
-      "code": "dicionario = { 'id': 10 }\nprint(dicionario['nome'])",
+      "code": "senha = [10, 20, 30]\nhash = senha\nhash += [40]\nprint(senha)",
       "choices": [
-        "Lança KeyError (Chave Inexistente)",
-        "Retorna null",
-        "Retorna undefined"
+        "Variável senha expurgo isolado: Imprime [10, 20, 30].",
+        "A variável sofre uma sombra de Mutação (In-Place Binding). A manipulação estendida '+=', alterou o próprio endereço físico matriz que ambas variáveis parasitam. O array senha jorrará [10, 20, 30, 40].",
+        "TypeError severo list operando via '=' global.",
+        "Símbolo indevido. O correto em hashes é 'add()'."
       ],
-      "answer": 0,
-      "explain": "Diferente do Javascript que retorna 'undefined', buscar uma chave com colchetes puramente Num Dicionário em Python que não exista dá uma explosão dura de KeyError! Para evitar, use `dicionario.get('nome')`."
+      "answer": 1,
+      "explain": "🤖 IA: A falácia do += vs =. Em tipos Mutáveis (Lists) em Python, a reatribuição `hash += [40]` na verdade aciona uma chamada ao kernel nativo `__iadd__` que estende as raízes das variáveis já clonadas. `hash = hash + [40]` criaria uma ilha nova, salvando a velha original das chamas."
     },
     {
-      "code": "x = 10\ndef alterar():\n   x = 20\n\nalterar()\nprint(x)",
+      "code": "(x, y, z) = \"CMD\"\nprint(x, y, z)",
       "choices": [
-        "Printará 10 (Escopo Local vs Global)",
-        "Ocorrerá um erro de redeclaração de variável",
-        "Printará 20, pois foi alterado"
+        "Destruição Lógica! CPython não desembala chaves de Strings.",
+        "O terminal vai cuspir cada String inteira: CMD CMD CMD.",
+        "Erro Assíncrono da tupla não definida globalmente no bytecode.",
+        "Ele funciona violentamente perfeito: Mapeará o texto espalhando em bytes exatos 'C', 'M', 'D' descompactando os chars iteráveis das tripas da var."
       ],
-      "answer": 0,
-      "explain": "A variável x=20 criada DENTRO da função morre dentro dela (Escopo Local). Para alterar o X de fora de fato, ele teria que declarar `global x` dentro da função primeiro."
+      "answer": 3,
+      "explain": "🤖 IA: Magia Arcana do CPython [Sequence Unpacking]. Strings em Python tratam todos seus corpos como iteráveis vivos. Se mapear lados esquerdo de coletores como tuplas iguais aos buracos da string direita, o motor nativo tritura em arrays limpas alocadas sem for loops extras!"
+    },
+    {
+      "code": "def process_data(d={0: 0}):\n    d[0] += 1\n    return d[0]\n\nfor _ in range(3): process_data()",
+      "choices": [
+        "Sobe um TypeError por conta de Default em Tipo de Dado dict().",
+        "Ele vai jorrar retorno numérico estático: 1 três vezes puras iteradas.",
+        "O contador sofrerá engajamento acumulativo: 1, depois 2, depois 3, pois d={0:0} só é instanciado na memória no Parsing da Biblioteca em nível de escopo central.",
+        "Erro Sintático. O lambda não está descompactando as instâncias list comprehension iteráveis."
+      ],
+      "answer": 2,
+      "explain": "🤖 IA: Desmoronamento Mutável Revisitado! Todos e quaisquer Dicionários `{}` ou Arrays `[]` plantados na cabeça do argumento (def func(d={})) viram Constantes Globais debaixo do capô da linguagem C compilada. NUNCA DEIXE defaults complexos. Use `def x(d=None)` e mapeie DENTRO."
+    },
+    {
+      "code": "banco_dados = [\"User1\", \"User2\"]\nwith open('backdoor.log', 'w') as f:\n    f.write(banco_dados)",
+      "choices": [
+        "A execução do Write em CPython apenas aceita matrizes brutais binárias 'WB'.",
+        "Python fará cast implícito magicamente (str(banco_dados)) salvando os colchetes com sucesso na trilha textual.",
+        "Comando write() apenas suporta objetos de raiz textual String, ele abortará com o terminal gritando TypeError com urgência sistêmica.",
+        "A porta .log não possui privilégios sys_admin. Falhará subitamente silenciada."
+      ],
+      "answer": 2,
+      "explain": "🤖 IA: [TypeError Arquitetural]. Listas não se convertem automaticamente por pura boa vontade de salvar seu log. A menos que apliques cast como `.write(str(banco_dados))` ou a iterás, sua missão abortará deixando os arquivos vazios corrompidos no sistema."
+    },
+    {
+      "code": "senhas_vazadas = { 'joao': 1234, 'maria': 5678, 'joao': 9999 }\nprint(senhas_vazadas['joao'])",
+      "choices": [
+        "O motor Hash do Python colapsa gerando chaves repetidas em falha Dicionário Key Error.",
+        "O dicionário salva matriz multidimensional. Irá imprimir [1234, 9999] em uma lista Array encapsulada.",
+        "Lógica Overriding Nativa. O dicionário substitui a antiga key calado, exibindo cruelmente a porta sobrescrita: 9999 ao vivo.",
+        "A saída retornada será a matriz original nativa de leitura 1234 estritamente cega."
+      ],
+      "answer": 2,
+      "explain": "🤖 IA: Sobrescrita de Hashing Silenciosa. CPython nunca reclama de chaves duplicadas no parseo de JSON e Dicts, as chaves subsequentes apunhalam as antigas esmagando e assumindo impiedosamente os reinos dos slots de memória local de quem tiver o mesmo prefixo."
+    },
+    {
+      "code": "x = [1, 2, 3]\ny = x\nx += [4]\nprint(y)",
+      "choices": [
+        "Imprime [1, 2, 3]. Operadores em Listas clonam instâncias.",
+        "Impreme [1, 2, 3, 4]. Ambas as variáveis atracaram o ponteiro no mesmo objeto nativo do disco alocador (Alias Mutability Binding).",
+        "Levanta Exceção. A atribuição X e Y desfigura o array na raiz.",
+        "Gera corrupção por erro referencial list."
+      ],
+      "answer": 1,
+      "explain": "🤖 IA: Você achou que estava salvando um Backup ao fazer Y = X? Apenas colocou duas moscas de nome distinto olhando pro exato mesmo copo físico! A destruição mutável (+= 4) operado em quem for varre os espólios afetando os dois simultaneamente. Use `.copy()` no futuro pra proteção."
+    },
+    {
+      "code": "try:\n    val = 10 / 0\nexcept AssertionError:\n    print('Apanhado')\nfinally:\n    print('Fim')",
+      "choices": [
+        "A saída imprime apenas 'Fim'. Catch nativo bloqueia erros nulos.",
+        "O output será 'Apanhado' 'Fim', ignorado falhas assíncronas binárias.",
+        "O interpretador imprime em tela esfaqueada 'Apanhado' e jorra falha silenciada.",
+        "ZeroDivisionError foi atirado! Ele passa varando pelo except AssertionError despreparado. A rotina morre queimada imprimindo 'Fim', e então encerra sua trilha despejando a Exception na cara do Dev por negligência!"
+      ],
+      "answer": 3,
+      "explain": "🤖 IA: Estratégia Falha no Tratamento de Exceções. Dividir por 0 não gera o pacato `AssertionError`, mas sim uma facada vital nomeada `ZeroDivisionError`. Como o Catch escudo falhou em interceptar o calão letal, o finally sangra e depois entrega a alma abortando o seu processo."
     }
   ]
-,
-  logica: [
-  {
-    "code": "# Quero contar de 1 até exatamente 19\nfor i in range(1, 19):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 19. Deveria ser range(1, 20)",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 19)' vai rodar até o 18. Para chegar até 19, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "if email == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "preco = int(input())\nif preco > 48 and preco < 44:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 48 e menor que 44 ao mesmo tempo.",
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 48 e < 44."
-  },
-  {
-    "code": "if usuario == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 48\nfor i in range(1, 48):\n  print(i)",
-    "choices": [
-      "Range para no número anterior. Ele nunca vai printar o 48. Deveria ser range(1, 49)",
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 0,
-    "explain": "Função range() é exclusiva no final. 'range(1, 48)' vai rodar até o 47. Para chegar até 48, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 38\nfor i in range(1, 38):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 38. Deveria ser range(1, 39)",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 38)' vai rodar até o 37. Para chegar até 38, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "if email == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "if email == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "idade = int(input())\nif idade > 26 and idade < 19:\n  print('Aprovado')",
-    "choices": [
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 26 e menor que 19 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 26 e < 19."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "idade = int(input())\nif idade > 27 and idade < 23:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 27 e menor que 23 ao mesmo tempo.",
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 27 e < 23."
-  },
-  {
-    "code": "numero = 5\nwhile numero < 15:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável numero tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no numero"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de numero dentro dele, a condição (numero < 15) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "A variável precisaria ser do tipo float.",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "velocidade = int(input())\nif velocidade > 24 and velocidade < 17:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 24 e menor que 17 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 24 e < 17."
-  },
-  {
-    "code": "preco = int(input())\nif preco > 23 and preco < 15:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 23 e menor que 15 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 23 e < 15."
-  },
-  {
-    "code": "nota = int(input())\nif nota > 12 and nota < 4:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 12 e menor que 4 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 12 e < 4."
-  },
-  {
-    "code": "vidas = 3\nwhile vidas < 15:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no vidas",
-      "O while não aceita o sinal de <",
-      "A variável vidas tem que começar em 0"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de vidas dentro dele, a condição (vidas < 15) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "temperatura = int(input())\nif temperatura > 29 and temperatura < 20:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 29 e menor que 20 ao mesmo tempo.",
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 29 e < 20."
-  },
-  {
-    "code": "if login == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "idade = int(input())\nif idade > 19 and idade < 13:\n  print('Aprovado')",
-    "choices": [
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 19 e menor que 13 ao mesmo tempo.",
-      "O Python não entende a palavra and."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 19 e < 13."
-  },
-  {
-    "code": "numero = 1\nwhile numero < 11:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "A variável numero tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no numero"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de numero dentro dele, a condição (numero < 11) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "if email == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "i = 10\nwhile i < 26:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável i tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no i"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de i dentro dele, a condição (i < 26) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "preco = int(input())\nif preco > 23 and preco < 21:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 23 e menor que 21 ao mesmo tempo.",
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 23 e < 21."
-  },
-  {
-    "code": "nota = int(input())\nif nota > 37 and nota < 32:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 37 e menor que 32 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 37 e < 32."
-  },
-  {
-    "code": "pontos = 6\nwhile pontos < 23:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "A variável pontos tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no pontos"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de pontos dentro dele, a condição (pontos < 23) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 26\nfor i in range(1, 26):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 26. Deveria ser range(1, 27)",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 26)' vai rodar até o 25. Para chegar até 26, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "if email == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "if usuario == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "velocidade = int(input())\nif velocidade > 13 and velocidade < 8:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 13 e menor que 8 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 13 e < 8."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 11\nfor i in range(1, 11):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 11. Deveria ser range(1, 12)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 11)' vai rodar até o 10. Para chegar até 11, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "idade = int(input())\nif idade > 31 and idade < 27:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 31 e menor que 27 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 31 e < 27."
-  },
-  {
-    "code": "preco = int(input())\nif preco > 20 and preco < 18:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 20 e menor que 18 ao mesmo tempo.",
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 20 e < 18."
-  },
-  {
-    "code": "vidas = 4\nwhile vidas < 11:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no vidas",
-      "O while não aceita o sinal de <",
-      "A variável vidas tem que começar em 0"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de vidas dentro dele, a condição (vidas < 11) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "if usuario == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "if usuario == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "if usuario == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "if login == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "if login == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "if email == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "pontos = 7\nwhile pontos < 18:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no pontos",
-      "A variável pontos tem que começar em 0"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de pontos dentro dele, a condição (pontos < 18) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "contador = 0\nwhile contador < 7:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável contador tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no contador",
-      "O while não aceita o sinal de <"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de contador dentro dele, a condição (contador < 7) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 15\nfor i in range(1, 15):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 15. Deveria ser range(1, 16)",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 15)' vai rodar até o 14. Para chegar até 15, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "velocidade = int(input())\nif velocidade > 10 and velocidade < 4:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 10 e menor que 4 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 10 e < 4."
-  },
-  {
-    "code": "numero = 2\nwhile numero < 20:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "A variável numero tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no numero"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de numero dentro dele, a condição (numero < 20) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 23\nfor i in range(1, 23):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 23. Deveria ser range(1, 24)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 23)' vai rodar até o 22. Para chegar até 23, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "x = int(input())\nif x / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "A variável precisaria ser do tipo float.",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 35\nfor i in range(1, 35):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 35. Deveria ser range(1, 36)",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 35)' vai rodar até o 34. Para chegar até 35, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "i = 2\nwhile i < 13:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "A variável i tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no i"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de i dentro dele, a condição (i < 13) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 17\nfor i in range(1, 17):\n  print(i)",
-    "choices": [
-      "Range para no número anterior. Ele nunca vai printar o 17. Deveria ser range(1, 18)",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 0,
-    "explain": "Função range() é exclusiva no final. 'range(1, 17)' vai rodar até o 16. Para chegar até 17, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "temperatura = int(input())\nif temperatura > 18 and temperatura < 16:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 18 e menor que 16 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 18 e < 16."
-  },
-  {
-    "code": "i = 1\nwhile i < 9:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável i tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no i",
-      "O while não aceita o sinal de <"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de i dentro dele, a condição (i < 9) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "x = 6\nwhile x < 24:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "A variável x tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no x"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de x dentro dele, a condição (x < 24) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "velocidade = int(input())\nif velocidade > 35 and velocidade < 30:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 35 e menor que 30 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 35 e < 30."
-  },
-  {
-    "code": "if login == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "idade = int(input())\nif idade > 42 and idade < 36:\n  print('Aprovado')",
-    "choices": [
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 42 e menor que 36 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 42 e < 36."
-  },
-  {
-    "code": "numero = 0\nwhile numero < 17:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no numero",
-      "O while não aceita o sinal de <",
-      "A variável numero tem que começar em 0"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de numero dentro dele, a condição (numero < 17) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 8\nfor i in range(1, 8):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 8. Deveria ser range(1, 9)",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 8)' vai rodar até o 7. Para chegar até 8, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 6\nfor i in range(1, 6):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 6. Deveria ser range(1, 7)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 6)' vai rodar até o 5. Para chegar até 6, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 24\nfor i in range(1, 24):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 24. Deveria ser range(1, 25)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 24)' vai rodar até o 23. Para chegar até 24, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "pontos = 7\nwhile pontos < 13:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável pontos tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no pontos"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de pontos dentro dele, a condição (pontos < 13) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "vidas = 4\nwhile vidas < 17:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável vidas tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no vidas"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de vidas dentro dele, a condição (vidas < 17) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "nota = int(input())\nif nota > 45 and nota < 39:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 45 e menor que 39 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 45 e < 39."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "if email == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "velocidade = int(input())\nif velocidade > 44 and velocidade < 39:\n  print('Aprovado')",
-    "choices": [
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 44 e menor que 39 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 44 e < 39."
-  },
-  {
-    "code": "pontos = 1\nwhile pontos < 10:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no pontos",
-      "O while não aceita o sinal de <",
-      "A variável pontos tem que começar em 0"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de pontos dentro dele, a condição (pontos < 10) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "vidas = 10\nwhile vidas < 15:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no vidas",
-      "A variável vidas tem que começar em 0",
-      "O while não aceita o sinal de <"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de vidas dentro dele, a condição (vidas < 15) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 45\nfor i in range(1, 45):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 45. Deveria ser range(1, 46)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 45)' vai rodar até o 44. Para chegar até 45, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "if usuario == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "velocidade = int(input())\nif velocidade > 42 and velocidade < 34:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 42 e menor que 34 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 42 e < 34."
-  },
-  {
-    "code": "velocidade = int(input())\nif velocidade > 27 and velocidade < 23:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 27 e menor que 23 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 27 e < 23."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 48\nfor i in range(1, 48):\n  print(i)",
-    "choices": [
-      "Range para no número anterior. Ele nunca vai printar o 48. Deveria ser range(1, 49)",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 0,
-    "explain": "Função range() é exclusiva no final. 'range(1, 48)' vai rodar até o 47. Para chegar até 48, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 49\nfor i in range(1, 49):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 49. Deveria ser range(1, 50)",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 49)' vai rodar até o 48. Para chegar até 49, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 49\nfor i in range(1, 49):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 49. Deveria ser range(1, 50)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 49)' vai rodar até o 48. Para chegar até 49, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "x = 9\nwhile x < 29:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "A variável x tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no x"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de x dentro dele, a condição (x < 29) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "i = 3\nwhile i < 9:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável i tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no i",
-      "O while não aceita o sinal de <"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de i dentro dele, a condição (i < 9) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "contador = 0\nwhile contador < 6:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável contador tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no contador",
-      "O while não aceita o sinal de <"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de contador dentro dele, a condição (contador < 6) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "if usuario == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 9\nfor i in range(1, 9):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 9. Deveria ser range(1, 10)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 9)' vai rodar até o 8. Para chegar até 9, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 16\nfor i in range(1, 16):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 16. Deveria ser range(1, 17)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 16)' vai rodar até o 15. Para chegar até 16, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "x = int(input())\nif x / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 40\nfor i in range(1, 40):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 40. Deveria ser range(1, 41)",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 40)' vai rodar até o 39. Para chegar até 40, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "if usuario == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "contador = 7\nwhile contador < 17:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "A variável contador tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no contador"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de contador dentro dele, a condição (contador < 17) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "nota = int(input())\nif nota > 14 and nota < 8:\n  print('Aprovado')",
-    "choices": [
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 14 e menor que 8 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 14 e < 8."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 29\nfor i in range(1, 29):\n  print(i)",
-    "choices": [
-      "Range para no número anterior. Ele nunca vai printar o 29. Deveria ser range(1, 30)",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 0,
-    "explain": "Função range() é exclusiva no final. 'range(1, 29)' vai rodar até o 28. Para chegar até 29, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "if login == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "temperatura = int(input())\nif temperatura > 13 and temperatura < 9:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 13 e menor que 9 ao mesmo tempo.",
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 13 e < 9."
-  },
-  {
-    "code": "temperatura = int(input())\nif temperatura > 26 and temperatura < 20:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 26 e menor que 20 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 26 e < 20."
-  },
-  {
-    "code": "x = int(input())\nif x / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 19\nfor i in range(1, 19):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 19. Deveria ser range(1, 20)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 19)' vai rodar até o 18. Para chegar até 19, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 26\nfor i in range(1, 26):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 26. Deveria ser range(1, 27)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 26)' vai rodar até o 25. Para chegar até 26, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 10\nfor i in range(1, 10):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 10. Deveria ser range(1, 11)",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 10)' vai rodar até o 9. Para chegar até 10, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "nota = int(input())\nif nota > 48 and nota < 45:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 48 e menor que 45 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 48 e < 45."
-  },
-  {
-    "code": "idade = int(input())\nif idade > 23 and idade < 18:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 23 e menor que 18 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 23 e < 18."
-  },
-  {
-    "code": "pontos = 5\nwhile pontos < 14:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável pontos tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no pontos",
-      "O while não aceita o sinal de <"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de pontos dentro dele, a condição (pontos < 14) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "x = 5\nwhile x < 16:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no x",
-      "A variável x tem que começar em 0",
-      "O while não aceita o sinal de <"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de x dentro dele, a condição (x < 16) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 8\nfor i in range(1, 8):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 8. Deveria ser range(1, 9)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 8)' vai rodar até o 7. Para chegar até 8, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 46\nfor i in range(1, 46):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 46. Deveria ser range(1, 47)",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 46)' vai rodar até o 45. Para chegar até 46, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "if usuario == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "A variável precisaria ser do tipo float.",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "vidas = 2\nwhile vidas < 7:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no vidas",
-      "A variável vidas tem que começar em 0"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de vidas dentro dele, a condição (vidas < 7) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 23\nfor i in range(1, 23):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 23. Deveria ser range(1, 24)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 23)' vai rodar até o 22. Para chegar até 23, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "numero = 6\nwhile numero < 22:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável numero tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no numero",
-      "O while não aceita o sinal de <"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de numero dentro dele, a condição (numero < 22) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "qtd = int(input())\nif qtd / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "temperatura = int(input())\nif temperatura > 50 and temperatura < 44:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 50 e menor que 44 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 50 e < 44."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 8\nfor i in range(1, 8):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 8. Deveria ser range(1, 9)",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 8)' vai rodar até o 7. Para chegar até 8, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "x = 6\nwhile x < 13:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no x",
-      "O while não aceita o sinal de <",
-      "A variável x tem que começar em 0"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de x dentro dele, a condição (x < 13) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "temperatura = int(input())\nif temperatura > 29 and temperatura < 25:\n  print('Aprovado')",
-    "choices": [
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 29 e menor que 25 ao mesmo tempo.",
-      "O Python não entende a palavra and."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 29 e < 25."
-  },
-  {
-    "code": "if login == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "if usuario == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "if email == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 7\nfor i in range(1, 7):\n  print(i)",
-    "choices": [
-      "Range para no número anterior. Ele nunca vai printar o 7. Deveria ser range(1, 8)",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 0,
-    "explain": "Função range() é exclusiva no final. 'range(1, 7)' vai rodar até o 6. Para chegar até 7, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "preco = int(input())\nif preco > 50 and preco < 45:\n  print('Aprovado')",
-    "choices": [
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 50 e menor que 45 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 50 e < 45."
-  },
-  {
-    "code": "preco = int(input())\nif preco > 30 and preco < 24:\n  print('Aprovado')",
-    "choices": [
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 30 e menor que 24 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 30 e < 24."
-  },
-  {
-    "code": "temperatura = int(input())\nif temperatura > 21 and temperatura < 18:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 21 e menor que 18 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 21 e < 18."
-  },
-  {
-    "code": "idade = int(input())\nif idade > 39 and idade < 32:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 39 e menor que 32 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 39 e < 32."
-  },
-  {
-    "code": "nota = int(input())\nif nota > 43 and nota < 35:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 43 e menor que 35 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 43 e < 35."
-  },
-  {
-    "code": "if login == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 16\nfor i in range(1, 16):\n  print(i)",
-    "choices": [
-      "Range para no número anterior. Ele nunca vai printar o 16. Deveria ser range(1, 17)",
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 0,
-    "explain": "Função range() é exclusiva no final. 'range(1, 16)' vai rodar até o 15. Para chegar até 16, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "velocidade = int(input())\nif velocidade > 23 and velocidade < 17:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Condição impossível! Ninguém pode ser maior que 23 e menor que 17 ao mesmo tempo.",
-      "Falta um else no final do if."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 23 e < 17."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 33\nfor i in range(1, 33):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 33. Deveria ser range(1, 34)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 33)' vai rodar até o 32. Para chegar até 33, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "i = 10\nwhile i < 16:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável i tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no i"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de i dentro dele, a condição (i < 16) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 13\nfor i in range(1, 13):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 13. Deveria ser range(1, 14)",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 13)' vai rodar até o 12. Para chegar até 13, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "if usuario == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "valor = int(input())\nif valor / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "vidas = 7\nwhile vidas < 22:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável vidas tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no vidas"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de vidas dentro dele, a condição (vidas < 22) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "nota = int(input())\nif nota > 30 and nota < 25:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 30 e menor que 25 ao mesmo tempo.",
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 30 e < 25."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 18\nfor i in range(1, 18):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 18. Deveria ser range(1, 19)",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 18)' vai rodar até o 17. Para chegar até 18, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "if login == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "x = 1\nwhile x < 21:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "A variável x tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no x"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de x dentro dele, a condição (x < 21) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 36\nfor i in range(1, 36):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 36. Deveria ser range(1, 37)",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 36)' vai rodar até o 35. Para chegar até 36, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "if login == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "idade = int(input())\nif idade > 22 and idade < 15:\n  print('Aprovado')",
-    "choices": [
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 22 e menor que 15 ao mesmo tempo.",
-      "O Python não entende a palavra and."
-    ],
-    "answer": 1,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 22 e < 15."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 31\nfor i in range(1, 31):\n  print(i)",
-    "choices": [
-      "Range para no número anterior. Ele nunca vai printar o 31. Deveria ser range(1, 32)",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1)."
-    ],
-    "answer": 0,
-    "explain": "Função range() é exclusiva no final. 'range(1, 31)' vai rodar até o 30. Para chegar até 31, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "if login == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "pontos = 4\nwhile pontos < 14:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no pontos",
-      "A variável pontos tem que começar em 0"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de pontos dentro dele, a condição (pontos < 14) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "contador = 7\nwhile contador < 25:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no contador",
-      "O while não aceita o sinal de <",
-      "A variável contador tem que começar em 0"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de contador dentro dele, a condição (contador < 25) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "if usuario == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 49\nfor i in range(1, 49):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente.",
-      "Range para no número anterior. Ele nunca vai printar o 49. Deveria ser range(1, 50)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 49)' vai rodar até o 48. Para chegar até 49, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "preco = int(input())\nif preco > 33 and preco < 26:\n  print('Aprovado')",
-    "choices": [
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if.",
-      "Condição impossível! Ninguém pode ser maior que 33 e menor que 26 ao mesmo tempo."
-    ],
-    "answer": 2,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 33 e < 26."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 5\nfor i in range(1, 5):\n  print(i)",
-    "choices": [
-      "Range para no número anterior. Ele nunca vai printar o 5. Deveria ser range(1, 6)",
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 0,
-    "explain": "Função range() é exclusiva no final. 'range(1, 5)' vai rodar até o 4. Para chegar até 5, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "contador = 2\nwhile contador < 22:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável contador tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no contador"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de contador dentro dele, a condição (contador < 22) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "qtd = int(input())\nif qtd / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 35\nfor i in range(1, 35):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 35. Deveria ser range(1, 36)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 35)' vai rodar até o 34. Para chegar até 35, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "x = int(input())\nif x / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 0,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "vidas = 5\nwhile vidas < 19:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável vidas tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no vidas"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de vidas dentro dele, a condição (vidas < 19) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "if usuario == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "qtd = int(input())\nif qtd / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "A variável precisaria ser do tipo float."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "temperatura = int(input())\nif temperatura > 16 and temperatura < 7:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 16 e menor que 7 ao mesmo tempo.",
-      "O Python não entende a palavra and.",
-      "Falta um else no final do if."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 16 e < 7."
-  },
-  {
-    "code": "if login == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "numero = 3\nwhile numero < 16:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "A variável numero tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no numero"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de numero dentro dele, a condição (numero < 16) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "if login == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "pontos = 2\nwhile pontos < 8:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável pontos tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no pontos"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de pontos dentro dele, a condição (pontos < 8) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "if login == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "x = int(input())\nif x / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Apenas números inteiros suportam variáveis pares.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "if email == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND."
-    ],
-    "answer": 2,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "if login == 'admin' or codigo == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "x = int(input())\nif x / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "if email == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 12\nfor i in range(1, 12):\n  print(i)",
-    "choices": [
-      "O for sempre começa no zero obrigatoriamente.",
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 12. Deveria ser range(1, 13)"
-    ],
-    "answer": 2,
-    "explain": "Função range() é exclusiva no final. 'range(1, 12)' vai rodar até o 11. Para chegar até 12, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "contador = 6\nwhile contador < 18:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável contador tem que começar em 0",
-      "Loop infinito! Faltou somar +1 no contador",
-      "O while não aceita o sinal de <"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de contador dentro dele, a condição (contador < 18) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "if usuario == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "If não suporta checar duas variáveis no Python.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "if email == 'admin' or senha == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 0,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "x = int(input())\nif x / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "if usuario == 'admin' or pin == '123':\n  print('Acesso Liberado Cadeira da Presidência')",
-    "choices": [
-      "Faltou colocar as variáveis entre parênteses obrigatórios.",
-      "Uso do OR compromete segurança. Basta UM erro para liberar acesso. Deveria ser AND.",
-      "If não suporta checar duas variáveis no Python."
-    ],
-    "answer": 1,
-    "explain": "Lógica de Segurança: O operador OR (Ou) libera acesso se apenas UMA das coisas for verdade. Se alguém errar a senha mas acertar o login, ele entra! Use AND."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 32\nfor i in range(1, 32):\n  print(i)",
-    "choices": [
-      "Faltou colocar print(i+1).",
-      "Range para no número anterior. Ele nunca vai printar o 32. Deveria ser range(1, 33)",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 1,
-    "explain": "Função range() é exclusiva no final. 'range(1, 32)' vai rodar até o 31. Para chegar até 32, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "preco = int(input())\nif preco > 18 and preco < 12:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 18 e menor que 12 ao mesmo tempo.",
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 18 e < 12."
-  },
-  {
-    "code": "vidas = 4\nwhile vidas < 14:\n  print('Rodando...')\n",
-    "choices": [
-      "A variável vidas tem que começar em 0",
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no vidas"
-    ],
-    "answer": 2,
-    "explain": "Em um loop While, se você não alterar o valor de vidas dentro dele, a condição (vidas < 14) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "x = int(input())\nif x / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/).",
-      "Apenas números inteiros suportam variáveis pares."
-    ],
-    "answer": 1,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "idade = int(input())\nif idade > 22 and idade < 16:\n  print('Aprovado')",
-    "choices": [
-      "Condição impossível! Ninguém pode ser maior que 22 e menor que 16 ao mesmo tempo.",
-      "Falta um else no final do if.",
-      "O Python não entende a palavra and."
-    ],
-    "answer": 0,
-    "explain": "Erro Lógico Booleano: Quando usamos AND, as duas coisas precisam ser verdadeiras. Um número não tem como ser simultaneamente > 22 e < 16."
-  },
-  {
-    "code": "numero = int(input())\nif numero / 2 == 0:\n  print('É par!')",
-    "choices": [
-      "Apenas números inteiros suportam variáveis pares.",
-      "A variável precisaria ser do tipo float.",
-      "Para saber se é par, precisa dividir o Resto (%) e não fazer divisão normal (/)."
-    ],
-    "answer": 2,
-    "explain": "Matemática Lógica: O sinal de '/' divide. Apenas números com resto 0 ao dividir por 2 são pares, portanto você deve usar a operação Módulo '%' (Ex: x % 2 == 0)."
-  },
-  {
-    "code": "# Quero contar de 1 até exatamente 5\nfor i in range(1, 5):\n  print(i)",
-    "choices": [
-      "Range para no número anterior. Ele nunca vai printar o 5. Deveria ser range(1, 6)",
-      "Faltou colocar print(i+1).",
-      "O for sempre começa no zero obrigatoriamente."
-    ],
-    "answer": 0,
-    "explain": "Função range() é exclusiva no final. 'range(1, 5)' vai rodar até o 4. Para chegar até 5, você precisaria colocar +1 no limite."
-  },
-  {
-    "code": "pontos = 2\nwhile pontos < 15:\n  print('Rodando...')\n",
-    "choices": [
-      "O while não aceita o sinal de <",
-      "Loop infinito! Faltou somar +1 no pontos",
-      "A variável pontos tem que começar em 0"
-    ],
-    "answer": 1,
-    "explain": "Em um loop While, se você não alterar o valor de pontos dentro dele, a condição (pontos < 15) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "numero = 5\nwhile numero < 18:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no numero",
-      "O while não aceita o sinal de <",
-      "A variável numero tem que começar em 0"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de numero dentro dele, a condição (numero < 18) será sempre Verdadeira, causando um loop infinito!"
-  },
-  {
-    "code": "contador = 8\nwhile contador < 14:\n  print('Rodando...')\n",
-    "choices": [
-      "Loop infinito! Faltou somar +1 no contador",
-      "O while não aceita o sinal de <",
-      "A variável contador tem que começar em 0"
-    ],
-    "answer": 0,
-    "explain": "Em um loop While, se você não alterar o valor de contador dentro dele, a condição (contador < 14) será sempre Verdadeira, causando um loop infinito!"
-  }
-]
 };
