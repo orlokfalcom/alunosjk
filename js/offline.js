@@ -172,14 +172,50 @@ print(factorial(-1))`,
 
 // Generate Bug (client-side)
 function generateBug(mode) {
-    const templates = bugTemplates[mode] || bugTemplates.facil;
+    let categoryMap = {
+        'facil': 'iniciante',
+        'medio': 'logica',
+        'dificil': 'massiva',
+        'inferno': 'massiva'
+    };
+    
+    let targetCategory = categoryMap[mode] || 'iniciante';
+    
+    // Auto AI Logic (Ajusta dificuldade com base na performance)
+    if (mode === 'ia') {
+        const user = getCurrentUser();
+        let accuracy = 0;
+        let diffChoice = 'iniciante';
+        
+        if (user && user.performance) {
+            let total = 0, correct = 0;
+            Object.values(user.performance).forEach(p => {
+                total += p.total; correct += p.correct;
+            });
+            accuracy = total > 0 ? (correct / total) : 0;
+            
+            if (accuracy > 0.8 && total > 5) diffChoice = 'massiva';
+            else if (accuracy > 0.5 && total > 3) diffChoice = 'logica';
+            else diffChoice = 'iniciante';
+        }
+        targetCategory = diffChoice;
+    }
+    
+    // Use QUESTIONS_DATA Se importado, senao fallback para o legado
+    let templates = (typeof QUESTIONS_DATA !== 'undefined' && QUESTIONS_DATA[targetCategory]) 
+                    ? QUESTIONS_DATA[targetCategory] 
+                    : (bugTemplates[mode] || bugTemplates.facil);
+                    
     const template = templates[Math.floor(Math.random() * templates.length)];
+    
+    // Handle both old and new data structures
     return {
         id: Date.now(),
         code: template.code,
         category: mode,
-        options: template.options,
-        correct: template.correct
+        options: template.choices || template.options,
+        correct: template.answer !== undefined ? template.answer : template.correct,
+        explain: template.explain || template.bug || "O código apresenta uma falha técnica."
     };
 }
 
@@ -191,11 +227,11 @@ function setDifficulty(difficulty) {
     }
 
     // Update button active styling
-    ['facil', 'medio', 'dificil', 'inferno'].forEach((level) => {
+    ['ia', 'facil', 'medio', 'dificil', 'inferno'].forEach((level) => {
         const btn = document.getElementById(`btn-dificuldade-${level}`);
         if (btn) {
-            btn.classList.remove('active');
-            if (level === difficulty) btn.classList.add('active');
+            btn.classList.remove('active', 'border-white');
+            if (level === difficulty) btn.classList.add('active', 'border-white');
         }
     });
 }
@@ -225,6 +261,7 @@ function registerUser(username, password, name) {
         totalWrong: 0,
         averageTime: 0,
         achievements: [],
+        inventory: { hints: 0, skips: 0 },
         createdAt: new Date().toISOString()
     };
     localStorage.setItem('userData', JSON.stringify(userData));
@@ -255,6 +292,7 @@ function createTestUser() {
         totalWrong: 4,
         averageTime: 12.5,
         achievements: ['first_10', 'streak_5'],
+        inventory: { hints: 2, skips: 1 }, // Comeca com alguns itens de teste
         createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString() // 7 days ago
     };
 
@@ -276,16 +314,41 @@ function resetTestData() {
 
 function getCurrentUser() {
     const username = localStorage.getItem('currentUser');
-    return username ? userData[username] : null;
+    const user = username ? userData[username] : null;
+
+    // Safety merge para adicionar o inventory em perfis antigos (Patch Retrocompatibilidade)
+    if (user && !user.inventory) {
+        user.inventory = { hints: 0, skips: 0 };
+        localStorage.setItem('userData', JSON.stringify(userData));
+    }
+
+    return user;
 }
 
-function saveScore(mode, score, timeTaken = 0) {
+function saveScore(mode, baseScore, timeTaken = 0) {
     const user = getCurrentUser();
-    if (!user) return;
+    if (!user) return null;
 
-    user.xp += score;
+    // Escalonamento por dificuldade
+    let difficultyMultiplier = 1;
+    if (mode === 'medio' || mode === 'logica') difficultyMultiplier = 2;
+    if (mode === 'dificil' || mode === 'massiva' || mode === 'inferno') difficultyMultiplier = 3;
+    
+    let score = baseScore * difficultyMultiplier;
+
+    // Speed run bonus
+    let speedBonus = timeTaken > 0 && timeTaken < 6 ? 5 : 0;
+    
+    // Combo multiplier (Máx 100% de bônus, 5% por acerto)
+    let comboMultiplier = Math.min(1.0, user.streak * 0.05); 
+    
+    let totalScore = score + speedBonus;
+    let finalXP = Math.floor(totalScore + (totalScore * comboMultiplier));
+    let coinsEarned = Math.floor(finalXP / 5);
+
+    user.xp += finalXP;
     user.level = Math.floor(user.xp / 100) + 1;
-    user.coins += Math.floor(score / 10);
+    user.coins += coinsEarned;
     user.totalBugsFound += 1;
     user.totalCorrect += 1;
 
@@ -309,7 +372,8 @@ function saveScore(mode, score, timeTaken = 0) {
     checkAchievements(user);
 
     localStorage.setItem('userData', JSON.stringify(userData));
-    return user;
+    
+    return { earnedXP: finalXP, earnedCoins: coinsEarned, comboBonus: (comboMultiplier*100).toFixed(0), speedBonus };
 }
 
 function wrongAnswer(mode) {
@@ -647,17 +711,18 @@ function showDashboard() {
             <div class="mb-4 text-center">
                 <h5>Selecione a dificuldade</h5>
                 <div class="d-flex justify-content-center flex-wrap gap-2 mt-2">
+                    <button class="btn btn-outline-info btn-sm fw-bold border-2" id="btn-dificuldade-ia" onclick="setDifficulty('ia')"><i class="fas fa-brain"></i> Auto IA</button>
                     <button class="btn btn-outline-success btn-sm" id="btn-dificuldade-facil" onclick="setDifficulty('facil')">Fácil</button>
                     <button class="btn btn-outline-warning btn-sm" id="btn-dificuldade-medio" onclick="setDifficulty('medio')">Médio</button>
                     <button class="btn btn-outline-danger btn-sm" id="btn-dificuldade-dificil" onclick="setDifficulty('dificil')">Difícil</button>
-                    <button class="btn btn-outline-dark btn-sm" id="btn-dificuldade-inferno" onclick="setDifficulty('inferno')">Inferno</button>
+                    <button class="btn btn-outline-dark btn-sm text-secondary" id="btn-dificuldade-inferno" onclick="setDifficulty('inferno')">Inferno</button>
                 </div>
-                <p class="mt-2 mb-0">Dificuldade atual: <strong id="currentDifficultyLabel">Fácil</strong></p>
+                <p class="mt-2 mb-0">Dificuldade atual: <strong id="currentDifficultyLabel" class="text-primary">Fácil</strong></p>
             </div>
 
-            <div class="text-center">
-                <button class="btn btn-primary btn-lg me-3" onclick="loadGameInterface()">🎮 Iniciar Jogo</button>
-                <button class="btn btn-outline-primary btn-lg" onclick="showRanking()">🏅 Ver Ranking</button>
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+                <button class="btn btn-primary btn-lg px-4 pulse" onclick="loadGameInterface()">🎮 Iniciar Jogo</button>
+                <button class="btn btn-warning btn-lg text-dark fw-bold px-4" onclick="showStore()">🛒 Cyber Market</button>
             </div>
         </div>
     `;
@@ -668,50 +733,77 @@ function showDashboard() {
     setDifficulty(currentDifficulty);
 }
 
+// Function for basic syntax highlight of python code
+function highlightPython(code) {
+    if(!code) return "";
+    return code
+        .replace(/</g, "&lt;").replace(/>/g, "&gt;") // sanitize HTML
+        .replace(/\b(def|if|else|elif|for|while|return|import|from|class|try|except|with|and|or|not)\b/g, '<span class="text-danger fw-bold">$1</span>')
+        .replace(/(["'`])(.*?)\1/g, '<span class="text-success">$&</span>')
+        .replace(/#(.*)$/gm, '<span class="text-secondary">#$1</span>')
+        .replace(/\b\d+\b/g, '<span class="text-info">$&</span>')
+        .replace(/\b(print|len|range|int|str|float|list|dict|set|input)\b/g, '<span class="text-warning">$1</span>');
+}
+
 // Load Game Interface (SPA approach)
 function loadGameInterface() {
     const user = getCurrentUser();
     const bug = generateBug(currentDifficulty);
+    window.currentBug = bug; // Store for checkAnswer
     gameStartTime = Date.now(); // Start timer
 
     const gameHTML = `
-        <div class="container py-5">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="cyber-title mb-4">🐛 Python Detective - Jogo Offline (${currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1)})</h2>
-                <div class="text-end">
-                    <div class="mb-2">
-                        <span class="badge badge-primary me-2">XP: ${user.xp}</span>
-                        <span class="badge badge-success me-2">Level: ${user.level}</span>
-                        <span class="badge badge-warning">Coins: ${user.coins}</span>
+        <div class="container py-4 py-md-5">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
+                <h2 class="cyber-title mb-0 fs-3 d-flex align-items-center">
+                    <span class="badge bg-primary me-2">🐛</span> Python Detective
+                </h2>
+                <div class="d-flex gx-2 align-items-center flex-wrap justify-content-center">
+                    <div class="hud-panel p-2 me-2 d-flex gap-2">
+                        <span class="hud-pill"><i class="fas fa-star text-warning me-1"></i> XP: ${user.xp}</span>
+                        <span class="hud-pill"><i class="fas fa-layer-group text-success me-1"></i> Lv: ${user.level}</span>
+                        <span class="hud-pill"><i class="fas fa-fire text-danger me-1"></i> Seq: ${user.streak}</span>
                     </div>
-                    <button class="btn btn-outline-primary" onclick="showDashboard()">Dashboard</button>
+                    <button class="btn btn-outline-danger btn-sm" onclick="showDashboard()"><i class="fas fa-home"></i> Sair</button>
                 </div>
             </div>
 
-            <div class="card mb-4">
-                <div class="card-header bg-dark text-primary">
-                    <h5 class="mb-0">🔍 Encontre o Bug no Código:</h5>
+            <div class="card mb-4 border-primary shadow-lg" style="background-color: var(--glass-bg);">
+                <div class="card-header bg-dark border-primary d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 text-primary"><i class="fas fa-search me-2"></i> Analise o Código Abaixo:</h5>
+                    <span class="badge bg-secondary border border-secondary">${currentDifficulty.toUpperCase()}</span>
                 </div>
-                <div class="card-body p-0">
-                    <div class="code-display">
-                        <pre class="mb-0">${bug.code}</pre>
+                <div class="card-body p-0 position-relative">
+                    <div class="code-display bg-dark p-3 p-md-4 rounded-bottom" style="font-family: 'Fira Code', monospace; font-size: 1.1rem; overflow-x: auto; border: 1px inset rgba(21,163,255,0.2);">
+                        <pre class="mb-0 text-light"><code>${highlightPython(bug.code)}</code></pre>
                     </div>
                 </div>
             </div>
 
-            <div class="row g-3 mb-4">
+            <div class="row g-3 mb-4" id="optionsContainer">
                 ${bug.options.map((opt, i) => `
-                    <div class="col-md-6">
-                        <button class="btn btn-outline-primary w-100 py-4 fw-bold" onclick="checkAnswer(${i}, ${bug.correct})">
+                    <div class="col-12 col-md-6">
+                        <button class="btn btn-outline-info w-100 py-3 fw-bold text-start px-4 position-relative overflow-hidden option-btn" 
+                                onclick="checkAnswer(${i}, ${bug.correct})" 
+                                style="transition: all 0.2s; border-radius: 8px; border-width: 2px;">
+                            <span class="badge bg-dark text-info border border-info me-2 fs-6">${String.fromCharCode(65 + i)}</span> 
                             ${opt}
                         </button>
                     </div>
                 `).join('')}
             </div>
 
-            <div class="text-center">
-                <button class="btn btn-secondary me-2" onclick="loadGameInterface()">🔄 Pular Bug</button>
-                <button class="btn btn-outline-danger" onclick="showDashboard()">🏠 Voltar ao Dashboard</button>
+            <div id="feedbackContainer" class="d-none"></div>
+            
+            <div class="text-center mt-4 d-flex justify-content-center gap-4 flex-wrap">
+                <button class="btn btn-outline-info btn-sm position-relative px-3 py-2" onclick="useHint()" ${user.inventory.hints > 0 ? '' : 'disabled'}>
+                    <i class="fas fa-lightbulb"></i> Módulo Dica 
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-dark">${user.inventory.hints}</span>
+                </button>
+                <button class="btn btn-outline-danger btn-sm position-relative px-3 py-2" onclick="useSkip()" ${user.inventory.skips > 0 ? '' : 'disabled'}>
+                    <i class="fas fa-forward"></i> Bypass Root 
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">${user.inventory.skips}</span>
+                </button>
             </div>
         </div>
     `;
@@ -721,19 +813,222 @@ function loadGameInterface() {
     mainElement.innerHTML = gameHTML;
 }
 
-// Check Answer (with timing)
+// Item functions
+function useHint() {
+    const user = getCurrentUser();
+    if (!user || user.inventory.hints <= 0) return;
+    
+    // Find incorrect options
+    const bug = window.currentBug;
+    const buttons = document.querySelectorAll('.option-btn');
+    let incorrectIndexes = [];
+    
+    for (let i = 0; i < bug.options.length; i++) {
+        if (i !== bug.correct) incorrectIndexes.push(i);
+    }
+    
+    // Remove 2 incorrect options
+    incorrectIndexes.sort(() => 0.5 - Math.random());
+    const toDisable = incorrectIndexes.slice(0, 2);
+    
+    toDisable.forEach(idx => {
+        buttons[idx].disabled = true;
+        buttons[idx].classList.add('opacity-50');
+        buttons[idx].innerHTML = '<i class="fas fa-ban text-danger"></i> Dica: Ocultado';
+    });
+    
+    // Deduct
+    user.inventory.hints -= 1;
+    localStorage.setItem('userData', JSON.stringify(userData));
+    
+    // Disable hint button to prevent double-use
+    event.currentTarget.disabled = true;
+    event.currentTarget.querySelector('.badge').innerText = user.inventory.hints;
+}
+
+function useSkip() {
+    const user = getCurrentUser();
+    if (!user || user.inventory.skips <= 0) return;
+    
+    user.inventory.skips -= 1;
+    localStorage.setItem('userData', JSON.stringify(userData));
+    
+    alert("Bypass Ativado! Saltando nível de segurança sem penalidades.");
+    loadGameInterface();
+}
+
+// Check Answer (with timing and visual feedback)
 function checkAnswer(selected, correct) {
     const endTime = Date.now();
-    const timeTaken = (endTime - gameStartTime) / 1000; // seconds
+    const timeTaken = (endTime - gameStartTime) / 1000;
+    const isCorrect = (selected === correct);
+    const bug = window.currentBug;
+    
+    // Disable buttons
+    const buttons = document.querySelectorAll('#optionsContainer button');
+    buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correct) {
+            btn.classList.remove('btn-outline-info', 'opacity-50');
+            btn.classList.add('btn-success', 'text-white', 'border-success');
+            // ensure text is visible in case it was disabled by hint
+            if (btn.innerHTML.includes('Ocultado')) btn.innerHTML = bug.options[idx]; 
+        } else if (idx === selected && !isCorrect) {
+            btn.classList.remove('btn-outline-info');
+            btn.classList.add('btn-danger', 'text-white', 'border-danger');
+        }
+    });
 
-    if (selected === correct) {
-        saveScore(currentDifficulty, 10, timeTaken);
-        alert(`Correto! +10 XP\nTempo: ${timeTaken.toFixed(1)}s`);
+    // Process logic
+    let titleStr = '';
+    let xpStr = '';
+    let alertClass = '';
+    let aiComment = '';
+
+    if (isCorrect) {
+        let results = saveScore(currentDifficulty, 10, timeTaken);
+        titleStr = '🎉 SUCESSO! BUG ENCONTRADO!';
+        xpStr = `+${results.earnedXP} XP | +${results.earnedCoins} Criptos`;
+        alertClass = 'alert-success border-success';
+        
+        if (results.speedBonus > 0) {
+            aiComment = "🤖 IA: Reflexos impressionantes! Identificação feita em tempo recorde (<6s). Ganho de Agilidade aplicado.";
+        } else if (timeTaken > 30) {
+            aiComment = "🤖 IA: Análise de longo prazo, porém precisa. Continue treinando para agilizar sua dedução heurística.";
+        } else {
+            aiComment = `🤖 IA: Diagnóstico analítico perfeito. Combo está rendendo bônus de +${results.comboBonus}% em ganhos base!`;
+        }
+        
     } else {
         wrongAnswer(currentDifficulty);
-        alert('Errado! Sequência zerada.');
+        titleStr = '❌ FALHA! DIAGNÓSTICO INCORRETO!';
+        xpStr = 'Sequência Zerada';
+        alertClass = 'alert-danger border-danger';
+        
+        if (timeTaken < 4) {
+             aiComment = "🤖 IA: Impulsividade crítica detectada. Você enviou a resposta sem ler o código propriamente. Mantenha o foco!";
+        } else {
+             aiComment = "🤖 IA: Raciocínio Incorreto. O código possui nuances lógicas que lhe escaparam. Leia minha explicação de sistema abaixo.";
+        }
     }
-    loadGameInterface(); // Next bug
+
+    const feedbackHTML = `
+        <div class="alert ${alertClass} mt-4 shadow-lg p-3 p-md-4" role="alert" style="background-color: var(--glass-bg); backdrop-filter: blur(10px);">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+                <h4 class="alert-heading fw-bold mb-2 mb-md-0 text-white">${titleStr}</h4>
+                <span class="badge bg-dark border border-light fs-6 text-white">${xpStr}</span>
+            </div>
+            
+            <div class="mb-3 p-2 bg-dark rounded border border-warning">
+                <p class="mb-0 text-warning" style="font-family: var(--font-heading); font-size: 0.9rem;">${aiComment}</p>
+            </div>
+            
+            <div class="p-3 mb-4 rounded" style="background: rgba(0,0,0,0.6); border-left: 4px solid var(--primary);">
+                <p class="mb-0 text-light lh-lg"><i class="fas fa-info-circle me-2 text-primary"></i> <strong class="text-primary">LÓGICA DO SISTEMA:</strong> ${bug.explain}</p>
+            </div>
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
+                <small class="text-light opacity-75"><i class="fas fa-clock"></i> Tempo de Resolução: ${timeTaken.toFixed(1)}s</small>
+                <button class="btn btn-primary fw-bold px-4 py-2 pulse w-100 w-sm-auto" onclick="loadGameInterface()">PRÓXIMO CASO <i class="fas fa-arrow-right ms-2"></i></button>
+            </div>
+        </div>
+    `;
+
+    const feedbackContainer = document.getElementById('feedbackContainer');
+    feedbackContainer.innerHTML = feedbackHTML;
+    feedbackContainer.classList.remove('d-none');
+    feedbackContainer.classList.add('fade-in');
+    
+    // Auto scroll to feedback
+    setTimeout(() => {
+        feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+}
+
+// ====== CYBER MARKET (STORE) ======
+function showStore() {
+    const user = getCurrentUser();
+    if (!user) return;
+    
+    // Safety check just in case
+    if (!user.inventory) user.inventory = { hints: 0, skips: 0 };
+
+    const storeHTML = `
+        <div class="container py-4 py-md-5 fade-in">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
+                <h2 class="cyber-title mb-0 d-flex align-items-center">
+                    <span class="badge bg-warning text-dark me-2">🛒</span> Cyber Market
+                </h2>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="hud-panel p-2 mb-0">
+                        <span class="hud-pill fs-6"><i class="fas fa-coins text-warning me-1"></i> Saldo: <span id="storeBalance" class="text-white">${user.coins}</span></span>
+                    </div>
+                    <button class="btn btn-outline-danger" onclick="showDashboard()"><i class="fas fa-arrow-left"></i> Voltar</button>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-info shadow-lg" style="background-color: var(--glass-bg);">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-lightbulb text-info mb-3" style="font-size: 3rem; text-shadow: 0 0 15px rgba(23,162,184,0.5);"></i>
+                            <h4 class="text-white">Módulo Decodificador (50/50)</h4>
+                            <p class="text-muted mb-4">Use durante a investigação para eliminar 2 opções incorretas instantaneamente.</p>
+                            <div class="d-flex justify-content-between align-items-center bg-dark p-3 rounded mb-3 border border-secondary">
+                                <span class="text-light">Em Estoque: <strong class="fs-5 text-info" id="inv-hints">${user.inventory.hints}</strong></span>
+                                <span class="badge bg-warning text-dark fs-6 px-3 py-2">15 Moedas</span>
+                            </div>
+                            <button class="btn btn-info w-100 fw-bold border-2" onclick="buyItem('hints', 15, event)">COMPRAR (-15 <i class="fas fa-coins text-dark ms-1"></i>)</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card h-100 border-danger shadow-lg" style="background-color: var(--glass-bg);">
+                        <div class="card-body text-center p-4">
+                            <i class="fas fa-forward text-danger mb-3" style="font-size: 3rem; text-shadow: 0 0 15px rgba(220,53,69,0.5);"></i>
+                            <h4 class="text-white">Bypass Root (Pular Bug)</h4>
+                            <p class="text-muted mb-4">Pule um bug suspeito de ser armadilha sem perder a sua cobiçada Sequência (Streak).</p>
+                            <div class="d-flex justify-content-between align-items-center bg-dark p-3 rounded mb-3 border border-secondary">
+                                <span class="text-light">Em Estoque: <strong class="fs-5 text-danger" id="inv-skips">${user.inventory.skips}</strong></span>
+                                <span class="badge bg-warning text-dark fs-6 px-3 py-2">30 Moedas</span>
+                            </div>
+                            <button class="btn btn-danger w-100 fw-bold border-2" onclick="buyItem('skips', 30, event)">COMPRAR (-30 <i class="fas fa-coins text-dark ms-1"></i>)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const mainElement = document.querySelector('main') || document.body;
+    mainElement.innerHTML = storeHTML;
+}
+
+function buyItem(itemType, cost, event) {
+    const user = getCurrentUser();
+    if (!user) return;
+    
+    if (user.coins >= cost) {
+        user.coins -= cost;
+        user.inventory[itemType] += 1;
+        localStorage.setItem('userData', JSON.stringify(userData));
+        
+        // Update UI
+        document.getElementById('storeBalance').innerText = user.coins;
+        document.getElementById(`inv-${itemType}`).innerText = user.inventory[itemType];
+        
+        // Brief visual effect
+        const btn = event.currentTarget;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✔ COMPRADO!';
+        btn.classList.add('bg-success', 'border-success', 'text-white');
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove('bg-success', 'border-success', 'text-white');
+        }, 1000);
+    } else {
+        alert("Moedas insuficientes! Volte ao terminal e encontre mais bugs.");
+    }
 }
 
 // Initialize Pyodide when page loads
