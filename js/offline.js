@@ -172,6 +172,25 @@ print(factorial(-1))`,
 
 // Generate Bug (client-side)
 function generateBug(mode) {
+    // ---- INTERCEPTAÇÃO DA NOVA IA PROCEDURAL (MODO AUTO) ----
+    if (mode === 'ia') {
+        const user = getCurrentUser();
+        let perfMatrix = { total: 0, correct: 0 };
+        
+        if (user && user.performance) {
+            Object.values(user.performance).forEach(p => {
+                perfMatrix.total += p.total; 
+                perfMatrix.correct += p.correct;
+            });
+        }
+        
+        // Verifica se a engine ProceduralAI está no cache do navegador (via index.html)
+        if (typeof ProceduralAI !== 'undefined') {
+            return ProceduralAI.gerar(perfMatrix);
+        }
+    }
+    
+    // ---- LÓGICA ESTÁTICA ANTIGA (HARDCODED) PARA MODOS ESPECÍFICOS ----
     let categoryMap = {
         'facil': 'iniciante',
         'medio': 'logica',
@@ -180,26 +199,6 @@ function generateBug(mode) {
     };
     
     let targetCategory = categoryMap[mode] || 'iniciante';
-    
-    // Auto AI Logic (Ajusta dificuldade com base na performance)
-    if (mode === 'ia') {
-        const user = getCurrentUser();
-        let accuracy = 0;
-        let diffChoice = 'iniciante';
-        
-        if (user && user.performance) {
-            let total = 0, correct = 0;
-            Object.values(user.performance).forEach(p => {
-                total += p.total; correct += p.correct;
-            });
-            accuracy = total > 0 ? (correct / total) : 0;
-            
-            if (accuracy > 0.8 && total > 5) diffChoice = 'massiva';
-            else if (accuracy > 0.5 && total > 3) diffChoice = 'logica';
-            else diffChoice = 'iniciante';
-        }
-        targetCategory = diffChoice;
-    }
     
     // Use QUESTIONS_DATA Se importado, senao fallback para o legado
     let templates = (typeof QUESTIONS_DATA !== 'undefined' && QUESTIONS_DATA[targetCategory]) 

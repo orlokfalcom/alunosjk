@@ -1,31 +1,39 @@
-# Aprimoramento do Banco de Dados Escolar/Hacking
+# Motor de Geração Procedural de Questões (IA Local)
 
-O usuário solicitou o aprimoramento das questões do jogo. Após investigar o arquivo `data/questions.js` (que atualmente possui 2200 linhas), identifiquei que ele sofre de **"Inchaço por Repetição"**: a categoria "lógica" está cheia de perguntas geradas por robô mudando apenas um número (ex: *Quero contar até 19*, *Quero contar até 35*...). Isso torna o jogo monótono e destrói o engajamento.
+O usuário solicitou que a IA "gere" novas questões a partir do desempenho. Como o objetivo do jogo é ser **100% Offline e leve** (sem requerer internet para chamar a API do ChatGPT/Gemini), a solução realística é construir um **Motor de Geração Procedural (Procedural Generation Engine)** no JavaScript.
+
+## 🧠 Como a IA Procedural vai funcionar?
+
+Ao invés de lermos perguntas estáticas fixas, a IA terá dezenas de **"Modelos Lógicos"** (Templates).
+Quando o sistema pedir uma questão, a IA analisará o perfil do jogador (ex: *"Ele tem errado muitas perguntas de Laços For/While"*). Ela então:
+1. Puxa o "Molde" de Array/Loop.
+2. Injeta variáveis sorteadas de um dicionário Hacker (ex: `['root', 'admin', 'guest']` ou `[1024, 2048, 4096]`).
+3. Monta uma questão matematicamente e logicamente nova, e cria na hora respostas dinâmicas embaralhadas.
+4. Gera uma explicação customizada alertando o erro com os números precisados do sorteio.
+
+Dessa forma, o jogo ganha **questões infinitas sem pesar o arquivo** ou repetir exatamente os mesmos textos.
 
 ## User Review Required
 
 > [!WARNING]  
-> Eu vou sobreescrever totalmente o arquivo de banco de dados (`data/questions.js`). Vou deletar as 2200 linhas de questões repetitivas e construir um Banco Analítico Menor, porém infinitamente mais inteligente e focado no tema *Detective*.  
-> **Você autoriza essa limpeza drástica e a injeção do novo currículo?**
+> Você prefere que eu construa essa **(A) Inteligência Procedural Offline** (que gera infinitas permutações matemáticas e de sintaxe na hora pelo navegador) ou você imaginava **(B) Ligar a uma API do ChatGPT/Gemini** via Internet (o que exigiria que o aluno tivesse acesso à rede o tempo todo para jogar)?  
+> Responda "A" para manter o sistema puramente Offline e infinito, ou "B" se quiser integrar chaves complexas da internet!
 
-## 📚 Proposed Changes
+## ⚙️ Proposed Changes
 
-### [Component 1] Formatação do Array de Questões
-- **Padronização:** Toda questão terá exatamente **4 alternativas**. O código antigo tinha apenas 3 opções em várias questões, o que não preenchia perfeitamente os 4 botões (A, B, C, D) desenhados na UI.
-- **Dificuldade Crescente Real:** 
-   - `Iniciante:` Erros de sintaxe (`IndentationError`, falha de aspas, `=` ao invés de `==`).
-   - `Lógica (Médio):` Erros de laços, tratamento de strings, manipulação básica de lista.
-   - `Massiva (Difícil):` Erros conceituais violentos que caem em entrevistas de emprego (ex: *Default Mutable Arguments*, *Late Binding Closures*, *Scope Leak*, falhas de cópia rasa de matrizes).
+### [NEW] `js/ai_generator.js`
+- Um novo script que centraliza a lógica do Cérebro da Inteligência.
+- Implementação da classe `ProceduralAI` com os métodos:
+  - `analisarDesempenho(userData)`: Lê os dados salvos do jogador e decide qual "pilar" da linguagem Python ele precisa treinar (Tipagem, Loop, Condicional).
+  - `gerarQuestao(pilar)`: Fabrica um problema novo selecionando verbos de hacking e regras do Python (ex: `while bytes < ${limite}`).
 
-### [Component 2] O Contexto "Narrativo"
-- Os comentários das explicações da IA ganharão um tom mais profissional e cibernético. Ao invés de *"Falta aspas na maçã"*, a explicação será: *"Anomalia de Sintaxe: O interpretador encontrou um EOF inesperado. Todas as declarações de String exigem fechamento de aspas."*
+### [MODIFY] `js/offline.js`
+- Atualizar a função mestre `generateBug(mode)`. Em vez de sortear do arquivo bruto estático `questions.js`, ele passará a chamar a rotina: `window.currentBug = ProceduralAI.fabricarDesafio();`
 
-### [Component 3] Reescrita (Target Files)
-
-#### [MODIFY] `data/questions.js`
-- Redução de 2200 linhas repetitivas para um JSON limpo, estruturado, e contendo cerca de 45 a 50 questões únicas e artesanais, divididas perfeitamente nos 3 tiers de dificuldade (Iniciante, Lógica, Massiva) exigidas pelo `offline.js`.
+### [MODIFY] `index.html`
+- Chamar o arquivo script modular `<script src="./js/ai_generator.js"></script>` no cabeçalho.
 
 ## Verification Plan
-1. Injetar o novo código e recarregar a aplicação.
-2. Iniciar um jogo no modo Auto IA ou Lógica.
-3. Conferir se 4 opções são renderizadas na tela invés de 3, garantindo que a matriz visual fique perfeitamente simétrica.
+1. Inserir a Célula IA no sistema.
+2. Logar o desempenho visual de um usuário e observar a IA gerando variáveis novas.
+3. Testar a interface gráfica para validar que os códigos dinâmicos estão quebrando linha bem no terminal Pyodide.
