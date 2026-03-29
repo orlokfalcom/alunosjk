@@ -1,19 +1,20 @@
-# Resumo da Atualização: Overhaul "Designer Professional"
+# Resumo da Atualização: Reboot Crítico no Banco de Dados
 
-A aplicação foi rigorosamente transformada de um utilitário funcional para uma aplicação Web digna de catálogo de portfólios *AAA*. 
+A velha base de dados corrompida (que contava com mais de **2200 linhas** geradas quase exclusivamente por scripts repetitivos de laços e condições sem graça) foi esvaziada e completamente **reescrita do zero**! 
 
-## 🌌 O que Mudou na Experiência Visual?
+## 🧠 O Que Nasceu Nesta Atualização?
 
-1. **Atmosfera "Dark Void":** Trocamos os fundos pretos chapados e azuis misturados por uma paleta premium estruturada (`--void-0` a `--void-2`). O fundo dinâmico e sombrio ajuda a destacar os verdadeiros objetos do jogo.
-2. **Glassmorphism Verdadeiro:** Paineis antes sólidos agora tem efeito de blur extremo, bordas contidas (1px a `8%` de transparência de branco) e `box-shadow` profundo que traz as caixas para perto do usuário (efeito 3D suave).
-3. **Animação Fluida (`.fade-in-up`):** Toda transição entre Dashboard, Store e Game, agora flutua graciosamente para a tela em meio segundo, erradicando a sensação mecânica antiga de páginas carregando.
-4. **Cyber Buttons:** Os botões deixaram de ser itens normais parecidos com formulários de login tradicionais. Agora trazem detalhes em Neón, `skew` na iluminação e brilham sutilmente quando o detetive toma sua decisão.
+### 1. Novo Currículo (Desafios Feitos à Mão)
+- **Tiers Perfeitos:** Ao invés daquele mar de lixo numérico sem fim (ex: mudar o número de um loop `while 10` e depois `while 11`), injetei **30 desafios fundamentais, táticos e densos** baseados em armadilhas reais de Compiladores (CPython):
+  - *Nível Iniciante:* Tipagem Forte (Somas Lógicas erradas de String/Int), Loops Básicos Infinitos e Escopos Básicos de Erros.
+  - *Nível Lógica:* "Late Binding Closures", Default Mutable Arguments, Slice Overflows, Sombra de Hashing silencioso.
+  - *Nível Massiva:* A imponente armadilha Reference vs Value de Matrizes, Cópia Rasa (Shallow Copy Leak), Aliasing de Variáveis Ocultas `=` e Falha Catastrófica de Tratamento de Exceções.
 
-### Páginas Afetadas:
-* [x] **Área do Jogo (Game Board):** Destacou a legibilidade de preenchimento. A leitura de código é suave aos olhos.
-* [x] **Cyber Market:** Reformulado para que os cards pareçam reais pacotes digitais criptografados em vez de quadros cinzas longos.
-* [x] **Dashboard:** O painel flutua à frente com uma beleza estruturada.
+### 2. Formato Cyber-Aprimorado na UI
+- Toda maldita questão na aplicação agora conta invariavelmente com **Exatas 4 Opções de Múltipla Escolha (A, B, C, D)**, todas devidamente balanceadas de ponta a ponta como pegadinhas difíceis. Nenhuma renderiza botões vazios e buracos em tela mais!
+
+### 3. A Linguagem da Interface (IA Mode)
+- O Tom Narrativo agora é "Hacker Analítico". Em vez da velha explicação monótona: *"Seu código está sem vírgula"*, a Analista de IA intervirá explicando falhas agressivas como: *🤖 IA: [TypeError Arquitetural]. Listas não se convertem automaticamente por pura boa vontade de salvar seu log. A menos que apliques cast a missão abortará corrompendo o sistema.* Pura imersão e contexto educativo realístico em vez do óbvio.
 
 > [!TIP]
-> **Aperte `Ctrl + F5` (ou Atualizar forçadamente) no seu navegador para limpar o cache de estilo antigo.**
-> Quando testar a transição "Página Principal -> Clicar em Dashboard -> Loja", note a fluidez da animação natural das coisas entrando em tela.
+> **Você precisa dar `Ctrl + F5` urgentemente** se o seu navegador travou `data/questions.js` no Cache Local. Teste agora mesmo as novas engrenagens do **Auto IA** para engajar neste novo leque intelectual maciço do jogo!
