@@ -18,15 +18,28 @@ function scrollToFeatures() {
 
 // Initialize Pyodide
 async function initPyodide() {
-    pyodide = await loadPyodide({
-        indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
-    });
-    console.log('Pyodide loaded successfully');
+    try {
+        pyodide = await loadPyodide({
+            indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+        });
+        console.log('Pyodide loaded successfully');
 
-    // Create test user if no users exist
-    if (Object.keys(userData).length === 0) {
-        createTestUser();
-        console.log('Usuário de teste criado automaticamente');
+        // Create test user if no users exist
+        if (Object.keys(userData).length === 0) {
+            createTestUser();
+            console.log('Usuário de teste criado automaticamente');
+        }
+    } catch (e) {
+        console.error("Erro ao carregar sistema:", e);
+    } finally {
+        // Remove Splash Screen with a smooth fade
+        const splash = document.getElementById('splashScreen');
+        if (splash) {
+            splash.style.transition = 'opacity 0.5s ease, filter 0.5s ease';
+            splash.style.opacity = '0';
+            splash.style.filter = 'blur(20px)';
+            setTimeout(() => splash.remove(), 500);
+        }
     }
 }
 
@@ -613,331 +626,313 @@ function selectUser(username) {
     }
 }
 
-// Show Dashboard (SPA approach)
+// Show Dashboard (SPA approach with Premium Components)
 function showDashboard() {
     const user = getCurrentUser();
     const dashboardHTML = `
-        <div class="container py-5 fade-in-up">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="cyber-title mb-4">🐛 Python Detective - Dashboard</h2>
-                <button class="btn btn-outline-primary" onclick="showLoginModal()">Trocar Usuário</button>
-            </div>
-
-            <div class="row mb-4">
-                <div class="col-md-3 mb-3">
-                    <div class="card stats-card text-center h-100 premium-glass border-0">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <h4 class="display-4 mb-2 text-primary">${user.level}</h4>
-                            <p class="mb-0 text-light fw-bold">NÍVEL</p>
-                        </div>
-                    </div>
+        <div class="container py-4 page-transition">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3">
+                <div>
+                    <h1 class="text-gradient-primary mb-0">AGENT: ${user.name.toUpperCase()}</h1>
+                    <p class="text-muted small mb-0">SISTEMA DE SEGURANÇA NACIONAL - NIVEL ${user.level}</p>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card stats-card text-center h-100 premium-glass border-0">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <h4 class="display-4 mb-2 text-success">${user.xp}</h4>
-                            <p class="mb-0 text-light fw-bold">XP TOTAL</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card stats-card text-center h-100 premium-glass border-0">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <h4 class="display-4 mb-2 text-warning">${user.coins}</h4>
-                            <p class="mb-0 text-light fw-bold">MOEDAS</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card stats-card text-center h-100 premium-glass border-0">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <h4 class="display-4 mb-2 text-info">${user.streak}</h4>
-                            <p class="mb-0 text-light fw-bold">SEQUÊNCIA</p>
-                        </div>
-                    </div>
+                <div class="d-flex gap-2">
+                    <button class="btn-cyber" onclick="showUserSelection()">
+                        <i class="fas fa-user-secret"></i> ALTERAR AGENTE
+                    </button>
+                    <button class="btn-cyber danger" onclick="logout()">
+                        <i class="fas fa-power-off"></i>
+                    </button>
                 </div>
             </div>
 
-            <div class="row mb-4">
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100 premium-glass border-0">
-                        <div class="card-header border-0 bg-transparent text-primary pb-0">
-                            <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i> Estatísticas Gerais</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row text-center mb-3">
-                                <div class="col-6">
-                                    <h6 class="text-success display-6 mb-0">${user.totalCorrect}</h6>
-                                    <small class="text-muted fw-bold">Corretos</small>
-                                </div>
-                                <div class="col-6">
-                                    <h6 class="text-danger display-6 mb-0">${user.totalWrong}</h6>
-                                    <small class="text-muted fw-bold">Errados</small>
-                                </div>
+            <!-- XP & Level HUD -->
+            <div class="premium-glass p-4 mb-4 d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+                <div class="d-flex align-items-center gap-4">
+                    <div class="level-badge" style="width: 80px; height: 80px; background: var(--bg-surface); border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 2rem; color: var(--primary); box-shadow: 0 0 20px var(--primary-glow);">
+                        ${user.level}
+                    </div>
+                    <div>
+                        <h4 class="mb-1">PROGRESSO DE REPUTAÇÃO</h4>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="progress" style="width: 250px; height: 8px;">
+                                <div class="progress-bar" style="width: ${user.xp % 100}%"></div>
                             </div>
-                            <div class="row text-center rounded p-2" style="background: rgba(0,0,0,0.3);">
-                                <div class="col-6 border-end border-secondary">
-                                    <h6 class="text-primary fs-3 mb-0">${user.bestStreak}</h6>
-                                    <small class="text-muted">Melhor Seq.</small>
-                                </div>
-                                <div class="col-6">
-                                    <h6 class="text-info fs-3 mb-0">${user.averageTime.toFixed(1)}s</h6>
-                                    <small class="text-muted">Tempo Médio</small>
-                                </div>
+                            <span class="text-primary fw-bold">${user.xp % 100}/100 XP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex gap-3">
+                    <div class="hud-pill"><i class="fas fa-coins text-warning"></i> ${user.coins} CRÉDITOS</div>
+                    <div class="hud-pill"><i class="fas fa-fire text-danger"></i> STREAK: ${user.streak}</div>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-3">
+                    <div class="premium-glass card-stats h-100">
+                        <div class="value text-primary glow-primary">${user.totalCorrect}</div>
+                        <div class="label">BUGS ELIMINADOS</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="premium-glass card-stats h-100">
+                        <div class="value text-danger glow-secondary">${user.totalWrong}</div>
+                        <div class="label">FALHAS DE SISTEMA</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="premium-glass card-stats h-100">
+                        <div class="value text-success glow-primary">${user.bestStreak}</div>
+                        <div class="label">MAIOR SEQUÊNCIA</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="premium-glass card-stats h-100">
+                        <div class="value text-warning glow-primary">${user.averageTime.toFixed(1)}s</div>
+                        <div class="label">TEMPO DE REAÇÃO</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-lg-8">
+                    <div class="premium-glass p-0 overflow-hidden h-100">
+                        <div class="p-4 border-bottom border-light border-opacity-10 bg-surface">
+                            <h5 class="mb-0 text-gradient-primary"><i class="fas fa-terminal me-2"></i> SELECIONAR MISSÃO OPERACIONAL</h5>
+                        </div>
+                        <div class="p-4">
+                            <div class="d-flex flex-wrap gap-3 justify-content-center">
+                                <label class="difficulty-option">
+                                    <input type="radio" name="difficulty" value="ia" onchange="setDifficulty('ia')" ${currentDifficulty === 'ia' ? 'checked' : ''} hidden>
+                                    <div class="btn-cyber ${currentDifficulty === 'ia' ? 'primary' : ''}"><i class="fas fa-brain"></i> IA PROCEDURAL</div>
+                                </label>
+                                <label class="difficulty-option">
+                                    <input type="radio" name="difficulty" value="facil" onchange="setDifficulty('facil')" ${currentDifficulty === 'facil' ? 'checked' : ''} hidden>
+                                    <div class="btn-cyber ${currentDifficulty === 'facil' ? 'primary' : ''}">INICIANTE</div>
+                                </label>
+                                <label class="difficulty-option">
+                                    <input type="radio" name="difficulty" value="medio" onchange="setDifficulty('medio')" ${currentDifficulty === 'medio' ? 'checked' : ''} hidden>
+                                    <div class="btn-cyber ${currentDifficulty === 'medio' ? 'primary' : ''}">EXECUTOR LÓGICO</div>
+                                </label>
+                                <label class="difficulty-option">
+                                    <input type="radio" name="difficulty" value="dificil" onchange="setDifficulty('dificil')" ${currentDifficulty === 'dificil' ? 'checked' : ''} hidden>
+                                    <div class="btn-cyber ${currentDifficulty === 'dificil' ? 'primary' : ''}">DETETIVE ELITE</div>
+                                </label>
+                                <label class="difficulty-option">
+                                    <input type="radio" name="difficulty" value="inferno" onchange="setDifficulty('inferno')" ${currentDifficulty === 'inferno' ? 'checked' : ''} hidden>
+                                    <div class="btn-cyber ${currentDifficulty === 'inferno' ? 'primary' : ''} text-danger">MODO INFERNO</div>
+                                </label>
+                            </div>
+                            
+                            <div class="text-center mt-5">
+                                <button class="btn-cyber primary px-5 py-3 fs-5" onclick="loadGameInterface()">
+                                    <i class="fas fa-play-circle fs-4"></i> INICIAR OPERAÇÃO
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100 premium-glass border-0">
-                        <div class="card-header border-0 bg-transparent text-success pb-0">
-                            <h5 class="mb-0"><i class="fas fa-trophy me-2"></i> Conquistas</h5>
+                <div class="col-lg-4">
+                    <div class="premium-glass p-0 h-100">
+                        <div class="p-4 border-bottom border-light border-opacity-10 bg-surface">
+                            <h5 class="mb-0 text-success"><i class="fas fa-medal me-2"></i> ARQUIVO DE CONQUISTAS</h5>
                         </div>
-                        <div class="card-body d-flex flex-wrap gap-2 align-items-start">
-                            ${user.achievements.length > 0 ? 
+                        <div class="p-4 d-flex flex-wrap gap-2">
+                             ${user.achievements.length > 0 ? 
                                 user.achievements.map(achievement => `
-                                    <span class="badge bg-success bg-opacity-25 text-success border border-success p-2 px-3 rounded-pill"><i class="fas fa-star me-1"></i> ${achievement}</span>
+                                    <div class="hud-pill" title="Conquista Desbloqueada">
+                                        <i class="fas fa-check-circle text-success"></i> ${achievement.replace('_', ' ').toUpperCase()}
+                                    </div>
                                 `).join('') :
-                                '<p class="text-muted mb-0 w-100 text-center py-4 opacity-50"><i class="fas fa-ghost fs-3 d-block mb-2"></i>Nenhuma conquista ainda</p>'
+                                '<div class="text-center w-100 py-5 opacity-30"><i class="fas fa-lock fs-1 d-block mb-3"></i><p>SEM REGISTROS</p></div>'
                             }
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mb-4 text-center">
-                <h5>Selecione a dificuldade</h5>
-                <div class="d-flex justify-content-center flex-wrap gap-2 mt-2">
-                    <button class="btn btn-outline-info btn-sm fw-bold border-2" id="btn-dificuldade-ia" onclick="setDifficulty('ia')"><i class="fas fa-brain"></i> Auto IA</button>
-                    <button class="btn btn-outline-success btn-sm" id="btn-dificuldade-facil" onclick="setDifficulty('facil')">Fácil</button>
-                    <button class="btn btn-outline-warning btn-sm" id="btn-dificuldade-medio" onclick="setDifficulty('medio')">Médio</button>
-                    <button class="btn btn-outline-danger btn-sm" id="btn-dificuldade-dificil" onclick="setDifficulty('dificil')">Difícil</button>
-                    <button class="btn btn-outline-dark btn-sm text-secondary" id="btn-dificuldade-inferno" onclick="setDifficulty('inferno')">Inferno</button>
-                </div>
-                <p class="mt-2 mb-0">Dificuldade atual: <strong id="currentDifficultyLabel" class="text-primary">Fácil</strong></p>
-            </div>
-
-            <div class="d-flex justify-content-center flex-wrap gap-3 mt-5">
-                <button class="btn btn-cyber py-3 px-5 text-uppercase pulse fs-5" onclick="loadGameInterface()"><i class="fas fa-gamepad me-2 text-primary"></i> Iniciar Jogo</button>
-                <button class="btn btn-cyber py-3 px-5 text-warning fs-5" onclick="showStore()"><i class="fas fa-shopping-cart me-2"></i> Cyber Market</button>
+            <div class="text-center">
+                <button class="btn-cyber" style="border-color: var(--warning); color: var(--warning);" onclick="showStore()">
+                    <i class="fas fa-shopping-cart"></i> CYBER MARKET (BLACK MARKET)
+                </button>
             </div>
         </div>
     `;
 
-    // Replace main content instead of entire body
     const mainElement = document.querySelector('main') || document.body;
     mainElement.innerHTML = dashboardHTML;
-    setDifficulty(currentDifficulty);
 }
 
-// Function for basic syntax highlight of python code
-function highlightPython(code) {
-    if(!code) return "";
-    return code
-        .replace(/</g, "&lt;").replace(/>/g, "&gt;") // sanitize HTML
-        .replace(/\b(def|if|else|elif|for|while|return|import|from|class|try|except|with|and|or|not)\b/g, '<span class="text-danger fw-bold">$1</span>')
-        .replace(/(["'`])(.*?)\1/g, '<span class="text-success">$&</span>')
-        .replace(/#(.*)$/gm, '<span class="text-secondary">#$1</span>')
-        .replace(/\b\d+\b/g, '<span class="text-info">$&</span>')
-        .replace(/\b(print|len|range|int|str|float|list|dict|set|input)\b/g, '<span class="text-warning">$1</span>');
+function logout() {
+    localStorage.removeItem('currentUser');
+    location.reload();
 }
 
-// Load Game Interface (SPA approach)
+// Load Game Interface (SPA approach with Prism.js)
 function loadGameInterface() {
     const user = getCurrentUser();
     const bug = generateBug(currentDifficulty);
-    window.currentBug = bug; // Store for checkAnswer
-    gameStartTime = Date.now(); // Start timer
+    window.currentBug = bug; 
+    window.answered = false;
+    gameStartTime = Date.now();
 
     const gameHTML = `
-        <div class="container py-4 py-md-5 fade-in-up">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
-                <h2 class="cyber-title mb-0 fs-3 d-flex align-items-center">
-                    <span class="badge bg-primary me-2">🐛</span> Python Detective
-                </h2>
-                <div class="d-flex gx-2 align-items-center flex-wrap justify-content-center">
-                    <div class="hud-panel p-2 me-2 d-flex gap-2">
-                        <span class="hud-pill"><i class="fas fa-star text-warning me-1"></i> XP: ${user.xp}</span>
-                        <span class="hud-pill"><i class="fas fa-layer-group text-success me-1"></i> Lv: ${user.level}</span>
-                        <span class="hud-pill"><i class="fas fa-fire text-danger me-1"></i> Seq: ${user.streak}</span>
-                    </div>
-                    <button class="btn btn-outline-danger btn-sm" onclick="showDashboard()"><i class="fas fa-home"></i> Sair</button>
+        <div class="container py-4 page-transition">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn-cyber" onclick="showDashboard()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2 class="text-gradient-primary mb-0">MISSÃO OPERACIONAL</h2>
+                </div>
+                <div class="d-flex gap-2">
+                    <div class="hud-pill"><i class="fas fa-layer-group text-primary"></i> NIVEL ${user.level}</div>
+                    <div class="hud-pill"><i class="fas fa-fire text-danger"></i> STREAK: ${user.streak}</div>
                 </div>
             </div>
 
-            <div class="card mb-4 premium-glass border-0">
-                <div class="card-header border-0 bg-transparent d-flex justify-content-between align-items-center pb-0">
-                    <h5 class="mb-0 text-primary fw-bold"><i class="fas fa-search me-2"></i> Analise o Código Abaixo:</h5>
-                    <span class="badge border border-secondary text-secondary" style="background: rgba(255,255,255,0.05);">${currentDifficulty.toUpperCase()}</span>
+            <div class="premium-glass p-0 overflow-hidden mb-4">
+                <div class="p-3 border-bottom border-light border-opacity-10 bg-surface d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="fas fa-bug me-2"></i> ANALISE O MALWARE ABAIXO:</span>
+                    <span class="badge-cyber warning">${currentDifficulty.toUpperCase()}</span>
                 </div>
-                <div class="card-body p-3 p-md-4 position-relative">
-                    <div class="code-display bg-dark p-3 p-md-4 rounded shadow-inner" style="font-family: 'Fira Code', monospace; font-size: 1.1rem; overflow-x: auto; border: 1px inset rgba(255,255,255,0.1);">
-                        <pre class="mb-0 text-light"><code>${highlightPython(bug.code)}</code></pre>
-                    </div>
+                <div class="p-0">
+                    <pre class="line-numbers"><code class="language-python">${bug.code}</code></pre>
                 </div>
             </div>
 
-            <div class="row g-3 mb-4" id="optionsContainer">
+            <div class="row g-3 mb-5" id="optionsContainer">
                 ${bug.options.map((opt, i) => `
-                    <div class="col-12 col-md-6">
-                        <button class="btn btn-cyber w-100 py-3 fw-bold text-start px-4 option-btn" 
-                                onclick="checkAnswer(${i}, ${bug.correct})">
-                            <span class="badge bg-dark text-primary border border-primary me-2 fs-6 shadow-sm">${String.fromCharCode(65 + i)}</span> 
+                    <div class="col-md-6">
+                        <button class="btn-cyber w-100 py-3 text-start px-4 op-btn" 
+                                onclick="checkAnswer(${i}, ${bug.correct}, this)">
+                            <span class="badge-cyber me-3" style="min-width: 30px; text-align: center;">${String.fromCharCode(65 + i)}</span> 
                             ${opt}
                         </button>
                     </div>
                 `).join('')}
             </div>
 
-            <div id="feedbackContainer" class="d-none"></div>
+            <div id="feedbackContainer" class="mb-4"></div>
             
-            <div class="text-center mt-4 d-flex justify-content-center gap-4 flex-wrap">
-                <button class="btn btn-cyber position-relative px-4 py-2" onclick="useHint()" ${user.inventory.hints > 0 ? '' : 'disabled'}>
-                    <i class="fas fa-lightbulb text-info"></i> Módulo Dica 
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info text-dark shadow">${user.inventory.hints}</span>
+            <div class="d-flex justify-content-center gap-4 flex-wrap">
+                <button class="btn-cyber" id="hintBtn" onclick="useHint(this)" ${user.inventory.hints > 0 ? '' : 'disabled'}>
+                    <i class="fas fa-lightbulb text-warning"></i> INJETAR DICA (${user.inventory.hints})
                 </button>
-                <button class="btn btn-cyber position-relative px-4 py-2" onclick="useSkip()" ${user.inventory.skips > 0 ? '' : 'disabled'}>
-                    <i class="fas fa-forward text-danger"></i> Bypass Root 
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger shadow">${user.inventory.skips}</span>
+                <button class="btn-cyber" id="skipBtn" onclick="useSkip(this)" ${user.inventory.skips > 0 ? '' : 'disabled'}>
+                    <i class="fas fa-forward text-info"></i> BYPASS MISSÃO (${user.inventory.skips})
                 </button>
             </div>
         </div>
     `;
 
-    // Replace main content
     const mainElement = document.querySelector('main') || document.body;
     mainElement.innerHTML = gameHTML;
+    
+    // Trigger Prism.js Highlighting
+    if (window.Prism) {
+        window.Prism.highlightAll();
+    }
+}
+
+// Function to handle answer checking with animations
+function checkAnswer(selectedIndex, correctIndex, buttonElement) {
+    if (window.answered) return;
+    window.answered = true;
+
+    const isCorrect = selectedIndex === correctIndex;
+    const feedbackContainer = document.getElementById('feedbackContainer');
+    const timeTaken = (Date.now() - gameStartTime) / 1000;
+
+    // Apply animations to buttons
+    const buttons = document.querySelectorAll('.op-btn');
+    buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === correctIndex) {
+            btn.classList.add('ans-correct');
+            btn.style.borderColor = 'var(--success)';
+        } else if (idx === selectedIndex && !isCorrect) {
+            btn.classList.add('ans-wrong');
+            btn.style.borderColor = 'var(--danger)';
+        }
+    });
+
+    if (isCorrect) {
+        const results = saveScore(currentDifficulty, 10, timeTaken);
+        feedbackContainer.innerHTML = `
+            <div class="premium-glass p-4 border-success page-transition" style="background: hsla(var(--neon-green), 0.1);">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <i class="fas fa-check-circle text-success fs-2"></i>
+                    <h4 class="mb-0 text-success">MALWARE ELIMINADO COM SUCESSO!</h4>
+                </div>
+                <p class="text-light-50">${window.currentBug.explain}</p>
+                <div class="d-flex gap-3 mt-3">
+                    <div class="hud-pill">+${results.earnedXP} XP</div>
+                    <div class="hud-pill">+${results.earnedCoins} CRÉDITOS</div>
+                </div>
+                <button class="btn-cyber primary mt-4 w-100" onclick="loadGameInterface()">PRÓXIMA MISSÃO</button>
+            </div>
+        `;
+    } else {
+        wrongAnswer(currentDifficulty);
+        feedbackContainer.innerHTML = `
+            <div class="premium-glass p-4 border-danger page-transition" style="background: hsla(0, 100%, 50%, 0.1);">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <i class="fas fa-times-circle text-danger fs-2"></i>
+                    <h4 class="mb-0 text-danger">FALHA NA INTERCEPTAÇÃO!</h4>
+                </div>
+                <p class="text-light-50">O sistema de defesa detectou sua tentativa. A sequência foi resetada.</p>
+                <p class="small text-muted">${window.currentBug.explain}</p>
+                <div class="d-flex gap-3 mt-2">
+                    <button class="btn-cyber primary mt-3" onclick="loadGameInterface()">TENTAR NOVAMENTE</button>
+                    <button class="btn-cyber mt-3" onclick="showDashboard()">VOLTAR AO QG</button>
+                </div>
+            </div>
+        `;
+    }
 }
 
 // Item functions
-function useHint() {
+function useHint(btn) {
     const user = getCurrentUser();
     if (!user || user.inventory.hints <= 0) return;
     
-    // Find incorrect options
     const bug = window.currentBug;
-    const buttons = document.querySelectorAll('.option-btn');
+    const buttons = document.querySelectorAll('.op-btn');
     let incorrectIndexes = [];
     
     for (let i = 0; i < bug.options.length; i++) {
         if (i !== bug.correct) incorrectIndexes.push(i);
     }
     
-    // Remove 2 incorrect options
     incorrectIndexes.sort(() => 0.5 - Math.random());
     const toDisable = incorrectIndexes.slice(0, 2);
     
     toDisable.forEach(idx => {
         buttons[idx].disabled = true;
-        buttons[idx].classList.add('opacity-50');
-        buttons[idx].innerHTML = '<i class="fas fa-ban text-danger"></i> Dica: Ocultado';
+        buttons[idx].style.opacity = '0.3';
+        buttons[idx].innerHTML = `<span class="badge-cyber me-3">#</span> [SISTEMA OCULTADO]`;
     });
     
-    // Deduct
     user.inventory.hints -= 1;
     localStorage.setItem('userData', JSON.stringify(userData));
     
-    // Disable hint button to prevent double-use
-    event.currentTarget.disabled = true;
-    event.currentTarget.querySelector('.badge').innerText = user.inventory.hints;
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fas fa-lightbulb text-warning"></i> DICA APLICADA (${user.inventory.hints})`;
 }
 
-function useSkip() {
+function useSkip(btn) {
     const user = getCurrentUser();
     if (!user || user.inventory.skips <= 0) return;
     
     user.inventory.skips -= 1;
     localStorage.setItem('userData', JSON.stringify(userData));
     
-    alert("Bypass Ativado! Saltando nível de segurança sem penalidades.");
-    loadGameInterface();
-}
-
-// Check Answer (with timing and visual feedback)
-function checkAnswer(selected, correct) {
-    const endTime = Date.now();
-    const timeTaken = (endTime - gameStartTime) / 1000;
-    const isCorrect = (selected === correct);
-    const bug = window.currentBug;
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fas fa-forward text-info"></i> BYPASS ATIVO (${user.inventory.skips})`;
     
-    // Disable buttons
-    const buttons = document.querySelectorAll('#optionsContainer button');
-    buttons.forEach((btn, idx) => {
-        btn.disabled = true;
-        if (idx === correct) {
-            btn.classList.add('active-cyber', 'border-success');
-            // ensure text is visible in case it was disabled by hint
-            if (btn.innerHTML.includes('Ocultado')) btn.innerHTML = bug.options[idx]; 
-        } else if (idx === selected && !isCorrect) {
-            btn.classList.add('border-danger');
-            btn.style.color = 'var(--bs-danger)';
-        }
-    });
-
-    // Process logic
-    let titleStr = '';
-    let xpStr = '';
-    let alertClass = '';
-    let aiComment = '';
-
-    if (isCorrect) {
-        let results = saveScore(currentDifficulty, 10, timeTaken);
-        titleStr = '🎉 SUCESSO! BUG ENCONTRADO!';
-        xpStr = `+${results.earnedXP} XP | +${results.earnedCoins} Criptos`;
-        alertClass = 'alert-success border-success';
-        
-        if (results.speedBonus > 0) {
-            aiComment = "🤖 IA: Reflexos impressionantes! Identificação feita em tempo recorde (<6s). Ganho de Agilidade aplicado.";
-        } else if (timeTaken > 30) {
-            aiComment = "🤖 IA: Análise de longo prazo, porém precisa. Continue treinando para agilizar sua dedução heurística.";
-        } else {
-            aiComment = `🤖 IA: Diagnóstico analítico perfeito. Combo está rendendo bônus de +${results.comboBonus}% em ganhos base!`;
-        }
-        
-    } else {
-        wrongAnswer(currentDifficulty);
-        titleStr = '❌ FALHA! DIAGNÓSTICO INCORRETO!';
-        xpStr = 'Sequência Zerada';
-        alertClass = 'alert-danger border-danger';
-        
-        if (timeTaken < 4) {
-             aiComment = "🤖 IA: Impulsividade crítica detectada. Você enviou a resposta sem ler o código propriamente. Mantenha o foco!";
-        } else {
-             aiComment = "🤖 IA: Raciocínio Incorreto. O código possui nuances lógicas que lhe escaparam. Leia minha explicação de sistema abaixo.";
-        }
-    }
-
-    const feedbackHTML = `
-        <div class="alert ${alertClass} mt-4 fade-in-up p-3 p-md-4 premium-glass" role="alert">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
-                <h4 class="alert-heading fw-bold mb-2 mb-md-0 text-white">${titleStr}</h4>
-                <span class="badge bg-dark border border-light fs-6 text-white shadow">${xpStr}</span>
-            </div>
-            
-            <div class="mb-3 p-3 bg-dark rounded border border-warning shadow-inner">
-                <p class="mb-0 text-warning" style="font-family: var(--font-heading); font-size: 0.9rem;">${aiComment}</p>
-            </div>
-            
-            <div class="p-3 mb-4 rounded" style="background: rgba(0,0,0,0.6); border-left: 4px solid var(--primary);">
-                <p class="mb-0 text-light lh-lg"><i class="fas fa-info-circle me-2 text-primary"></i> <strong class="text-primary">LÓGICA DO SISTEMA:</strong> ${bug.explain}</p>
-            </div>
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-3">
-                <small class="text-light opacity-75"><i class="fas fa-clock"></i> Tempo de Resolução: ${timeTaken.toFixed(1)}s</small>
-                <button class="btn btn-primary fw-bold px-4 py-2 pulse w-100 w-sm-auto" onclick="loadGameInterface()">PRÓXIMO CASO <i class="fas fa-arrow-right ms-2"></i></button>
-            </div>
-        </div>
-    `;
-
-    const feedbackContainer = document.getElementById('feedbackContainer');
-    feedbackContainer.innerHTML = feedbackHTML;
-    feedbackContainer.classList.remove('d-none');
-    feedbackContainer.classList.add('fade-in');
-    
-    // Auto scroll to feedback
-    setTimeout(() => {
-        feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 100);
+    setTimeout(() => loadGameInterface(), 500);
 }
 
 // ====== CYBER MARKET (STORE) ======
@@ -945,50 +940,61 @@ function showStore() {
     const user = getCurrentUser();
     if (!user) return;
     
-    // Safety check just in case
     if (!user.inventory) user.inventory = { hints: 0, skips: 0 };
 
     const storeHTML = `
-        <div class="container py-4 py-md-5 fade-in-up">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
-                <h2 class="cyber-title mb-0 d-flex align-items-center">
-                    <span class="badge bg-warning text-dark me-2">🛒</span> Cyber Market
-                </h2>
-                <div class="d-flex gx-2 align-items-center flex-wrap justify-content-center">
-                    <div class="hud-panel p-2 me-2 mb-0 d-flex gap-2">
-                        <span class="hud-pill fs-6"><i class="fas fa-coins text-warning me-1"></i> Saldo: <span id="storeBalance" class="text-white">${user.coins}</span></span>
-                    </div>
-                    <button class="btn btn-outline-danger" onclick="showDashboard()"><i class="fas fa-arrow-left"></i> Voltar</button>
+        <div class="container py-4 page-transition">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn-cyber" onclick="showDashboard()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2 class="text-gradient-primary mb-0">BLACK MARKET</h2>
                 </div>
+                <div class="hud-pill fs-5"><i class="fas fa-coins text-warning"></i> SALDO: <span id="storeBalance">${user.coins}</span> CRÉDITOS</div>
             </div>
 
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card h-100 premium-glass border-0">
-                        <div class="card-body text-center p-4">
-                            <i class="fas fa-lightbulb text-info mb-3" style="font-size: 3.5rem; filter: drop-shadow(0 0 15px rgba(23,162,184,0.6));"></i>
-                            <h4 class="text-white fw-bold">Módulo Decodificador</h4>
-                            <p class="text-muted mb-4 opacity-75">Use durante a investigação para eliminar 2 opções incorretas instantaneamente (50/50).</p>
-                            <div class="d-flex justify-content-between align-items-center bg-dark p-3 rounded mb-4 shadow-inner" style="border: 1px inset rgba(255,255,255,0.05);">
-                                <span class="text-light">Em Estoque: <strong class="fs-4 text-info" id="inv-hints">${user.inventory.hints}</strong></span>
-                                <span class="badge bg-warning text-dark fs-6 px-3 py-2 fw-bold shadow">15 Moedas</span>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-5">
+                    <div class="premium-glass p-0 h-100 feature-card">
+                        <div class="p-4 text-center">
+                            <div class="icon-box mx-auto" style="color: var(--warning)">
+                                <i class="fas fa-lightbulb fs-1"></i>
                             </div>
-                            <button class="btn btn-cyber w-100 py-3 fs-5" onclick="buyItem('hints', 15, event)"><i class="fas fa-shopping-cart text-primary me-2"></i> COMPRAR</button>
+                            <h3 class="mb-3">MÓDULO DECODER</h3>
+                            <p class="text-muted small mb-4">Elimina duas rotas falsas durante a investigação de malware.</p>
+                            
+                            <div class="bg-surface p-3 rounded mb-4 d-flex justify-content-between align-items-center">
+                                <span class="text-dim">PREÇO</span>
+                                <span class="text-warning fw-bold fs-4">15 <i class="fas fa-coins"></i></span>
+                            </div>
+                            
+                            <button class="btn-cyber primary w-100 py-3" onclick="buyItem('hints', 15, this)">
+                                <i class="fas fa-shopping-cart"></i> ADQUIRIR MÓDULO
+                            </button>
+                            <p class="mt-3 text-dim small">EM ESTOQUE: <span id="inv-hints">${user.inventory.hints}</span></p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-md-6">
-                    <div class="card h-100 premium-glass border-0">
-                        <div class="card-body text-center p-4">
-                            <i class="fas fa-forward text-danger mb-3" style="font-size: 3.5rem; filter: drop-shadow(0 0 15px rgba(220,53,69,0.6));"></i>
-                            <h4 class="text-white fw-bold">Bypass Root</h4>
-                            <p class="text-muted mb-4 opacity-75">Pule um bug suspeito de ser armadilha letal sem perder a sua cobiçada Sequência (Streak).</p>
-                            <div class="d-flex justify-content-between align-items-center bg-dark p-3 rounded mb-4 shadow-inner" style="border: 1px inset rgba(255,255,255,0.05);">
-                                <span class="text-light">Em Estoque: <strong class="fs-4 text-danger" id="inv-skips">${user.inventory.skips}</strong></span>
-                                <span class="badge bg-warning text-dark fs-6 px-3 py-2 fw-bold shadow">30 Moedas</span>
+
+                <div class="col-md-5">
+                    <div class="premium-glass p-0 h-100 feature-card">
+                        <div class="p-4 text-center">
+                            <div class="icon-box mx-auto" style="color: var(--primary)">
+                                <i class="fas fa-forward fs-1"></i>
                             </div>
-                            <button class="btn btn-cyber w-100 py-3 fs-5" onclick="buyItem('skips', 30, event)"><i class="fas fa-shopping-cart text-primary me-2"></i> COMPRAR</button>
+                            <h3 class="mb-3">PROTOCOLO BYPASS</h3>
+                            <p class="text-muted small mb-4">Salta uma missão suspeita sem comprometer sua sequência operacional.</p>
+                            
+                            <div class="bg-surface p-3 rounded mb-4 d-flex justify-content-between align-items-center">
+                                <span class="text-dim">PREÇO</span>
+                                <span class="text-primary fw-bold fs-4">30 <i class="fas fa-coins"></i></span>
+                            </div>
+                            
+                            <button class="btn-cyber primary w-100 py-3" onclick="buyItem('skips', 30, this)">
+                                <i class="fas fa-shopping-cart"></i> ADQUIRIR PROTOCOLO
+                            </button>
+                            <p class="mt-3 text-dim small">EM ESTOQUE: <span id="inv-skips">${user.inventory.skips}</span></p>
                         </div>
                     </div>
                 </div>
@@ -1000,7 +1006,7 @@ function showStore() {
     mainElement.innerHTML = storeHTML;
 }
 
-function buyItem(itemType, cost, event) {
+function buyItem(itemType, cost, btn) {
     const user = getCurrentUser();
     if (!user) return;
     
@@ -1009,28 +1015,25 @@ function buyItem(itemType, cost, event) {
         user.inventory[itemType] += 1;
         localStorage.setItem('userData', JSON.stringify(userData));
         
-        // Update UI
         document.getElementById('storeBalance').innerText = user.coins;
         document.getElementById(`inv-${itemType}`).innerText = user.inventory[itemType];
         
-        // Brief visual effect
-        const btn = event.currentTarget;
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '✔ COMPRADO!';
-        btn.classList.add('bg-success', 'border-success', 'text-white');
+        const originalContent = btn.innerHTML;
+        btn.innerHTML = '✔ ADQUIRIDO';
+        btn.style.background = 'var(--success)';
+        btn.style.color = 'var(--bg-base)';
         setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.classList.remove('bg-success', 'border-success', 'text-white');
+            btn.innerHTML = originalContent;
+            btn.style.background = '';
+            btn.style.color = '';
         }, 1000);
     } else {
-        alert("Moedas insuficientes! Volte ao terminal e encontre mais bugs.");
+        alert("CRÉDITOS INSUFICIENTES PARA ESTA OPERAÇÃO.");
     }
 }
 
-// Initialize Pyodide when page loads
+// Initialize System
 window.addEventListener('load', () => {
-    // Always ensure test user exists with correct data
     createTestUser();
-    
     initPyodide();
 });

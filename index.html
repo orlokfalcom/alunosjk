@@ -2,319 +2,38 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#00d1ff">
+    <meta name="msapplication-TileColor" content="#0a0a0a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Python Detective - A elite do bug hunting. Treine sua lógica de programação Python em um ambiente Cyberpunk imersivo.">
+    <meta name="keywords" content="python, programação, lógica, jogo, educativo, bug hunting, cyberpunk">
+    <meta name="author" content="Antigravity AI">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alunosjk.com.br/">
+    <meta property="og:title" content="Python Detective | Elite Bug Hunting">
+    <meta property="og:description" content="Domine a detecção de bugs em Python com uma interface premium de última geração.">
+    <meta property="og:image" content="https://alunosjk.com.br/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Python Detective | Elite Bug Hunting">
+    <meta property="twitter:description" content="O próximo nível do aprendizado de Python.">
+    
     <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.png">
     <title>Python Detective | Elite Bug Hunting</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Prism.js for Premium Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        :root {
-            /* Premium Void & Slate Palette */
-            --void-0: #020617;
-            --void-1: #0f172a;
-            --void-2: #1e293b;
-            --neon-cyan: #00f2ff;
-            --neon-purple: #8b5cf6;
-            --neon-amber: #f59e0b;
-
-            --brand-primary: var(--neon-cyan);
-            --brand-secondary: var(--void-1);
-            --text-light: #f8fafc;
-            --text-med: #94a3b8;
-            --text-low: #475569;
-            
-            --glass-bg: rgba(15, 23, 42, 0.55);
-            --glass-border: rgba(255, 255, 255, 0.08);
-
-            --primary: var(--neon-cyan);
-            --primary-glow: rgba(0, 242, 255, 0.6);
-            --secondary: var(--neon-purple);
-            --warning: var(--neon-amber);
-            --font-heading: 'Outfit', sans-serif;
-            --font-mono: 'Fira Code', monospace;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            min-height: 100vh;
-            color: var(--text-light);
-            background: #020617; /* Fallback */
-            background: radial-gradient(circle at 15% 15%, var(--void-1) 0%, var(--void-0) 60%, #000000 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        header {
-            background: rgba(5, 8, 25, 0.86);
-            backdrop-filter: blur(14px);
-        }
-        header h1 {
-            letter-spacing: 0.08em;
-            color: #ffffff;
-        }
-        .hero-section {
-            position: relative;
-            overflow: hidden;
-            background-image: radial-gradient(circle at top right, rgba(21,163,255,0.6), rgba(0,0,0,0) 40%), radial-gradient(circle at 80% 30%, rgba(72,255,156,0.25), rgba(0,0,0,0) 35%), linear-gradient(100deg, #081542 0%, #081b38 100%);
-            border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 18px 40px rgba(2,5,19,0.55);
-        }
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(2,6,22,0.45), rgba(2,5,19,0.74));
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-        .features .card {
-            background-color: rgba(10, 19, 52, 0.78);
-            border: 1px solid rgba(42, 95, 190, 0.26);
-            color: #ffffff;
-        }
-        .glow-text {
-            color: #ffffff;
-            text-shadow: 0 0 24px rgba(21,163,255,0.9), 0 0 32px rgba(72,255,156,0.6);
-        }
-        .hud-panel {
-            background: rgba(2, 10, 30, 0.8);
-            border: 1px solid rgba(59, 144, 255, 0.45);
-            border-radius: 12px;
-            backdrop-filter: blur(6px);
-            box-shadow: 0 10px 28px rgba(2, 8, 24, 0.65);
-            margin-bottom: 1.5rem;
-            padding: 0.85rem 1rem;
-        }
-        .hud-pill {
-            background: rgba(12, 35, 80, 0.95);
-            border: 1px solid rgba(117, 189, 255, 0.4);
-            color: #a7c7ff;
-            border-radius: 999px;
-            padding: 0.25rem 0.75rem;
-            font-size: 0.82rem;
-            font-weight: 600;
-        }
-        .progress-game {
-            height: 12px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, rgba(21,163,255,0.17), rgba(20,183,255,0.04));
-            overflow: hidden;
-        }
-        .progress-game .progress-bar {
-            background: linear-gradient(90deg, #1da8ff, #54e8ff);
-            transition: width 0.5s ease;
-            box-shadow: 0 0 10px rgba(84, 232, 255, 0.7);
-        }
-        .pulse {
-            animation: pulse 2.2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-        }
-        .orbit {
-            position: absolute;
-            border-radius: 50%;
-            border: 1px dashed rgba(113, 210, 255, 0.4);
-            animation: orbit-move 10s linear infinite;
-        }
-        @keyframes orbit-move {
-            0% { transform: rotate(0deg) translate(0, 0); }
-            100% { transform: rotate(360deg) translate(0, 0); }
-        }
-        .features .card:hover {
-            transform: translateY(-3px);
-            transition: transform 0.2s ease;
-            box-shadow: 0 14px 36px rgba(0,0,0,0.28);
-        }
-        
-        /* Typography Clamp Scaling - Softened */
-        h1, .h1 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
-        h2, .h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
-        h3, .h3 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); }
-        h4, .h4 { font-size: clamp(1.1rem, 2vw, 1.5rem); }
-        h5, .h5 { font-size: clamp(1rem, 1.5vw, 1.25rem); }
-        h6, .h6 { font-size: clamp(0.9rem, 1.2vw, 1rem); }
-        
-        /* App Layout Constraint */
-        main > .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .cyber-title {
-            font-family: var(--font-heading);
-            color: var(--primary);
-            text-shadow: 0 0 10px rgba(21, 163, 255, 0.4);
-            font-size: clamp(1.6rem, 3vw, 2.2rem) !important;
-        }
-
-        .stats-card .display-4 {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 700;
-        }
-        
-        .stats-card .display-6 {
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-        }
-
-        .hero-content h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-            animation: floatText 4.5s ease-in-out infinite;
-        }
-        .hero-content p {
-            font-size: clamp(1.1rem, 3vw, 1.5rem);
-            animation: pulseText 3.8s ease-in-out infinite;
-        }
-        .challenge-icon {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            animation: heartbeat 1.1s ease-in-out infinite;
-            margin-right: 0.5rem;
-        }
-        @keyframes floatText {
-            0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 12px rgba(29, 168, 255, 0.46)); }
-            50% { transform: translateY(-5px) rotate(-0.1deg); filter: drop-shadow(0 0 18px rgba(84, 232, 255, 0.75)); }
-        }
-        @keyframes pulseText {
-            0%, 100% { opacity: 0.95; }
-            50% { opacity: 1; letter-spacing: 0.02em; }
-        }
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.08); }
-            40% { transform: scale(0.98); }
-        }
-        .cta-chip {
-            background: linear-gradient(120deg, rgba(21,163,255,0.92), rgba(64, 161, 255,0.84));
-            border-radius: 999px;
-            padding: 0.35rem 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: white;
-            font-size: 0.95rem;
-            font-weight: 600;
-            box-shadow: 0 0 22px rgba(21,163,255,.38);
-            animation: glowchip 2.2s ease-in-out infinite;
-        }
-        @keyframes glowchip {
-            0%, 100% { box-shadow: 0 0 22px rgba(21,163,255,0.35); transform: translateY(0) scale(1); }
-            50% { box-shadow: 0 0 36px rgba(55,210,255,0.85); transform: translateY(-2px) scale(1.02); }
-        }
-        .hero-shimmer {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.12) 55%, transparent 100%);
-            transform: translateX(-100%);
-            animation: shimmer-slide 3.8s ease-in-out infinite;
-            pointer-events: none;
-            border-radius: 24px;
-        }
-        @keyframes shimmer-slide {
-            0% { transform: translateX(-100%); }
-            65% { transform: translateX(120%); }
-            100% { transform: translateX(120%); }
-        }
-        a.btn-primary {
-            border: 1px solid #1da8ff;
-        }
-        a.btn-outline-primary {
-            color: #bbd8ff;
-            border-color: #4f8eff;
-        }
-        a.btn-outline-primary:hover {
-            background-color: rgba(21,163,255,0.14);
-            color: #f7fbff;
-        }
-        .text-muted {
-            color: #c0c0c0 !important;
-        }
-        .text-white-50 {
-            color: rgba(255, 255, 255, 0.9) !important;
-        }
-        .alert-primary {
-            background-color: rgba(0,242,255,0.1);
-            color: var(--text-light);
-            border-color: rgba(0,242,255,0.3);
-        }
-        
-        /* Premium Anim & Cyber Classes */
-        .fade-in-up {
-            animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .premium-glass {
-            background: var(--glass-bg) !important;
-            backdrop-filter: blur(24px) !important;
-            -webkit-backdrop-filter: blur(24px) !important;
-            border: 1px solid var(--glass-border) !important;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
-            border-radius: 16px !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .premium-glass:hover {
-            border-color: rgba(255, 255, 255, 0.15) !important;
-            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6) !important;
-        }
-
-        .btn-cyber {
-            position: relative;
-            background: var(--void-1);
-            color: var(--text-light);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            font-family: var(--font-heading);
-            font-weight: 600;
-            z-index: 1;
-        }
-        
-        .btn-cyber::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: skewX(-20deg);
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .btn-cyber:hover:not(:disabled)::before {
-            left: 150%;
-        }
-
-        .btn-cyber:hover:not(:disabled) {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.25), inset 0 0 10px rgba(0, 242, 255, 0.1);
-            color: var(--neon-cyan);
-            transform: translateY(-2px);
-        }
-        
-        .hud-pill {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--text-light);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Orbitron:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
     <script src="data/questions.js"></script>
     <script src="js/i18n.js"></script>
@@ -331,45 +50,24 @@
     </script>
 </head>
 <body>
+    <!-- Splash Screen Premium -->
+    <div id="splashScreen" class="splash-overlay d-flex flex-column align-items-center justify-content-center">
+        <div class="spinner-border text-primary mb-3 loader-lg" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h2 class="cyber-title glow-primary">INICIALIZANDO SISTEMA</h2>
+        <p class="text-muted small">Carregando Pyodide & Recursos de Elite...</p>
+    </div>
 
-    <header class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary sticky-top">
-        <!-- <div class="container-fluid px-3 px-md-4">
-           <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
-                <span class="badge bg-primary me-2 fs-6">🐛</span>
-                <span class="text-primary d-none d-sm-inline">Python Detective</span>
-                <span class="text-primary d-inline d-sm-none">PD</span>
-                <small class="text-muted ms-2 d-none d-md-inline">v2.0</small>
-            </a>
-
-             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#features">
-                            <i class="fas fa-tools me-1 d-lg-none"></i>
-                            <span class="d-none d-lg-inline">🛠️ </span>
-                            Ferramentas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">
-                            <i class="fas fa-info-circle me-1 d-lg-none"></i>
-                            Sobre
-                        </a>
-                    </li>
-                </ul> 
-
-                <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
-                    <button class="btn btn-outline-primary btn-sm w-100 w-lg-auto" onclick="startOfflineGame()">
-                        <i class="fas fa-play me-1"></i>
-                        <span class="d-none d-sm-inline">INICIAR JOGO</span>
-                        <span class="d-inline d-sm-none">JOGAR</span>
-                    </button>
-                </div>
-            </div> -->
+    <header class="premium-glass m-3 sticky-top header-premium-bar">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <span class="text-primary fw-bold fs-4 glow-primary font-heading-main">PD</span>
+                <span class="ms-2 text-muted small d-none d-sm-inline">PYTHON DETECTIVE v2.5</span>
+            </div>
+            <div id="headerActions">
+                <!-- Dinamicamente preenchido pelo JS -->
+            </div>
         </div>
     </header>
 
@@ -442,8 +140,8 @@
                                         <div class="text-info">>>> resultado = investigar_evidencia(evidencia)</div>
                                         <div class="text-warning">>>> print(f"Resultado: {resultado}")</div>
                                     </div>
-                                    <div class="progress mb-2" style="height: 8px;">
-                                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+                                    <div class="progress mb-2 h-8px">
+                                        <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated w-75"></div>
                                     </div>
                                     <div class="d-flex justify-content-between small text-muted">
                                         <span>Investigação em andamento...</span>
@@ -597,6 +295,9 @@
             console.log('PWA install prompt disponível.');
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 </body>
 </html>
