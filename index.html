@@ -65,8 +65,15 @@
                 <span class="text-primary fw-bold fs-4 glow-primary font-heading-main">PD</span>
                 <span class="ms-2 text-muted small d-none d-sm-inline">PYTHON DETECTIVE v2.5</span>
             </div>
-            <div id="headerActions">
-                <!-- Dinamicamente preenchido pelo JS -->
+            <div id="headerActions" class="d-flex align-items-center gap-2">
+                <select id="langSelect" class="form-select form-select-sm bg-dark text-white border-primary border-opacity-50" style="width: auto;" onchange="if(typeof setLanguage === 'function') setLanguage(this.value)">
+                    <option value="pt">🌐 PT</option>
+                    <option value="en">🌐 EN</option>
+                    <option value="es">🌐 ES</option>
+                </select>
+                <button id="muteBtn" class="btn-cyber" title="Toggle Sound" onclick="toggleMute(this)" style="padding: 6px 12px; font-size: 13px;">
+                    <i class="fas fa-volume-up"></i>
+                </button>
             </div>
         </div>
     </header>

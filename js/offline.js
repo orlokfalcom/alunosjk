@@ -5,6 +5,53 @@ let globalPerformance = JSON.parse(localStorage.getItem('globalPerformance') || 
 let gameStartTime = 0;
 let currentDifficulty = 'facil'; // Default difficulty
 
+// Sound FX Manager (Intect Premium Engine)
+const sfx = {
+    ctx: null,
+    muted: localStorage.getItem('sfx_muted') === 'true',
+    init() {
+        if (!this.ctx) {
+            try { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { }
+        }
+    },
+    play(freq, type, dur, vol = 0.1) {
+        if (this.muted || !this.ctx) return;
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+        gain.gain.setValueAtTime(vol, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + dur);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + dur);
+    },
+    tick() { this.play(800, 'square', 0.05, 0.01); },
+    tap() { this.play(300, 'triangle', 0.05, 0.03); },
+    correct() { this.play(800, 'sine', 0.1, 0.05); setTimeout(() => this.play(1200, 'sine', 0.2, 0.05), 100); },
+    wrong() { this.play(200, 'sawtooth', 0.3, 0.05); },
+    win() { this.play(500, 'sine', 0.1, 0.1); setTimeout(() => this.play(700, 'sine', 0.3, 0.1), 150); }
+};
+
+// Mouse Tracking & Global Clicks
+document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+    document.documentElement.style.setProperty('--mouse-y', `${y}%`);
+});
+
+// Initialize SFX context on first user interaction (avoids AudioContext autoplay restriction)
+let sfxInited = false;
+document.addEventListener('click', () => {
+    if (!sfxInited) {
+        sfx.init();
+        sfxInited = true;
+    }
+}, { once: false });
+
 // Smooth scroll to features section
 function scrollToFeatures() {
     const featuresSection = document.getElementById('features');
@@ -16,23 +63,22 @@ function scrollToFeatures() {
     }
 }
 
-// Initialize Pyodide
+// Initialize Pyodide (Deferred)
 async function initPyodide() {
+    if (pyodide) return pyodide; // Already loaded
+    
     try {
+        console.log('Iniciando carregamento do Pyodide...');
         pyodide = await loadPyodide({
             indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
         });
-        console.log('Pyodide loaded successfully');
-
-        // Create test user if no users exist
-        if (Object.keys(userData).length === 0) {
-            createTestUser();
-            console.log('Usuário de teste criado automaticamente');
-        }
+        console.log('Pyodide carregado com sucesso');
+        return pyodide;
     } catch (e) {
-        console.error("Erro ao carregar sistema:", e);
+        console.error("Erro ao carregar Pyodide:", e);
+        return null;
     } finally {
-        // Remove Splash Screen with a smooth fade
+        // Remove Splash Screen if it still exists
         const splash = document.getElementById('splashScreen');
         if (splash) {
             splash.style.transition = 'opacity 0.5s ease, filter 0.5s ease';
@@ -337,61 +383,109 @@ function getCurrentUser() {
     return user;
 }
 
+// ── Bonus System Constants ─────────────────────────────────────────
+const DIFFICULTY_XP = {
+    facil:   { xp: 10, coins: 2,  label: 'Iniciante'    },
+    logica:  { xp: 20, coins: 4,  label: 'Lógica'       },
+    medio:   { xp: 20, coins: 4,  label: 'Médio'        },
+    ia:      { xp: 25, coins: 5,  label: 'IA Adaptativa'},
+    dificil: { xp: 35, coins: 7,  label: 'Pro'          },
+    massiva: { xp: 35, coins: 7,  label: 'Massiva'      },
+    inferno: { xp: 50, coins: 10, label: 'Inferno'      }
+};
+
+const STREAK_MILESTONES = [
+    { at: 3,  bonusXP: 10, bonusCoins: 3,  label: '🔥 Combo x3'    },
+    { at: 5,  bonusXP: 20, bonusCoins: 5,  label: '⚡ Combo x5'    },
+    { at: 10, bonusXP: 50, bonusCoins: 15, label: '💥 STREAK x10!' },
+    { at: 20, bonusXP: 100,bonusCoins: 30, label: '🌟 LENDÁRIO x20!'}
+];
+
 function saveScore(mode, baseScore, timeTaken = 0) {
     const user = getCurrentUser();
     if (!user) return null;
 
-    // Escalonamento por dificuldade
-    let difficultyMultiplier = 1;
-    if (mode === 'medio' || mode === 'logica') difficultyMultiplier = 2;
-    if (mode === 'dificil' || mode === 'massiva' || mode === 'inferno') difficultyMultiplier = 3;
-    
-    let score = baseScore * difficultyMultiplier;
+    const tier   = DIFFICULTY_XP[mode] || DIFFICULTY_XP['facil'];
+    let earnedXP    = tier.xp;
+    let earnedCoins = tier.coins;
+    const bonuses = [];
 
-    // Speed run bonus
-    let speedBonus = timeTaken > 0 && timeTaken < 6 ? 5 : 0;
-    
-    // Combo multiplier (Máx 100% de bônus, 5% por acerto)
-    let comboMultiplier = Math.min(1.0, user.streak * 0.05); 
-    
-    let totalScore = score + speedBonus;
-    let finalXP = Math.floor(totalScore + (totalScore * comboMultiplier));
-    let coinsEarned = Math.floor(finalXP / 5);
+    // ── 1. Combo Multiplier (5% per streak, max +100%) ─────────────
+    const comboBonus = Math.min(1.0, user.streak * 0.05);
+    earnedXP    = Math.floor(earnedXP * (1 + comboBonus));
+    earnedCoins = Math.floor(earnedCoins * (1 + comboBonus * 0.5));
+    if (comboBonus > 0) bonuses.push({ label: `🔄 Combo +${Math.round(comboBonus * 100)}%`, xp: 0 });
 
-    user.xp += finalXP;
-    user.level = Math.floor(user.xp / 100) + 1;
-    user.coins += coinsEarned;
+    // ── 2. Speed Bonus (under 8s = fast, under 4s = lightning) ─────
+    let speedBonusXP = 0;
+    if (timeTaken > 0 && timeTaken < 4) {
+        speedBonusXP = 10; bonuses.push({ label: '⚡ Relâmpago! (<4s)', xp: 10 });
+    } else if (timeTaken > 0 && timeTaken < 8) {
+        speedBonusXP = 5;  bonuses.push({ label: '🚀 Velocidade! (<8s)', xp: 5 });
+    }
+    earnedXP    += speedBonusXP;
+    earnedCoins += Math.floor(speedBonusXP / 2);
+
+    // ── 3. Streak Milestone Bonus ───────────────────────────────────
+    const nextStreak = user.streak + 1;
+    const milestone = STREAK_MILESTONES.find(m => m.at === nextStreak);
+    if (milestone) {
+        earnedXP    += milestone.bonusXP;
+        earnedCoins += milestone.bonusCoins;
+        bonuses.push({ label: milestone.label, xp: milestone.bonusXP });
+    }
+
+    // ── 4. First Correct of Session ─────────────────────────────────
+    if (user.totalCorrect === 0) {
+        earnedXP += 5; bonuses.push({ label: '🎯 Primeira Caçada!', xp: 5 });
+    }
+
+    // ── 5. Apply to user ────────────────────────────────────────────
+    user.xp    += earnedXP;
+    user.level  = Math.floor(user.xp / 100) + 1;
+    user.coins += earnedCoins;
     user.totalBugsFound += 1;
-    user.totalCorrect += 1;
-
-    // Update streak
+    user.totalCorrect   += 1;
     user.streak += 1;
     if (user.streak > user.bestStreak) user.bestStreak = user.streak;
 
-    // Update average time
-    if (user.averageTime === 0) {
-        user.averageTime = timeTaken;
-    } else {
-        user.averageTime = (user.averageTime + timeTaken) / 2;
+    // Rolling average time (Welford)
+    if (timeTaken > 0) {
+        if (user.averageTime === 0) {
+            user.averageTime = timeTaken;
+        } else {
+            user.averageTime = parseFloat(((user.averageTime * (user.totalCorrect - 1) + timeTaken) / user.totalCorrect).toFixed(2));
+        }
     }
 
-    // Performance by category
+    // Performance by mode
     if (!user.performance[mode]) user.performance[mode] = { correct: 0, total: 0 };
     user.performance[mode].correct += 1;
-    user.performance[mode].total += 1;
+    user.performance[mode].total   += 1;
 
-    // Check achievements
-    checkAchievements(user);
+    // ── 6. Achievements ─────────────────────────────────────────────
+    const newAchievements = checkAchievements(user);
 
     localStorage.setItem('userData', JSON.stringify(userData));
-    
-    return { earnedXP: finalXP, earnedCoins: coinsEarned, comboBonus: (comboMultiplier*100).toFixed(0), speedBonus };
+
+    return {
+        earnedXP,
+        earnedCoins,
+        bonuses,
+        comboBonus: Math.round(comboBonus * 100),
+        speedBonus: speedBonusXP,
+        newAchievements
+    };
 }
 
 function wrongAnswer(mode) {
     const user = getCurrentUser();
     if (!user) return;
 
+    // Reset streak — but save "near miss" if streak was high
+    if (user.streak >= 5 && !user.performance['near_miss_recorded']) {
+        user.bestStreak = Math.max(user.bestStreak, user.streak);
+    }
     user.streak = 0;
     user.totalWrong += 1;
 
@@ -401,22 +495,39 @@ function wrongAnswer(mode) {
     localStorage.setItem('userData', JSON.stringify(userData));
 }
 
+// ── Achievement Definitions ─────────────────────────────────────────
+const ACHIEVEMENT_DEFS = [
+    { id: 'first_blood',  label: '🩸 Primeira Caçada',   desc: 'Acertou a primeira',   check: u => u.totalCorrect >= 1   },
+    { id: 'first_10',     label: '🎯 Caçador x10',        desc: '10 bugs eliminados',   check: u => u.totalCorrect >= 10  },
+    { id: 'first_50',     label: '💀 Eliminador x50',     desc: '50 bugs eliminados',   check: u => u.totalCorrect >= 50  },
+    { id: 'first_100',    label: '☠️ Centurião',           desc: '100 bugs eliminados',  check: u => u.totalCorrect >= 100 },
+    { id: 'streak_3',     label: '🔥 Tríplice',           desc: 'Sequência de 3',       check: u => u.bestStreak >= 3     },
+    { id: 'streak_5',     label: '⚡ Combo Mestre',        desc: 'Sequência de 5',       check: u => u.bestStreak >= 5     },
+    { id: 'streak_10',    label: '💥 Combo Lendário',      desc: 'Sequência de 10',      check: u => u.bestStreak >= 10    },
+    { id: 'level_5',      label: '📡 Nível 5',             desc: 'Atingiu o nível 5',    check: u => u.level >= 5          },
+    { id: 'level_10',     label: '🛡️ Agente Elite',        desc: 'Atingiu o nível 10',   check: u => u.level >= 10         },
+    { id: 'speed_demon',  label: '⚡ Demônio da Velocidade',desc: 'Respondeu em <3s',    check: u => (u.averageTime > 0 && u.averageTime < 3) },
+    { id: 'inferno',      label: '🔥 Sobrevivente do Inferno', desc: 'Acertou no Inferno', check: u => (u.performance['inferno'] && u.performance['inferno'].correct >= 1) },
+    { id: 'collector',    label: '💰 Colecionador',         desc: 'Acumulou 100 créditos', check: u => u.coins >= 100       }
+];
+
 function checkAchievements(user) {
-    const newAchievements = [];
-
-    if (user.totalCorrect >= 10 && !user.achievements.includes('first_10')) {
-        newAchievements.push('first_10');
+    const newOnes = [];
+    for (const def of ACHIEVEMENT_DEFS) {
+        if (!user.achievements.includes(def.id) && def.check(user)) {
+            user.achievements.push(def.id);
+            newOnes.push(def);
+        }
     }
-    if (user.streak >= 5 && !user.achievements.includes('streak_5')) {
-        newAchievements.push('streak_5');
-    }
-    if (user.level >= 5 && !user.achievements.includes('level_5')) {
-        newAchievements.push('level_5');
-    }
-
-    user.achievements.push(...newAchievements);
-    return newAchievements;
+    return newOnes;
 }
+
+// Helper: get label for an achievement id
+function getAchievementLabel(id) {
+    const def = ACHIEVEMENT_DEFS.find(d => d.id === id);
+    return def ? def.label : id.replace(/_/g, ' ').toUpperCase();
+}
+
 
 // Run Python Code in Sandbox
 async function runPythonCode(code) {
@@ -614,31 +725,61 @@ function showUserSelection() {
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 }
 
-// Select Existing User
-// Select Existing User
+// Select Existing User - bypasses password for known-user selection
 function selectUser(username) {
-    const user = loginUser(username, 'offline');
-    if (user) {
-        hideModal();
-        showDashboard();
-    } else {
-        alert('Erro ao selecionar usuário.');
+    if (!userData[username]) {
+        alert('Usuário não encontrado.');
+        return;
     }
+    localStorage.setItem('currentUser', username);
+    hideModal();
+    showDashboard();
 }
 
 // Show Dashboard (SPA approach with Premium Components)
+// Performance Evolution Chart - rendered after showDashboard injects HTML
+function renderEvolutionChart() {
+    const user = getCurrentUser();
+    const container = document.getElementById('evolutionChart');
+    if (!container || !user) return;
+
+    // Build data from XP and level progression
+    const base = user.level * 10;
+    const correct = user.totalCorrect || 0;
+    const data = [
+        Math.max(5, base - 25),
+        Math.max(8, base - 15),
+        Math.max(10, base - 10),
+        Math.max(15, base - 5),
+        Math.max(20, base),
+        Math.max(20, base + Math.min(correct, 10)),
+        Math.max(20, base + Math.min(correct * 1.5, 20))
+    ];
+    const maxVal = Math.max(...data);
+
+    container.innerHTML = data.map((val, i) => {
+        const pct = Math.min(100, (val / maxVal) * 100);
+        const color = val >= base + 5
+            ? 'linear-gradient(0deg, var(--primary), var(--secondary))'
+            : val < base - 10
+                ? 'linear-gradient(0deg, var(--danger), #fb7185)'
+                : 'linear-gradient(0deg, #6366f1, var(--secondary))';
+        return `<div class="chart-bar" style="height:${pct}%;background:${color}" data-val="${Math.round(val)}"></div>`;
+    }).join('');
+}
+
 function showDashboard() {
     const user = getCurrentUser();
     const dashboardHTML = `
         <div class="container py-4 page-transition">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3">
                 <div>
-                    <h1 class="text-gradient-primary mb-0">AGENT: ${user.name.toUpperCase()}</h1>
-                    <p class="text-muted small mb-0">SISTEMA DE SEGURANÇA NACIONAL - NIVEL ${user.level}</p>
+                    <h1 class="text-gradient-primary mb-0">${t('label_agent')}: ${user.name.toUpperCase()}</h1>
+                    <p class="text-muted small mb-0">${t('dash_security_level')} - ${t('label_level')} ${user.level}</p>
                 </div>
                 <div class="d-flex gap-2">
                     <button class="btn-cyber" onclick="showUserSelection()">
-                        <i class="fas fa-user-secret"></i> ALTERAR AGENTE
+                        <i class="fas fa-user-secret"></i> ${t('dash_change_agent')}
                     </button>
                     <button class="btn-cyber danger" onclick="logout()">
                         <i class="fas fa-power-off"></i>
@@ -653,7 +794,7 @@ function showDashboard() {
                         ${user.level}
                     </div>
                     <div>
-                        <h4 class="mb-1">PROGRESSO DE REPUTAÇÃO</h4>
+                        <h4 class="mb-1">${t('dash_reputation')}</h4>
                         <div class="d-flex align-items-center gap-3">
                             <div class="progress" style="width: 250px; height: 8px;">
                                 <div class="progress-bar" style="width: ${user.xp % 100}%"></div>
@@ -663,7 +804,7 @@ function showDashboard() {
                     </div>
                 </div>
                 <div class="d-flex gap-3">
-                    <div class="hud-pill"><i class="fas fa-coins text-warning"></i> ${user.coins} CRÉDITOS</div>
+                    <div class="hud-pill"><i class="fas fa-coins text-warning"></i> ${user.coins} ${t('label_credits')}</div>
                     <div class="hud-pill"><i class="fas fa-fire text-danger"></i> STREAK: ${user.streak}</div>
                 </div>
             </div>
@@ -672,25 +813,25 @@ function showDashboard() {
                 <div class="col-md-3">
                     <div class="premium-glass card-stats h-100">
                         <div class="value text-primary glow-primary">${user.totalCorrect}</div>
-                        <div class="label">BUGS ELIMINADOS</div>
+                        <div class="label">${t('dash_bugs_found')}</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="premium-glass card-stats h-100">
                         <div class="value text-danger glow-secondary">${user.totalWrong}</div>
-                        <div class="label">FALHAS DE SISTEMA</div>
+                        <div class="label">${t('dash_failures')}</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="premium-glass card-stats h-100">
                         <div class="value text-success glow-primary">${user.bestStreak}</div>
-                        <div class="label">MAIOR SEQUÊNCIA</div>
+                        <div class="label">${t('dash_best_streak')}</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="premium-glass card-stats h-100">
                         <div class="value text-warning glow-primary">${user.averageTime.toFixed(1)}s</div>
-                        <div class="label">TEMPO DE REAÇÃO</div>
+                        <div class="label">${t('dash_reaction_time')}</div>
                     </div>
                 </div>
             </div>
@@ -699,35 +840,35 @@ function showDashboard() {
                 <div class="col-lg-8">
                     <div class="premium-glass p-0 overflow-hidden h-100">
                         <div class="p-4 border-bottom border-light border-opacity-10 bg-surface">
-                            <h5 class="mb-0 text-gradient-primary"><i class="fas fa-terminal me-2"></i> SELECIONAR MISSÃO OPERACIONAL</h5>
+                            <h5 class="mb-0 text-gradient-primary"><i class="fas fa-terminal me-2"></i> ${t('dash_select_mission')}</h5>
                         </div>
                         <div class="p-4">
                             <div class="d-flex flex-wrap gap-3 justify-content-center">
                                 <label class="difficulty-option">
                                     <input type="radio" name="difficulty" value="ia" onchange="setDifficulty('ia')" ${currentDifficulty === 'ia' ? 'checked' : ''} hidden>
-                                    <div class="btn-cyber ${currentDifficulty === 'ia' ? 'primary' : ''}"><i class="fas fa-brain"></i> IA PROCEDURAL</div>
+                                    <div class="btn-cyber ${currentDifficulty === 'ia' ? 'primary' : ''}"><i class="fas fa-brain"></i> ${t('btn_level_ai')}</div>
                                 </label>
                                 <label class="difficulty-option">
                                     <input type="radio" name="difficulty" value="facil" onchange="setDifficulty('facil')" ${currentDifficulty === 'facil' ? 'checked' : ''} hidden>
-                                    <div class="btn-cyber ${currentDifficulty === 'facil' ? 'primary' : ''}">INICIANTE</div>
+                                    <div class="btn-cyber ${currentDifficulty === 'facil' ? 'primary' : ''}">${t('btn_level_1')}</div>
                                 </label>
                                 <label class="difficulty-option">
                                     <input type="radio" name="difficulty" value="medio" onchange="setDifficulty('medio')" ${currentDifficulty === 'medio' ? 'checked' : ''} hidden>
-                                    <div class="btn-cyber ${currentDifficulty === 'medio' ? 'primary' : ''}">EXECUTOR LÓGICO</div>
+                                    <div class="btn-cyber ${currentDifficulty === 'medio' ? 'primary' : ''}">${t('btn_level_2')}</div>
                                 </label>
                                 <label class="difficulty-option">
                                     <input type="radio" name="difficulty" value="dificil" onchange="setDifficulty('dificil')" ${currentDifficulty === 'dificil' ? 'checked' : ''} hidden>
-                                    <div class="btn-cyber ${currentDifficulty === 'dificil' ? 'primary' : ''}">DETETIVE ELITE</div>
+                                    <div class="btn-cyber ${currentDifficulty === 'dificil' ? 'primary' : ''}">${t('btn_level_pro')}</div>
                                 </label>
                                 <label class="difficulty-option">
                                     <input type="radio" name="difficulty" value="inferno" onchange="setDifficulty('inferno')" ${currentDifficulty === 'inferno' ? 'checked' : ''} hidden>
-                                    <div class="btn-cyber ${currentDifficulty === 'inferno' ? 'primary' : ''} text-danger">MODO INFERNO</div>
+                                    <div class="btn-cyber ${currentDifficulty === 'inferno' ? 'primary' : ''} text-danger">${t('btn_level_3')}</div>
                                 </label>
                             </div>
                             
                             <div class="text-center mt-5">
                                 <button class="btn-cyber primary px-5 py-3 fs-5" onclick="loadGameInterface()">
-                                    <i class="fas fa-play-circle fs-4"></i> INICIAR OPERAÇÃO
+                                    <i class="fas fa-play-circle fs-4"></i> ${t('btn_start')}
                                 </button>
                             </div>
                         </div>
@@ -736,7 +877,7 @@ function showDashboard() {
                 <div class="col-lg-4">
                     <div class="premium-glass p-0 h-100">
                         <div class="p-4 border-bottom border-light border-opacity-10 bg-surface">
-                            <h5 class="mb-0 text-success"><i class="fas fa-medal me-2"></i> ARQUIVO DE CONQUISTAS</h5>
+                            <h5 class="mb-0 text-success"><i class="fas fa-medal me-2"></i> ${t('dash_achievements')}</h5>
                         </div>
                         <div class="p-4 d-flex flex-wrap gap-2">
                              ${user.achievements.length > 0 ? 
@@ -745,16 +886,20 @@ function showDashboard() {
                                         <i class="fas fa-check-circle text-success"></i> ${achievement.replace('_', ' ').toUpperCase()}
                                     </div>
                                 `).join('') :
-                                '<div class="text-center w-100 py-5 opacity-30"><i class="fas fa-lock fs-1 d-block mb-3"></i><p>SEM REGISTROS</p></div>'
+                                `<div class="text-center w-100 py-5 opacity-30"><i class="fas fa-lock fs-1 d-block mb-3"></i><p>${t('dash_no_records')}</p></div>`
                             }
                         </div>
+                    </div>
+                    <div class="premium-glass p-4 mt-4 h-auto">
+                        <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i> ${t('dash_reputation')}</h5>
+                        <div id="evolutionChart" class="chart-container"></div>
                     </div>
                 </div>
             </div>
 
             <div class="text-center">
                 <button class="btn-cyber" style="border-color: var(--warning); color: var(--warning);" onclick="showStore()">
-                    <i class="fas fa-shopping-cart"></i> CYBER MARKET (BLACK MARKET)
+                    <i class="fas fa-shopping-cart"></i> ${t('shop_title')}
                 </button>
             </div>
         </div>
@@ -762,6 +907,8 @@ function showDashboard() {
 
     const mainElement = document.querySelector('main') || document.body;
     mainElement.innerHTML = dashboardHTML;
+    renderEvolutionChart();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function logout() {
@@ -784,17 +931,17 @@ function loadGameInterface() {
                     <button class="btn-cyber" onclick="showDashboard()">
                         <i class="fas fa-arrow-left"></i>
                     </button>
-                    <h2 class="text-gradient-primary mb-0">MISSÃO OPERACIONAL</h2>
+                    <h2 class="text-gradient-primary mb-0">${t('game_mission')}</h2>
                 </div>
                 <div class="d-flex gap-2">
-                    <div class="hud-pill"><i class="fas fa-layer-group text-primary"></i> NIVEL ${user.level}</div>
+                    <div class="hud-pill"><i class="fas fa-layer-group text-primary"></i> ${t('label_level')} ${user.level}</div>
                     <div class="hud-pill"><i class="fas fa-fire text-danger"></i> STREAK: ${user.streak}</div>
                 </div>
             </div>
 
             <div class="premium-glass p-0 overflow-hidden mb-4">
                 <div class="p-3 border-bottom border-light border-opacity-10 bg-surface d-flex justify-content-between align-items-center">
-                    <span class="text-muted small"><i class="fas fa-bug me-2"></i> ANALISE O MALWARE ABAIXO:</span>
+                    <span class="text-muted small"><i class="fas fa-bug me-2"></i> ${t('game_analyze')}:</span>
                     <span class="badge-cyber warning">${currentDifficulty.toUpperCase()}</span>
                 </div>
                 <div class="p-0">
@@ -818,10 +965,10 @@ function loadGameInterface() {
             
             <div class="d-flex justify-content-center gap-4 flex-wrap">
                 <button class="btn-cyber" id="hintBtn" onclick="useHint(this)" ${user.inventory.hints > 0 ? '' : 'disabled'}>
-                    <i class="fas fa-lightbulb text-warning"></i> INJETAR DICA (${user.inventory.hints})
+                    <i class="fas fa-lightbulb text-warning"></i> ${t('btn_hint')} (${user.inventory.hints})
                 </button>
                 <button class="btn-cyber" id="skipBtn" onclick="useSkip(this)" ${user.inventory.skips > 0 ? '' : 'disabled'}>
-                    <i class="fas fa-forward text-info"></i> BYPASS MISSÃO (${user.inventory.skips})
+                    <i class="fas fa-forward text-info"></i> ${t('btn_skip')} (${user.inventory.skips})
                 </button>
             </div>
         </div>
@@ -859,34 +1006,36 @@ function checkAnswer(selectedIndex, correctIndex, buttonElement) {
     });
 
     if (isCorrect) {
+        sfx.correct();
         const results = saveScore(currentDifficulty, 10, timeTaken);
         feedbackContainer.innerHTML = `
             <div class="premium-glass p-4 border-success page-transition" style="background: hsla(var(--neon-green), 0.1);">
                 <div class="d-flex align-items-center gap-3 mb-3">
                     <i class="fas fa-check-circle text-success fs-2"></i>
-                    <h4 class="mb-0 text-success">MALWARE ELIMINADO COM SUCESSO!</h4>
+                    <h4 class="mb-0 text-success">${t('game_success')}</h4>
                 </div>
                 <p class="text-light-50">${window.currentBug.explain}</p>
                 <div class="d-flex gap-3 mt-3">
                     <div class="hud-pill">+${results.earnedXP} XP</div>
-                    <div class="hud-pill">+${results.earnedCoins} CRÉDITOS</div>
+                    <div class="hud-pill">+${results.earnedCoins} ${t('label_credits')}</div>
                 </div>
-                <button class="btn-cyber primary mt-4 w-100" onclick="loadGameInterface()">PRÓXIMA MISSÃO</button>
+                <button class="btn-cyber primary mt-4 w-100" onclick="loadGameInterface()">${t('game_next')}</button>
             </div>
         `;
     } else {
+        sfx.wrong();
         wrongAnswer(currentDifficulty);
         feedbackContainer.innerHTML = `
             <div class="premium-glass p-4 border-danger page-transition" style="background: hsla(0, 100%, 50%, 0.1);">
                 <div class="d-flex align-items-center gap-3 mb-3">
                     <i class="fas fa-times-circle text-danger fs-2"></i>
-                    <h4 class="mb-0 text-danger">FALHA NA INTERCEPTAÇÃO!</h4>
+                    <h4 class="mb-0 text-danger">${t('game_failure')}</h4>
                 </div>
-                <p class="text-light-50">O sistema de defesa detectou sua tentativa. A sequência foi resetada.</p>
+                <p class="text-light-50">${t('game_failure_desc')}</p>
                 <p class="small text-muted">${window.currentBug.explain}</p>
                 <div class="d-flex gap-3 mt-2">
-                    <button class="btn-cyber primary mt-3" onclick="loadGameInterface()">TENTAR NOVAMENTE</button>
-                    <button class="btn-cyber mt-3" onclick="showDashboard()">VOLTAR AO QG</button>
+                    <button class="btn-cyber primary mt-3" onclick="loadGameInterface()">${t('game_retry')}</button>
+                    <button class="btn-cyber mt-3" onclick="showDashboard()">${t('game_back_hq')}</button>
                 </div>
             </div>
         `;
@@ -919,7 +1068,7 @@ function useHint(btn) {
     localStorage.setItem('userData', JSON.stringify(userData));
     
     btn.disabled = true;
-    btn.innerHTML = `<i class="fas fa-lightbulb text-warning"></i> DICA APLICADA (${user.inventory.hints})`;
+    btn.innerHTML = `<i class="fas fa-lightbulb text-warning"></i> ${t('hint_applied')} (${user.inventory.hints})`;
 }
 
 function useSkip(btn) {
@@ -930,7 +1079,7 @@ function useSkip(btn) {
     localStorage.setItem('userData', JSON.stringify(userData));
     
     btn.disabled = true;
-    btn.innerHTML = `<i class="fas fa-forward text-info"></i> BYPASS ATIVO (${user.inventory.skips})`;
+    btn.innerHTML = `<i class="fas fa-forward text-info"></i> ${t('skip_active')} (${user.inventory.skips})`;
     
     setTimeout(() => loadGameInterface(), 500);
 }
@@ -949,9 +1098,9 @@ function showStore() {
                     <button class="btn-cyber" onclick="showDashboard()">
                         <i class="fas fa-arrow-left"></i>
                     </button>
-                    <h2 class="text-gradient-primary mb-0">BLACK MARKET</h2>
+                    <h2 class="text-gradient-primary mb-0">${t('shop_title')}</h2>
                 </div>
-                <div class="hud-pill fs-5"><i class="fas fa-coins text-warning"></i> SALDO: <span id="storeBalance">${user.coins}</span> CRÉDITOS</div>
+                <div class="hud-pill fs-5"><i class="fas fa-coins text-warning"></i> ${t('store_balance')}: <span id="storeBalance">${user.coins}</span> ${t('label_credits')}</div>
             </div>
 
             <div class="row g-4 justify-content-center">
@@ -961,18 +1110,18 @@ function showStore() {
                             <div class="icon-box mx-auto" style="color: var(--warning)">
                                 <i class="fas fa-lightbulb fs-1"></i>
                             </div>
-                            <h3 class="mb-3">MÓDULO DECODER</h3>
-                            <p class="text-muted small mb-4">Elimina duas rotas falsas durante a investigação de malware.</p>
+                            <h3 class="mb-3">${t('store_decoder')}</h3>
+                            <p class="text-muted small mb-4">${t('store_decoder_desc')}</p>
                             
                             <div class="bg-surface p-3 rounded mb-4 d-flex justify-content-between align-items-center">
-                                <span class="text-dim">PREÇO</span>
+                                <span class="text-dim">${t('store_price')}</span>
                                 <span class="text-warning fw-bold fs-4">15 <i class="fas fa-coins"></i></span>
                             </div>
                             
                             <button class="btn-cyber primary w-100 py-3" onclick="buyItem('hints', 15, this)">
-                                <i class="fas fa-shopping-cart"></i> ADQUIRIR MÓDULO
+                                <i class="fas fa-shopping-cart"></i> ${t('store_buy')}
                             </button>
-                            <p class="mt-3 text-dim small">EM ESTOQUE: <span id="inv-hints">${user.inventory.hints}</span></p>
+                            <p class="mt-3 text-dim small">${t('store_stock')}: <span id="inv-hints">${user.inventory.hints}</span></p>
                         </div>
                     </div>
                 </div>
@@ -983,18 +1132,18 @@ function showStore() {
                             <div class="icon-box mx-auto" style="color: var(--primary)">
                                 <i class="fas fa-forward fs-1"></i>
                             </div>
-                            <h3 class="mb-3">PROTOCOLO BYPASS</h3>
-                            <p class="text-muted small mb-4">Salta uma missão suspeita sem comprometer sua sequência operacional.</p>
+                            <h3 class="mb-3">${t('store_bypass')}</h3>
+                            <p class="text-muted small mb-4">${t('store_bypass_desc')}</p>
                             
                             <div class="bg-surface p-3 rounded mb-4 d-flex justify-content-between align-items-center">
-                                <span class="text-dim">PREÇO</span>
+                                <span class="text-dim">${t('store_price')}</span>
                                 <span class="text-primary fw-bold fs-4">30 <i class="fas fa-coins"></i></span>
                             </div>
                             
                             <button class="btn-cyber primary w-100 py-3" onclick="buyItem('skips', 30, this)">
-                                <i class="fas fa-shopping-cart"></i> ADQUIRIR PROTOCOLO
+                                <i class="fas fa-shopping-cart"></i> ${t('store_buy_protocol')}
                             </button>
-                            <p class="mt-3 text-dim small">EM ESTOQUE: <span id="inv-skips">${user.inventory.skips}</span></p>
+                            <p class="mt-3 text-dim small">${t('store_stock')}: <span id="inv-skips">${user.inventory.skips}</span></p>
                         </div>
                     </div>
                 </div>
@@ -1019,7 +1168,7 @@ function buyItem(itemType, cost, btn) {
         document.getElementById(`inv-${itemType}`).innerText = user.inventory[itemType];
         
         const originalContent = btn.innerHTML;
-        btn.innerHTML = '✔ ADQUIRIDO';
+        btn.innerHTML = `✔ ${t('store_acquired')}`;
         btn.style.background = 'var(--success)';
         btn.style.color = 'var(--bg-base)';
         setTimeout(() => {
@@ -1028,12 +1177,48 @@ function buyItem(itemType, cost, btn) {
             btn.style.color = '';
         }, 1000);
     } else {
-        alert("CRÉDITOS INSUFICIENTES PARA ESTA OPERAÇÃO.");
+        alert(t('store_insufficient'));
     }
 }
 
 // Initialize System
 window.addEventListener('load', () => {
-    createTestUser();
-    initPyodide();
+    // Only create test user if the system is completely empty
+    if (Object.keys(userData).length === 0) {
+        createTestUser();
+    }
+    
+    // Restore mute state on button icon
+    const muteBtn = document.getElementById('muteBtn');
+    if (muteBtn && sfx.muted) {
+        muteBtn.querySelector('i').className = 'fas fa-volume-mute';
+        muteBtn.style.opacity = '0.5';
+    }
+    
+    // Remove splash screen after short delay
+    setTimeout(() => {
+        const splash = document.getElementById('splashScreen');
+        if (splash) {
+            splash.style.transition = 'opacity 0.5s ease, filter 0.5s ease';
+            splash.style.opacity = '0';
+            splash.style.filter = 'blur(20px)';
+            setTimeout(() => splash.remove(), 500);
+        }
+    }, 1500);
 });
+
+// Toggle SFX Mute
+function toggleMute(btn) {
+    sfx.muted = !sfx.muted;
+    localStorage.setItem('sfx_muted', sfx.muted);
+    const icon = btn.querySelector('i');
+    if (sfx.muted) {
+        icon.className = 'fas fa-volume-mute';
+        btn.style.opacity = '0.5';
+    } else {
+        icon.className = 'fas fa-volume-up';
+        btn.style.opacity = '1';
+        sfx.init();
+        sfx.tap();
+    }
+}

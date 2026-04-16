@@ -61,10 +61,9 @@ Use este usuário para testar todas as funcionalidades sem precisar criar um per
 - `icon.png` - Ícone da aplicação
 - `css/style.css` - Estilos Bootstrap customizados
 - `data/questions.js` - Dados das questões de bugs
-- `js/offline.js` - Lógica principal offline (login, dashboard, métricas)
-- `js/game.js` - Lógica do jogo e interface
-- `js/correction.js` - Sistema de correção de bugs
+- `js/offline.js` - Lógica principal offline (login, dashboard, jogo, correções, store)
 - `js/i18n.js` - Internacionalização (PT/EN/ES)
+- `js/ai_generator.js` - Motor de geração procedural de bugs
 - `README.md` - Esta documentação
 
 ### Removidos (não necessários para versão offline):
