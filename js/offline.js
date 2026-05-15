@@ -410,71 +410,38 @@ function saveScore(mode, baseScore, timeTaken = 0) {
     let earnedCoins = tier.coins;
     const bonuses = [];
 
-    // ── 1. Combo Multiplier (5% per streak, max +100%) ─────────────
+    // ── 1. Combo Multiplier ─────────────
     const comboBonus = Math.min(1.0, user.streak * 0.05);
     earnedXP    = Math.floor(earnedXP * (1 + comboBonus));
     earnedCoins = Math.floor(earnedCoins * (1 + comboBonus * 0.5));
-    if (comboBonus > 0) bonuses.push({ label: `🔄 Combo +${Math.round(comboBonus * 100)}%`, xp: 0 });
 
-    // ── 2. Speed Bonus (under 8s = fast, under 4s = lightning) ─────
+    // ── 2. Speed Bonus ─────
     let speedBonusXP = 0;
     if (timeTaken > 0 && timeTaken < 4) {
-        speedBonusXP = 10; bonuses.push({ label: '⚡ Relâmpago! (<4s)', xp: 10 });
+        speedBonusXP = 15; bonuses.push({ label: '⚡ Ultra Veloz!', xp: 15 });
     } else if (timeTaken > 0 && timeTaken < 8) {
-        speedBonusXP = 5;  bonuses.push({ label: '🚀 Velocidade! (<8s)', xp: 5 });
+        speedBonusXP = 7;  bonuses.push({ label: '🚀 Rápido', xp: 7 });
     }
-    earnedXP    += speedBonusXP;
-    earnedCoins += Math.floor(speedBonusXP / 2);
+    earnedXP += speedBonusXP;
 
-    // ── 3. Streak Milestone Bonus ───────────────────────────────────
-    const nextStreak = user.streak + 1;
-    const milestone = STREAK_MILESTONES.find(m => m.at === nextStreak);
-    if (milestone) {
-        earnedXP    += milestone.bonusXP;
-        earnedCoins += milestone.bonusCoins;
-        bonuses.push({ label: milestone.label, xp: milestone.bonusXP });
-    }
+    // ── 3. Apply to Gamification Module ──
+    const actualXP = Gamification.addXP(earnedXP);
+    Gamification.addStreak();
 
-    // ── 4. First Correct of Session ─────────────────────────────────
-    if (user.totalCorrect === 0) {
-        earnedXP += 5; bonuses.push({ label: '🎯 Primeira Caçada!', xp: 5 });
-    }
-
-    // ── 5. Apply to user ────────────────────────────────────────────
-    user.xp    += earnedXP;
-    user.level  = Math.floor(user.xp / 100) + 1;
+    // ── 4. Sync Legacy Data ──────────────────
+    user.xp = Gamification.state.xp;
+    user.level = Gamification.state.level;
+    user.streak = Gamification.state.streak;
     user.coins += earnedCoins;
-    user.totalBugsFound += 1;
-    user.totalCorrect   += 1;
-    user.streak += 1;
+    user.totalCorrect += 1;
     if (user.streak > user.bestStreak) user.bestStreak = user.streak;
-
-    // Rolling average time (Welford)
-    if (timeTaken > 0) {
-        if (user.averageTime === 0) {
-            user.averageTime = timeTaken;
-        } else {
-            user.averageTime = parseFloat(((user.averageTime * (user.totalCorrect - 1) + timeTaken) / user.totalCorrect).toFixed(2));
-        }
-    }
-
-    // Performance by mode
-    if (!user.performance[mode]) user.performance[mode] = { correct: 0, total: 0 };
-    user.performance[mode].correct += 1;
-    user.performance[mode].total   += 1;
-
-    // ── 6. Achievements ─────────────────────────────────────────────
-    const newAchievements = checkAchievements(user);
 
     localStorage.setItem('userData', JSON.stringify(userData));
 
     return {
-        earnedXP,
+        earnedXP: actualXP,
         earnedCoins,
-        bonuses,
-        comboBonus: Math.round(comboBonus * 100),
-        speedBonus: speedBonusXP,
-        newAchievements
+        bonuses
     };
 }
 
@@ -482,15 +449,9 @@ function wrongAnswer(mode) {
     const user = getCurrentUser();
     if (!user) return;
 
-    // Reset streak — but save "near miss" if streak was high
-    if (user.streak >= 5 && !user.performance['near_miss_recorded']) {
-        user.bestStreak = Math.max(user.bestStreak, user.streak);
-    }
+    Gamification.resetStreak();
     user.streak = 0;
     user.totalWrong += 1;
-
-    if (!user.performance[mode]) user.performance[mode] = { correct: 0, total: 0 };
-    user.performance[mode].total += 1;
 
     localStorage.setItem('userData', JSON.stringify(userData));
 }
@@ -934,18 +895,27 @@ function loadGameInterface() {
                     <h2 class="text-gradient-primary mb-0">${t('game_mission')}</h2>
                 </div>
                 <div class="d-flex gap-2">
-                    <div class="hud-pill"><i class="fas fa-layer-group text-primary"></i> ${t('label_level')} ${user.level}</div>
-                    <div class="hud-pill"><i class="fas fa-fire text-danger"></i> STREAK: ${user.streak}</div>
+                    <div class="hud-pill"><i class="fas fa-layer-group text-primary"></i> LVL ${user.level}</div>
+                    <div class="hud-pill"><i class="fas fa-bolt text-warning"></i> STREAK: ${user.streak}</div>
                 </div>
             </div>
 
-            <div class="premium-glass p-0 overflow-hidden mb-4">
-                <div class="p-3 border-bottom border-light border-opacity-10 bg-surface d-flex justify-content-between align-items-center">
-                    <span class="text-muted small"><i class="fas fa-bug me-2"></i> ${t('game_analyze')}:</span>
-                    <span class="badge-cyber warning">${currentDifficulty.toUpperCase()}</span>
+            <div class="question-code mb-4">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div class="terminal-title">SCANNING_PAYLOAD...</div>
+                    <div class="ms-auto">
+                         <span class="badge ${bug.category.includes('CYBER') ? 'badge-cyber' : bug.category.includes('DEVOPS') ? 'badge-devops' : 'bg-warning'} text-dark small">
+                            ${bug.category}
+                         </span>
+                    </div>
                 </div>
-                <div class="p-0">
-                    <pre class="line-numbers"><code class="language-python">${bug.code}</code></pre>
+                <div class="terminal-body p-0">
+                    <pre class="line-numbers m-0" style="background: transparent"><code class="language-python">${bug.code}</code></pre>
                 </div>
             </div>
 
@@ -954,7 +924,7 @@ function loadGameInterface() {
                     <div class="col-md-6">
                         <button class="btn-cyber w-100 py-3 text-start px-4 op-btn" 
                                 onclick="checkAnswer(${i}, ${bug.correct}, this)">
-                            <span class="badge-cyber me-3" style="min-width: 30px; text-align: center;">${String.fromCharCode(65 + i)}</span> 
+                            <span class="badge bg-secondary me-3" style="min-width: 30px; text-align: center;">${String.fromCharCode(65 + i)}</span> 
                             ${opt}
                         </button>
                     </div>

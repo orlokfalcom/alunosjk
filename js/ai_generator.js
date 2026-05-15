@@ -10,13 +10,15 @@ const ProceduralAI = {
 
   // ── Dictionaries ──────────────────────────────────────────────────
   dicts: {
-    vars_int:  ['bytes', 'pacotes', 'ping', 'threads', 'tokens', 'nodes', 'frames', 'bits'],
-    vars_sys:  ['servidor', 'firewall', 'sistema', 'root', 'banco', 'cluster', 'proxy', 'daemon'],
-    strings:   ['Access Denied', 'Override', 'Exploit Injetado', 'Bypass Ativo', 'Rootkits', 'Payload', 'Malware', 'Cipher'],
-    numeros:   [404, 502, 1337, 8080, 256, 128, 64, 32, 200, 403, 500],
+    vars_int:  ['bytes', 'pacotes', 'ping', 'threads', 'tokens', 'nodes', 'frames', 'bits', 'buffer_size', 'offset'],
+    vars_sys:  ['servidor', 'firewall', 'sistema', 'root', 'banco', 'cluster', 'proxy', 'daemon', 'kernel', 'endpoint'],
+    strings:   ['Access Denied', 'Override', 'Exploit Injetado', 'Bypass Ativo', 'Rootkits', 'Payload', 'Malware', 'Cipher', 'Backdoor', 'Salt'],
+    numeros:   [404, 502, 1337, 8080, 256, 128, 64, 32, 200, 403, 500, 65535, 1024],
     pequenos:  [2, 3, 4, 5, 6, 8],
     ops:       ['+', '-', '*'],
-    verbs:     ['conectar', 'injetar', 'processar', 'validar', 'encriptar', 'compilar']
+    verbs:     ['conectar', 'injetar', 'processar', 'validar', 'encriptar', 'compilar', 'hackear', 'sniffar', 'debugar'],
+    cyber:     ['sql_injection', 'xss_payload', 'bruteforce', 'handshake', 'overflow', 'encryption_key'],
+    devops:    ['docker_image', 'pod_status', 'pipeline_id', 'git_ref', 'env_var', 'deployment']
   },
 
   // Anti-repeat state
@@ -283,6 +285,72 @@ const ProceduralAI = {
         answer: 2,
         explain: `🤖 [Walrus Operator] ':=' (operador morsa) atribui E retorna o valor. A variável 'total' fica disponível no escopo externo — não só dentro do if. Código válido desde Python 3.8.`,
         category: 'massiva'
+      };
+    },
+
+    // ════════ CYBERSECURITY ════════
+
+    cyber_sanitization: function(sys, num, str, sm, verb) {
+      const input = this.getRandom(this.dicts.cyber);
+      return {
+        code: `user_input = "${input}' OR 1=1--"\nquery = "SELECT * FROM users WHERE id = " + user_input\n# Executando query no banco...`,
+        choices: [
+          `O código está seguro pois user_input é uma string.`,
+          `Vulnerável a SQL Injection. O input do usuário deve ser sanitizado ou usar parâmetros preparados.`,
+          `Python impede injeções de SQL automaticamente por ser uma linguagem segura.`,
+          `Falta um 'import sql_security' para bloquear ataques.`
+        ],
+        answer: 1,
+        explain: `🛡️ [Cybersecurity] Concatenar strings diretamente em queries SQL é a falha n1 de segurança. Use 'parameterized queries' para evitar que o atacante manipule a lógica do banco.`,
+        category: 'cybersecurity'
+      };
+    },
+
+    cyber_secret_leak: function(sys, num, str, sm, verb) {
+      return {
+        code: `API_KEY = "sk-live-${num}${num}"\ndef fetch_data():\n    # Usa a chave para baixar dados\n    pass`,
+        choices: [
+          `Prática comum e segura em desenvolvimento ágil.`,
+          `Risco de Segurança: Segredos (Hardcoded Secrets) nunca devem estar no código fonte. Use variáveis de ambiente.`,
+          `A chave está segura pois está dentro de uma constante global.`,
+          `Python encripta automaticamente variáveis chamadas API_KEY.`
+        ],
+        answer: 1,
+        explain: `🛡️ [Secret Management] Commitar chaves de API no GitHub é um convite para hackers. Use arquivos .env e carregue-os com 'os.getenv()'.`,
+        category: 'cybersecurity'
+      };
+    },
+
+    // ════════ DEVOPS ════════
+
+    devops_env_fail: function(sys, num, str, sm, verb) {
+      const env = this.getRandom(this.dicts.devops);
+      return {
+        code: `import os\nif os.environ["${env}"] == "prod":\n    enable_firewall()`,
+        choices: [
+          `Sempre funciona se a variável estiver definida no Dockerfile.`,
+          `Lança KeyError se a variável de ambiente '${env}' não estiver definida no SO.`,
+          `os.environ retorna None por padrão se a chave não existir.`,
+          `Variáveis de ambiente só podem ser acessadas via módulo 'sys'.`
+        ],
+        answer: 1,
+        explain: `⚙️ [DevOps/Runtime] Acessar os.environ via colchetes [] lança KeyError se a chave faltar. Use os.environ.get("${env}") para evitar crashes na pipeline.`,
+        category: 'devops'
+      };
+    },
+
+    devops_path_join: function(sys, num, str, sm, verb) {
+      return {
+        code: `base_dir = "/app/data"\nfile_path = base_dir + "/" + "config.yaml"\n# Abrindo arquivo...`,
+        choices: [
+          `Forma correta e portável de montar caminhos de arquivo.`,
+          `Funciona, mas não é portável (Windows vs Linux). Use os.path.join() ou pathlib.Path.`,
+          `O sinal '+' não pode ser usado com strings de caminhos.`,
+          `Falta a barra tripla /// para sistemas Unix.`
+        ],
+        answer: 1,
+        explain: `⚙️ [DevOps/Portability] Hardcoding de separadores ('/') quebra em sistemas diferentes. O 'pathlib' do Python é a forma moderna e segura de manipular sistemas de arquivos.`,
+        category: 'devops'
       };
     }
   },

@@ -60,20 +60,34 @@
     </div>
 
     <header class="premium-glass m-3 sticky-top header-premium-bar">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <span class="text-primary fw-bold fs-4 glow-primary font-heading-main">PD</span>
-                <span class="ms-2 text-muted small d-none d-sm-inline">PYTHON DETECTIVE v2.5</span>
+        <div class="container-fluid d-flex flex-column gap-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <span class="text-primary fw-bold fs-4 glow-primary font-heading-main">ONYX</span>
+                    <span class="ms-2 text-muted small d-none d-sm-inline">ACADEMY v3.0 [SUPERNOVA]</span>
+                </div>
+                <div id="headerActions" class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fas fa-bolt text-warning"></i>
+                        <span id="streakCount" class="fw-bold">0</span>
+                    </div>
+                    <select id="langSelect" class="form-select form-select-sm bg-dark text-white border-primary border-opacity-50" style="width: auto;" onchange="if(typeof setLanguage === 'function') setLanguage(this.value)">
+                        <option value="pt">🌐 PT</option>
+                        <option value="en">🌐 EN</option>
+                        <option value="es">🌐 ES</option>
+                    </select>
+                    <button id="muteBtn" class="btn-cyber" title="Toggle Sound" onclick="toggleMute(this)" style="padding: 6px 12px; font-size: 13px;">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
             </div>
-            <div id="headerActions" class="d-flex align-items-center gap-2">
-                <select id="langSelect" class="form-select form-select-sm bg-dark text-white border-primary border-opacity-50" style="width: auto;" onchange="if(typeof setLanguage === 'function') setLanguage(this.value)">
-                    <option value="pt">🌐 PT</option>
-                    <option value="en">🌐 EN</option>
-                    <option value="es">🌐 ES</option>
-                </select>
-                <button id="muteBtn" class="btn-cyber" title="Toggle Sound" onclick="toggleMute(this)" style="padding: 6px 12px; font-size: 13px;">
-                    <i class="fas fa-volume-up"></i>
-                </button>
+            <!-- Progress / XP Bar -->
+            <div class="d-flex align-items-center gap-3">
+                <div class="small text-muted fw-bold">LVL <span id="userLevel">1</span></div>
+                <div class="xp-bar-container flex-grow-1">
+                    <div id="xpBar" class="xp-bar-fill" style="width: 0%"></div>
+                </div>
+                <div class="small text-muted fw-bold"><span id="userXP">0</span>/1000 XP</div>
             </div>
         </div>
     </header>
@@ -126,33 +140,31 @@
                     </div>
                     <div class="col-12 col-lg-6 order-1 order-lg-2">
                         <div class="hero-image-container position-relative mb-4 mb-lg-0">
-                            <div class="card bg-dark border-secondary shadow-lg">
-                                <div class="card-header bg-secondary border-secondary">
-                                    <div class="d-flex align-items-center">
-                                        <div class="bg-danger rounded-circle p-1 me-2">
-                                            <i class="fas fa-terminal text-white fs-6"></i>
-                                        </div>
-                                        <span class="text-white fw-bold small">Terminal Python</span>
-                                        <div class="ms-auto">
-                                            <span class="badge bg-success small">Online</span>
-                                        </div>
+                            <div class="card bg-dark border-secondary shadow-lg overflow-hidden">
+                                <div class="terminal-header">
+                                    <div class="terminal-dots">
+                                        <div class="terminal-dot dot-red"></div>
+                                        <div class="terminal-dot dot-yellow"></div>
+                                        <div class="terminal-dot dot-green"></div>
                                     </div>
+                                    <div class="terminal-title">Onyx_Kernel_Debugger</div>
+                                    <div class="ms-auto badge bg-success small">LIVE</div>
                                 </div>
-                                <div class="card-body p-4">
-                                    <div class="bg-secondary rounded p-3 mb-3 font-monospace small">
-                                        <div class="text-success">>>> def investigar_evidencia(evidencia):</div>
-                                        <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;if evidencia.tipo == "digital":</div>
-                                        <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Analisar metadados"</div>
-                                        <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;return "Coletar amostras"</div>
-                                        <div class="text-info">>>> resultado = investigar_evidencia(evidencia)</div>
-                                        <div class="text-warning">>>> print(f"Resultado: {resultado}")</div>
+                                <div class="terminal-body p-4">
+                                    <div class="bg-black rounded p-3 mb-3 font-monospace small" style="min-height: 120px; border: 1px solid hsla(0,0%,100%,0.05)">
+                                        <div class="text-success">>>> def onyx_v3_init():</div>
+                                        <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;engine = "Procedural_AI"</div>
+                                        <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;mode = "Supernova"</div>
+                                        <div class="text-info">&nbsp;&nbsp;&nbsp;&nbsp;return f"{engine} active in {mode}"</div>
+                                        <div class="text-warning">>>> onyx_v3_init()</div>
+                                        <div class="text-white">'Procedural_AI active in Supernova'</div>
                                     </div>
                                     <div class="progress mb-2 h-8px">
                                         <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated w-75"></div>
                                     </div>
                                     <div class="d-flex justify-content-between small text-muted">
-                                        <span>Investigação em andamento...</span>
-                                        <span>75%</span>
+                                        <span>Injected Payload: v3.0.42</span>
+                                        <span>Sync 100%</span>
                                     </div>
                                 </div>
                             </div>
@@ -302,6 +314,16 @@
             console.log('PWA install prompt disponível.');
         });
     </script>
+    <!-- Level Up Overlay -->
+    <div id="levelUpOverlay" class="level-up-overlay">
+        <h2 class="level-up-title">LEVEL UP!</h2>
+        <div id="newLevelBadge" class="badge bg-primary fs-3 px-4 py-2 mt-3">NÍVEL 2</div>
+        <p class="text-muted mt-4">Sua rede neural evoluiu.</p>
+        <button class="btn btn-warning btn-lg mt-5" onclick="closeLevelUp()">CONTINUAR MISSÃO</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/gamification.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Prism.js for code highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
