@@ -374,10 +374,33 @@ function getCurrentUser() {
     const username = localStorage.getItem('currentUser');
     const user = username ? userData[username] : null;
 
-    // Safety merge para adicionar o inventory em perfis antigos (Patch Retrocompatibilidade)
-    if (user && !user.inventory) {
-        user.inventory = { hints: 0, skips: 0 };
-        localStorage.setItem('userData', JSON.stringify(userData));
+    if (user) {
+        // Safety merge para adicionar o inventory em perfis antigos (Patch Retrocompatibilidade)
+        if (!user.inventory) {
+            user.inventory = { hints: 0, skips: 0 };
+            localStorage.setItem('userData', JSON.stringify(userData));
+        }
+
+        // Sync Gamification module state with active user profile (resolves multi-user level corruption bug)
+        if (typeof Gamification !== 'undefined' && Gamification.state) {
+            let changed = false;
+            if (Gamification.state.xp !== user.xp) {
+                Gamification.state.xp = user.xp;
+                changed = true;
+            }
+            if (Gamification.state.level !== user.level) {
+                Gamification.state.level = user.level;
+                changed = true;
+            }
+            if (Gamification.state.streak !== user.streak) {
+                Gamification.state.streak = user.streak;
+                changed = true;
+            }
+            if (changed) {
+                Gamification.save();
+                Gamification.updateUI();
+            }
+        }
     }
 
     return user;
@@ -1337,7 +1360,7 @@ function executeOnyxSearch() {
                 <div class="premium-glass p-3 border-light border-opacity-10 text-start feature-card">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <h6 class="text-gradient-primary mb-0"><i class="fas fa-graduation-cap me-2"></i>${res.title}</h6>
-                        <span class="badge bg-secondary text-dark">${res.source} | ${res.type.toUpperCase()}</span>
+                        <span class="badge bg-secondary text-dark">${res.source} | ${(res.type || 'geral').toUpperCase()}</span>
                     </div>
                     <p class="text-muted small mb-2" style="line-height: 1.4;">${res.snippet}</p>
                     <a href="${res.url}" target="_blank" class="btn-cyber text-success px-3 py-1 text-decoration-none d-inline-block" style="font-size: 0.75rem;">

@@ -1,8 +1,8 @@
 const CACHE_NAME = 'python-detective-v2';
 const ASSETS_CRITICAL = [
-    '/css/style.css',
-    '/js/i18n.js',
-    '/icon.png'
+    'css/style.css',
+    'js/i18n.js',
+    'icon.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -15,7 +15,8 @@ self.addEventListener('fetch', (event) => {
     const url = new URL(event.request.url);
     
     // Cache-First for critical assets
-    if (ASSETS_CRITICAL.includes(url.pathname)) {
+    const isCritical = ASSETS_CRITICAL.some(path => url.pathname.endsWith('/' + path));
+    if (isCritical) {
         event.respondWith(
             caches.match(event.request).then((res) => res || fetch(event.request))
         );
