@@ -1,0 +1,1919 @@
+{
+  "arxiv:3 data science": {
+    "data": [],
+    "timestamp": 1779047437.17
+  },
+  "arxiv:3": {
+    "data": [],
+    "timestamp": 1779047437.26
+  },
+  "arxiv:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047437.301
+  },
+  "ddg:3": {
+    "data": [],
+    "timestamp": 1779047439.62
+  },
+  "coursera:3": {
+    "data": [],
+    "timestamp": 1779047439.755
+  },
+  "edx:3": {
+    "data": [],
+    "timestamp": 1779047439.831
+  },
+  "kaggle:3": {
+    "data": [],
+    "timestamp": 1779047439.891
+  },
+  "fast.ai:3": {
+    "data": [],
+    "timestamp": 1779047439.894
+  },
+  "datacamp:3": {
+    "data": [],
+    "timestamp": 1779047439.907
+  },
+  "github:3": {
+    "data": [],
+    "timestamp": 1779047439.938
+  },
+  "paperswithcode:3": {
+    "data": [],
+    "timestamp": 1779047440.368
+  },
+  "google dataset:3": {
+    "data": [],
+    "timestamp": 1779047440.374
+  },
+  "ddg:3 data science": {
+    "data": [],
+    "timestamp": 1779047440.386
+  },
+  "kaggle:3 data science": {
+    "data": [],
+    "timestamp": 1779047440.757
+  },
+  "coursera:3 data science": {
+    "data": [],
+    "timestamp": 1779047440.977
+  },
+  "edx:3 data science": {
+    "data": [],
+    "timestamp": 1779047441.078
+  },
+  "fast.ai:3 data science": {
+    "data": [],
+    "timestamp": 1779047441.081
+  },
+  "datacamp:3 data science": {
+    "data": [],
+    "timestamp": 1779047441.086
+  },
+  "google dataset:3 data science": {
+    "data": [],
+    "timestamp": 1779047441.09
+  },
+  "paperswithcode:3 data science": {
+    "data": [],
+    "timestamp": 1779047441.094
+  },
+  "ddg:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047441.101
+  },
+  "github:3 data science": {
+    "data": [],
+    "timestamp": 1779047441.141
+  },
+  "edx:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047441.273
+  },
+  "coursera:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047441.277
+  },
+  "kaggle:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047441.35
+  },
+  "fast.ai:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047441.696
+  },
+  "datacamp:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047441.738
+  },
+  "github:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047441.748
+  },
+  "google dataset:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047441.759
+  },
+  "paperswithcode:3 machine learning": {
+    "data": [],
+    "timestamp": 1779047441.766
+  },
+  "crossref:3": {
+    "data": [],
+    "timestamp": 1779047441.83
+  },
+  "crossref:3 data science": {
+    "data": [],
+    "timestamp": 1779047441.84
+  },
+  "openalex:3 machine learning": {
+    "data": [
+      {
+        "title": "NetKet 3: Machine Learning Toolbox for Many-Body Quantum Systems",
+        "url": "https://openalex.org/W4293126226",
+        "snippet": "3 We introduce version of NetKet, the machine learning toolbox for many-body quantum physics. NetKet is built around neural states and provides efficient algorithms their evaluation optimization. This new on top JAX, a differentiable programming accelerated linear algebra framework Python language.",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.243
+      },
+      {
+        "title": "Python 3 for Machine Learning",
+        "url": "https://openalex.org/W4385674832",
+        "snippet": "2 3 This book is designed to provide the reader with basic Python programming concepts related machine learning. The first four chapters a fast-paced introduction 3, NumPy, and Pandas. fifth chapter introduces fundamental of sixth devoted learning classifiers, such as logistic regression, k-NN, deci",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.243
+      },
+      {
+        "title": "Predicting 30-days mortality for MIMIC-III patients with sepsis-3: a machine learning approach using XGboost",
+        "url": "https://openalex.org/W3111698685",
+        "snippet": "30 889 3670 4559 BACKGROUND: Sepsis is a significant cause of mortality in-hospital, especially in ICU patients. Early prediction sepsis essential, as prompt and appropriate treatment can improve survival outcomes. Machine learning methods are flexible algorithms with potential advantages over conve",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.245
+      },
+      {
+        "title": "Machine learning regression algorithms for biophysical parameter retrieval: Opportunities for Sentinel-2 and -3",
+        "url": "https://openalex.org/W2007342648",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.245
+      },
+      {
+        "title": "Heidelberg Retina Tomograph 3 machine learning classifiers for glaucoma detection",
+        "url": "https://openalex.org/W2110887432",
+        "snippet": "3 60 95 140 AIMS: To assess performance of classifiers trained on Heidelberg Retina Tomograph (HRT3) parameters for discriminating between healthy and glaucomatous eyes. METHODS: Classifiers were using HRT3 from subjects subjects. The all variables smaller sets created with backward elimination. Sev",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.245
+      },
+      {
+        "title": "Proceedings of the 24th international conference on Machine learning",
+        "url": "https://openalex.org/W1583837637",
+        "snippet": "1 3 5 6 8 11 19 32 66 150 522 This volume contains the papers accepted to 24th International Conference on Machine Learning (ICML 2007), which was held at Oregon State University in Corvalis, Oregon, from June 20th 24th, 2007. ICML is annual conference of Society (IMLS), and provides a venue for pre",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.246
+      },
+      {
+        "title": "From local explanations to global understanding with explainable AI for trees",
+        "url": "https://openalex.org/W2999615587",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.246
+      },
+      {
+        "title": "Seamless retrievals of chlorophyll-a from Sentinel-2 (MSI) and Sentinel-3 (OLCI) in inland and coastal waters: A machine-learning approach",
+        "url": "https://openalex.org/W3004942926",
+        "snippet": "1209 Consistent, cross-mission retrievals of near-surface concentration chlorophyll-a (Chla) in various aquatic ecosystems with broad ranges trophic levels have long been a complex undertaking. Here, we introduce machine-learning model, the Mixture Density Network (MDN), that largely outperforms exi",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.247
+      },
+      {
+        "title": "Interpretable prediction of 3-year all-cause mortality in patients with heart failure caused by coronary heart disease based on machine learning and SHAP",
+        "url": "https://openalex.org/W3196831580",
+        "snippet": "BACKGROUND: This study sought to evaluate the performance of machine learning (ML) models and establish an explainable ML model with good prediction 3-year all-cause mortality in patients heart failure (HF) caused by coronary disease (CHD). METHODS: We established six using follow-up data predict mo",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.247
+      },
+      {
+        "title": "Pattern Recognition and Machine Learning",
+        "url": "https://openalex.org/W2009086942",
+        "snippet": "(2007). Pattern Recognition and Machine Learning. Technometrics: Vol. 49, No. 3, pp. 366-366.",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.248
+      },
+      {
+        "title": "Advances in kernel methods: support vector learning",
+        "url": "https://openalex.org/W1604938182",
+        "snippet": "1 2 3 4 Introduction to support vector learning roadmap. Part Theory: three remarks on the method of function estimation, Vladimir Vapnik generalization performance machines and other pattern classifiers, Peter Bartlett John Shawe-Taylor Bayesian voting schemes large margin Nello Cristianini machine",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.323
+      },
+      {
+        "title": "Machine Learning Assisted Predictions of Intrinsic Dielectric Breakdown Strength of ABX<sub>3</sub>Perovskites",
+        "url": "https://openalex.org/W2471982001",
+        "snippet": "2 209 New and improved dielectric materials with high breakdown strength are required for both energy density electric storage applications continued miniaturization of electronic devices. Despite much practical significance, accurate ab initio predictions complex beyond the current state-of-the art",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.324
+      },
+      {
+        "title": "Extreme Learning Machine for Regression and Multiclass Classification",
+        "url": "https://openalex.org/W2026131661",
+        "snippet": "Due to the simplicity of their implementations, least square support vector machine (LS-SVM) and proximal (PSVM) have been widely used in binary classification applications. The conventional LS-SVM PSVM cannot be regression multiclass applications directly, although variants proposed handle such cas",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.324
+      },
+      {
+        "title": "Machine Learning for Predicting the Band Gaps of ABX<sub>3</sub> Perovskites from Elemental Properties",
+        "url": "https://openalex.org/W3014777786",
+        "snippet": "The band gap is an important parameter that determines light-harvesting capability of perovskite materials. It governs the performance various optoelectronic devices such as solar cells, light-emitting diodes, and photodetectors. For perovskites a formula ABX3 having non-zero gap, we study nonlinear",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.324
+      },
+      {
+        "title": "Autopoiesis and Cognition: The Realization of the Living",
+        "url": "https://openalex.org/W1916207017",
+        "snippet": "Editorial Preface General Table Of Contents Foreword Introduction (by Professor Maturana) Biology Cognition Dedication of I. II. The Problem III. Cognitive Function in A. Observer B. Living System C. Evolution D. Process IV. Particular Nerve Cells Architecture Representation E. Description F. Thinki",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.324
+      },
+      {
+        "title": "A Comparison of Machine Learning Algorithms for Mapping of Complex Surface-Mined and Agricultural Landscapes Using ZiYuan-3 Stereo Satellite Imagery",
+        "url": "https://openalex.org/W2437953928",
+        "snippet": "Land cover mapping (LCM) in complex surface-mined and agricultural landscapes could contribute greatly to regulating mine exploitation protecting geo-environments. However, there are some special spectrally similar land covers these which increase the difficulty LCM when employing high spatial resol",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.324
+      },
+      {
+        "title": "Application of Machine Learning for Optimization of 3-D Integrated Circuits and Systems",
+        "url": "https://openalex.org/W2586276609",
+        "snippet": "The 3-D integration helps improve performance and density of electronic systems. However, since electrical thermal for is related to each other, their codesign required. Machine learning, a promising approach in artificial intelligence, has recently shown promise addressing engineering optimization",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.325
+      },
+      {
+        "title": "Prediction of 3-year risk of diabetic kidney disease using machine learning based on electronic medical records",
+        "url": "https://openalex.org/W4220992874",
+        "snippet": "2 3 46 816 BACKGROUND: Established prediction models of Diabetic kidney disease (DKD) are limited to the analysis clinical research data or general population and do not consider hospital visits. Construct a 3-year diabetic risk model in patients with type diabetes mellitus (T2DM) using machine lear",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.325
+      },
+      {
+        "title": "Machine Learning–Based Model for Prediction of Outcomes in Acute Stroke",
+        "url": "https://openalex.org/W2923418412",
+        "snippet": "2 3 6 2043 2604 Background and Purpose- The prediction of long-term outcomes in ischemic stroke patients may be useful treatment decisions. Machine learning techniques are being increasingly adapted for use the medical field because their high accuracy. This study investigated applicability machine",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.325
+      },
+      {
+        "title": "A 3-D-Printed <italic>W</italic>-Band Slotted Waveguide Array Antenna Optimized Using Machine Learning",
+        "url": "https://openalex.org/W2883849272",
+        "snippet": "10 31 A three-dimensional (3-D) printed W-band slotted waveguide array antenna (SWAA) is proposed. The proposed SWAA consists of three different sections (two horizontal ones and a vertical one) such as radiating with × slots an aperture size mm 31.4 mm, coupling to feed the array, waveguide. Machin",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.326
+      }
+    ],
+    "timestamp": 1779047442.326
+  },
+  "openalex:3 data science": {
+    "data": [
+      {
+        "title": "Clinical features of patients infected with 2019 novel coronavirus in Wuhan, China",
+        "url": "https://openalex.org/W3001118548",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.758
+      },
+      {
+        "title": "The Moon Mineralogy Mapper (M<sup>3</sup>) imaging spectrometer for lunar science: Instrument description, calibration, on-orbit measurements, science data calibration and on-orbit validation",
+        "url": "https://openalex.org/W2124884226",
+        "snippet": "10 24 100 400 430 1542 2008 3000 [1] The NASA Discovery Moon Mineralogy Mapper imaging spectrometer was selected to pursue a wide range of science objectives requiring measurement composition at fine spatial scales over the full lunar surface. To these objectives, broad spectral with high uniformity",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.758
+      },
+      {
+        "title": "The Practice of Social Research",
+        "url": "https://openalex.org/W2006468167",
+        "snippet": "Part I: AN INTRODUCTION TO INQUIRY. 1. Human Inquiry and Science. 2. Paradigms, Theory, Social Research. 3. The Ethics Politics of II: THE STRUCTURING OF INQUIRY: QUANTITATIVE AND QUALITATIVE. 4. Research Design. 5. Conceptualization, Operationalization, Measurement. 6. Indexes, Scales, Typologies.",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.758
+      },
+      {
+        "title": "Researching Lived Experience: Human Science for an Action Sensitive Pedagogy",
+        "url": "https://openalex.org/W1553183615",
+        "snippet": "Preface to the 2nd Edition 1. Human Science Introduction Why Do Research? What Is a Hermeneutic Phenomenological Science? Does it Mean Be Rational? Cannot Description or Interpretation? Research-Procedures, Techniques, and Methods Methodical Structure of Research 2. Turning Nature Lived Experience T",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.759
+      },
+      {
+        "title": "THE <i>HUBBLE SPACE TELESCOPE</i> WIDE FIELD CAMERA 3 EARLY RELEASE SCIENCE DATA: PANCHROMATIC FAINT OBJECT COUNTS FOR 0.2-2 μm WAVELENGTH",
+        "url": "https://openalex.org/W2057778465",
+        "snippet": "3 6 10 We describe the Hubble Space Telescope (HST) Wide Field Camera (WFC3) Early Release Science (ERS) observations in Great Observatories Origins Deep Survey (GOODS) South field. The new WFC3 ERS data provide calibrated, drizzled mosaics UV filters F225W, F275W, and F336W, as well near-IR F098M (",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.759
+      },
+      {
+        "title": "Overview of the Coupled Model Intercomparison Project Phase 6 (CMIP6) experimental design and organization",
+        "url": "https://openalex.org/W2193503481",
+        "snippet": "21 Abstract. By coordinating the design and distribution of global climate model simulations past, current, future climate, Coupled Model Intercomparison Project (CMIP) has become one foundational elements science. However, need to address an ever-expanding range scientific questions arising from mo",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.759
+      },
+      {
+        "title": "Beyond Baron and Kenny: Statistical Mediation Analysis in the New Millennium",
+        "url": "https://openalex.org/W2074932610",
+        "snippet": "1 1978 Click to increase image sizeClick decrease size Notes 1. Although the partitioning of a total effect into direct and indirect components in manner described here does not require assumption that errors estimation are uncorrelated, such intercorrelation can bias parameter estimates standard er",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.759
+      },
+      {
+        "title": "An Algorithm for Least-Squares Estimation of Nonlinear Parameters",
+        "url": "https://openalex.org/W2087070363",
+        "snippet": "1 2 3 4 5 6 7 8 9 11 13 14 15 16 17 18 19 22 23 24 25 27 28 29 31 55 103 687 1959 1963 2006 Previous article Next An Algorithm for Least-Squares Estimation of Nonlinear ParametersDonald W. MarquardtDonald Marquardthttps://doi.org/10.1137/0111030PDFPDF PLUSBibTexSections ToolsAdd to favoritesExport C",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.76
+      },
+      {
+        "title": "Social Research Methods: Qualitative and Quantitative Approaches",
+        "url": "https://openalex.org/W2116720807",
+        "snippet": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 IN THIS SECTION: 1.) BRIEF 2.) COMPREHENSIVE TABLE OF CONTENTS Part I Foundations Chapter Why Do Research? What Are the Major Types of Social Theory and Research The Meanings Methodology How to Review Literature Conduct Ethical Studies II Planning Preparation S",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.761
+      },
+      {
+        "title": "SAGE Handbook of Mixed Methods in Social & Behavioral Research",
+        "url": "https://openalex.org/W1994324487",
+        "snippet": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 Part The Research Enterprise in the Social and Behavioral Sciences: Then Now Ch Major Issues Controversies Use of Mixed Methods Sciences - Charles Teddlie, Abbas Tashakkori Pragmatic Threads Search for Multiple Modes Inquiry End Ph",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.761
+      },
+      {
+        "title": "Principles of geographical information systems",
+        "url": "https://openalex.org/W1571356903",
+        "snippet": "1 2 3 1. Geographical Information: Society, Science, and Systems 2. Data models axioms: Formal abstractions of reality 3. in the Computer 4. input, verification, storage output 5. Creating continuous surfaces from point data 6. Optimal interpolation using geostatistics 7. The analysis discrete entit",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.761
+      },
+      {
+        "title": "The spread of true and false news online",
+        "url": "https://openalex.org/W2790166049",
+        "snippet": "95 2006 We investigated the differential diffusion of all verified true and false news stories distributed on Twitter from to 2017. The data comprise ~126,000 tweeted by ~3 million people more than 4.5 times. classified as or using information six independent fact-checking organizations that exhibit",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.761
+      },
+      {
+        "title": "Case study research and applications design and methods",
+        "url": "https://openalex.org/W2925515791",
+        "snippet": "1 2 3 4 5 6 17 Foreword Preface Acknowledgments About the Author Chapter 1. Getting Started: How to Know Whether and When Use Case Study as a Research Method Being Ready for Challenge, Setting High Expectations Comparing Studies With Other Social Science Methods Variations in Studies, but Common Def",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.761
+      },
+      {
+        "title": "Neurologic Manifestations of Hospitalized Patients With Coronavirus Disease 2019 in Wuhan, China",
+        "url": "https://openalex.org/W3016127017",
+        "snippet": "1 2 3 6 78 87 88 126 214 2019 Importance: The outbreak of coronavirus disease (COVID-19) in Wuhan, China, is serious and has the potential to become an epidemic worldwide. Several studies have described typical clinical manifestations including fever, cough, diarrhea, fatigue. However, our knowledge",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.762
+      },
+      {
+        "title": "Foundations of Qualitative Research: Interpretive and Critical Approaches",
+        "url": "https://openalex.org/W658855744",
+        "snippet": "Chapter 1: World Views, Paradigms, and the Practice of Social Science Research Case 1. Quantitative 2. Qualitative Thinking about Foundations What This Book Is Not About. Warrants Our Attention? The Traditional Canon Alternative Paradigms New Techniques or Paradigms? 2: History Context Paradigm Deve",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.762
+      },
+      {
+        "title": "Deep feature synthesis: Towards automating data science endeavors",
+        "url": "https://openalex.org/W2182353144",
+        "snippet": "2 3 615 906 In this paper, we develop the Data Science Machine, which is able to derive predictive models from raw data automatically. To achieve automation, first propose and Deep Feature Synthesis algorithm for automatically generating features relational datasets. The follows relationships in a b",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.762
+      },
+      {
+        "title": "Software update: The <scp>ORCA</scp> program system—Version 5.0",
+        "url": "https://openalex.org/W4220694746",
+        "snippet": "Abstract Version 5.0 of the ORCA quantum chemistry program suite was released in July 2021. represents a major improvement over all previous versions and features (1) highly improved performance, (2) increased numerical robustness, (3) host new functionality, (4) greatly user friendliness. The artic",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.762
+      },
+      {
+        "title": "Bio2RDF release 3: a larger connected network of linked data for the life sciences",
+        "url": "https://openalex.org/W2398915717",
+        "snippet": "2 10 30 Abstract. Bio2RDF is an open source project to generate and provide Linked Data for the Life Sciences. Here, we report on a third coordinated release of ~11 billion triples across biomedical databases datasets, representing fold increase in number since Release (Jan 2013). New clinically rel",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.763
+      },
+      {
+        "title": "Qualitative Research from Start to Finish",
+        "url": "https://openalex.org/W605593526",
+        "snippet": "Part 1. Understanding Qualitative Research. What Is Research-and Why Might You Consider Doing Such Research? The Allure of Research: A Topical Panorama Studies. Distinctiveness Multifaceted World Building Trustworthiness and Credibility into Equipping Yourself to Do Competencies in Managing Field-Ba",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.763
+      },
+      {
+        "title": "Sectoral patterns of technical change: Towards a taxonomy and a theory",
+        "url": "https://openalex.org/W1990360714",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047442.763
+      }
+    ],
+    "timestamp": 1779047442.763
+  },
+  "crossref:3 machine learning": {
+    "data": [
+      {
+        "title": "Machine learning with sklearn",
+        "url": "https://doi.org/10.1093/oso/9780198828044.003.0003",
+        "snippet": "This chapter’s goal is to show how to apply machine learning algorithms in a general setting using some classic methods. In particular, it demonstrates how to apply three important machine learning algorithms, a support vector classifier (SVC), a random forest classifier (RFC), and a multilayer perc",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Optimization and Machine Learning",
+        "url": "https://doi.org/10.1002/9781119902881",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Why Use Automated Machine Learning?",
+        "url": "https://doi.org/10.1093/oso/9780190941659.003.0001",
+        "snippet": "Machine learning is involved in search, translation, detecting depression, likelihood of college dropout, finding lost children, and to sell all kinds of products. While barely beyond its inception, the current machine learning revolution will affect people and organizations no less than the Industr",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Machine learning",
+        "url": "https://doi.org/10.1017/cbo9780511975509.007",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Machine Learning and Concept Formation",
+        "url": "https://doi.org/10.1023/a:1022896407371",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Machine learning",
+        "url": "https://doi.org/10.1017/cbo9780511804779.017",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Machine Learning and Qualitative Reasoning",
+        "url": "https://doi.org/10.1023/a:1022661713654",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Front Matter",
+        "url": "https://doi.org/10.1002/9781119902881.fmatter",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Machine Learning: A Maturing Field",
+        "url": "https://doi.org/10.1023/a:1022665512030",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Editorial: Human and Machine Learning",
+        "url": "https://doi.org/10.1023/a:1022854429410",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Machine Learning and Grammar Induction",
+        "url": "https://doi.org/10.1023/a:1022808826027",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Index",
+        "url": "https://doi.org/10.1002/9781119902881.index",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Editorial: Advice to Machine Learning Authors",
+        "url": "https://doi.org/10.1023/a:1022647305786",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Research Papers in Machine Learning",
+        "url": "https://doi.org/10.1023/a:1022603230145",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Machine Learning as an Experimental Science",
+        "url": "https://doi.org/10.1023/a:1022623814640",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Editorial: The Terminology of Machine Learning",
+        "url": "https://doi.org/10.1023/a:1022840627593",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "New Theoretical Directions In Machine Learning",
+        "url": "https://doi.org/10.1023/a:1022817027844",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.146
+      },
+      {
+        "title": "Einleitung: Vom Batch Machine Learning zum Online Machine Learning",
+        "url": "https://doi.org/10.1007/978-3-658-42505-0_1",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.147
+      },
+      {
+        "title": "Machine learning vs. neutrosophic machine learning",
+        "url": "https://doi.org/10.1201/9781003606055-5",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.147
+      },
+      {
+        "title": "Machine learning concepts",
+        "url": "https://doi.org/10.1017/cbo9780511804779.018",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.147
+      }
+    ],
+    "timestamp": 1779047443.147
+  },
+  "openalex:3": {
+    "data": [
+      {
+        "title": "G*Power 3: A flexible statistical power analysis program for the social, behavioral, and biomedical sciences",
+        "url": "https://openalex.org/W2087484885",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.314
+      },
+      {
+        "title": "MrBayes 3: Bayesian phylogenetic inference under mixed models",
+        "url": "https://openalex.org/W2146058063",
+        "snippet": "3 Abstract Summary: MrBayes performs Bayesian phylogenetic analysis combining information from different data partitions or subsets evolving under stochastic evolutionary models. This allows the user to analyze heterogeneous sets consisting of types—e.g. morphological, nucleotide, and protein—and ex",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.314
+      },
+      {
+        "title": "A method for registration of 3-D shapes",
+        "url": "https://openalex.org/W2049981393",
+        "snippet": "The authors describe a general-purpose, representation-independent method for the accurate and computationally efficient registration of 3-D shapes including free-form curves surfaces. handles full six degrees freedom is based on iterative closest point (ICP) algorithm, which requires only procedure",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.315
+      },
+      {
+        "title": "The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3)",
+        "url": "https://openalex.org/W2280404143",
+        "snippet": "2 31 65 100 IMPORTANCE: Definitions of sepsis and septic shock were last revised in 2001. Considerable advances have since been made into the pathobiology (changes organ function, morphology, cell biology, biochemistry, immunology, circulation), management, epidemiology sepsis, suggesting need for r",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.315
+      },
+      {
+        "title": "<i>VESTA 3</i> for three-dimensional visualization of crystal, volumetric and morphology data",
+        "url": "https://openalex.org/W2028056984",
+        "snippet": "3 VESTA is a three-dimensional visualization system for crystallographic studies and electronic state calculations. It has been upgraded to the latest version, , implementing new features including drawing external morphology of crystals; superimposing multiple structural models, volumetric data cry",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.315
+      },
+      {
+        "title": "Accurate structure prediction of biomolecular interactions with AlphaFold 3",
+        "url": "https://openalex.org/W4396721167",
+        "snippet": "1 2 3 Abstract The introduction of AlphaFold has spurred a revolution in modelling the structure proteins and their interactions, enabling huge range applications protein design 2–6 . Here we describe our model with substantially updated diffusion-based architecture that is capable predicting joint",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.315
+      },
+      {
+        "title": "<i>ORTEP</i>-3 for Windows - a version of<i>ORTEP</i>-III with a Graphical User Interface (GUI)",
+        "url": "https://openalex.org/W2059020082",
+        "snippet": "189 500 565 1985 Computer Program Abstracts The category provides a rapid means of communicating up-to-date information concerning both new programs or systems and significant updates to existing ones. Following normal submission, Abstract will be reviewed by one two members the IUCr Commission on C",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.315
+      },
+      {
+        "title": "Magnesium Replacement Improves the Metabolic Profile in Obese and Pre-Diabetic Patients with Mild-to-Moderate Chronic Kidney Disease: A 3-Month, Randomised, Double-Blind, Placebo-Controlled Study",
+        "url": "https://openalex.org/W2607031541",
+        "snippet": "3 30 90 128 365 <b><i>Background/Aims:</i></b> Magnesium is an essential mineral for many metabolic functions. There very little information on the effect of magnesium supplementation profiles chronic kidney disease (CKD) patients. The aim this study was to assess influence p",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.315
+      },
+      {
+        "title": "A Description of the Advanced Research WRF Version 3",
+        "url": "https://openalex.org/W2915783575",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.315
+      },
+      {
+        "title": "Image Denoising by Sparse 3-D Transform-Domain Collaborative Filtering",
+        "url": "https://openalex.org/W2056370875",
+        "snippet": "We propose a novel image denoising strategy based on an enhanced sparse representation in transform domain. The enhancement of the sparsity is achieved by grouping similar 2-D fragments (e.g., blocks) into 3-D data arrays which we call \"groups.\" Collaborative filtering special procedure developed to",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.316
+      },
+      {
+        "title": "The Phosphoinositide 3-Kinase Pathway",
+        "url": "https://openalex.org/W2070732456",
+        "snippet": "Phosphorylated lipids are produced at cellular membranes during signaling events and contribute to the recruitment activation of various components. The role phosphoinositide 3-kinase (PI3K), which catalyzes production phosphatidylinositol-3,4,5-trisphosphate, in cell survival pathways; regulation g",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.316
+      },
+      {
+        "title": "GRADE guidelines: 3. Rating the quality of evidence",
+        "url": "https://openalex.org/W2135400982",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.316
+      },
+      {
+        "title": "Occurrence of the potent mutagens 2- nitrobenzanthrone and 3-nitrobenzanthrone in fine airborne particles",
+        "url": "https://openalex.org/W2909240409",
+        "snippet": "Abstract Polycyclic aromatic compounds (PACs) are known due to their mutagenic activity. Among them, 2-nitrobenzanthrone (2-NBA) and 3-nitrobenzanthrone (3-NBA) considered as two of the most potent mutagens found in atmospheric particles. In present study 2-NBA, 3-NBA selected PAHs Nitro-PAHs were d",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.316
+      },
+      {
+        "title": "Methods of soil analysis. Part 3 - chemical methods.",
+        "url": "https://openalex.org/W1550918981",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.316
+      },
+      {
+        "title": "Long-Range Balanced Electron- and Hole-Transport Lengths in Organic-Inorganic CH <sub>3</sub> NH <sub>3</sub> PbI <sub>3</sub>",
+        "url": "https://openalex.org/W2129970907",
+        "snippet": "2 341 344 Unrestricted Travel in Solar Cells In the past years, organolead halide perovskites have emerged as a promising class of light-harvesting media experimental solar cells, but physical basis for their efficiency has been unclear (see Perspective by Hodes ). Two studies now show, using variet",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.316
+      },
+      {
+        "title": "Electron-hole diffusion lengths > 175 μm in solution-grown CH <sub>3</sub> NH <sub>3</sub> PbI <sub>3</sub> single crystals",
+        "url": "https://openalex.org/W2006619554",
+        "snippet": "1 3 100 175 Long, balanced electron and hole diffusion lengths greater than nanometers in the polycrystalline organolead trihalide compound CH3NH3PbI3 are critical for highly efficient perovskite solar cells. We found that single crystals grown by a solution-growth method can exceed micrometers unde",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.316
+      },
+      {
+        "title": "Technology Acceptance Model 3 and a Research Agenda on Interventions",
+        "url": "https://openalex.org/W2112042732",
+        "snippet": "ABSTRACT Prior research has provided valuable insights into how and why employees make a decision about the adoption use of information technologies (ITs) in workplace. From an organizational point view, however, more important issue is managers informed decisions interventions that can lead to grea",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.316
+      },
+      {
+        "title": "The phosphatidylinositol 3-Kinase–AKT pathway in human cancer",
+        "url": "https://openalex.org/W2388163742",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.316
+      },
+      {
+        "title": "Thrombolysis with Alteplase 3 to 4.5 Hours after Acute Ischemic Stroke",
+        "url": "https://openalex.org/W2159233098",
+        "snippet": "0 1 2 3 6 59 90 403 418 821 BACKGROUND: Intravenous thrombolysis with alteplase is the only approved treatment for acute ischemic stroke, but its efficacy and safety when administered more than hours after onset of symptoms have not been established. We tested between 4.5 a stroke. METHODS: After ex",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.317
+      },
+      {
+        "title": "Two‐Dimensional Nanocrystals Produced by Exfoliation of Ti<sub>3</sub>AlC<sub>2</sub>",
+        "url": "https://openalex.org/W2014451195",
+        "snippet": "2D Ti3C2 nanosheets, multilayer structures, and conical scrolls produced by room temperature exfoliation of Ti3AlC2 in HF are reported. Since is a member 60+ group layered ternary carbides nitrides, this discovery opens door to the synthesis large number other crystals.",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047443.317
+      }
+    ],
+    "timestamp": 1779047443.317
+  },
+  "arxiv:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047495.678
+  },
+  "arxiv:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047495.737
+  },
+  "arxiv:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047495.858
+  },
+  "ddg:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047496.62
+  },
+  "edx:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047496.627
+  },
+  "coursera:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047496.689
+  },
+  "datacamp:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047497.083
+  },
+  "fast.ai:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047497.089
+  },
+  "kaggle:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047497.095
+  },
+  "github:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047497.103
+  },
+  "paperswithcode:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047497.107
+  },
+  "google dataset:python lists index bounds": {
+    "data": [],
+    "timestamp": 1779047497.261
+  },
+  "ddg:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047497.299
+  },
+  "coursera:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047497.304
+  },
+  "edx:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047497.315
+  },
+  "kaggle:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047497.321
+  },
+  "datacamp:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047497.371
+  },
+  "github:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047497.38
+  },
+  "google dataset:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047497.423
+  },
+  "fast.ai:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047497.428
+  },
+  "ddg:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.497
+  },
+  "paperswithcode:python lists index bounds data science": {
+    "data": [],
+    "timestamp": 1779047497.537
+  },
+  "coursera:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.543
+  },
+  "edx:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.552
+  },
+  "kaggle:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.562
+  },
+  "datacamp:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.572
+  },
+  "google dataset:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.576
+  },
+  "github:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.58
+  },
+  "paperswithcode:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.587
+  },
+  "fast.ai:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.593
+  },
+  "crossref:python lists index bounds machine learning": {
+    "data": [],
+    "timestamp": 1779047497.808
+  },
+  "openalex:python lists index bounds data science": {
+    "data": [
+      {
+        "title": "The Astropy Project: Building an Open-science Project and Status of the v2.0 Core Package<sup>*</sup>",
+        "url": "https://openalex.org/W2888532099",
+        "snippet": "Abstract The Astropy Project supports and fosters the development of open-source openly developed Python packages that provide commonly needed functionality to astronomical community. A key element is core package astropy , which serves as foundation for more specialized projects packages. In this a",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.664
+      },
+      {
+        "title": "Benchmarking atlas-level data integration in single-cell genomics",
+        "url": "https://openalex.org/W4225598893",
+        "snippet": "13 14 23 68 85 Single-cell atlases often include samples that span locations, laboratories and conditions, leading to complex, nested batch effects in data. Thus, joint analysis of atlas datasets requires reliable data integration. To guide integration method choice, we benchmarked preprocessing com",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.664
+      },
+      {
+        "title": "Modules for Experiments in Stellar Astrophysics ( ): Convective Boundaries, Element Diffusion, and Massive Star Explosions",
+        "url": "https://openalex.org/W2767058944",
+        "snippet": "Abstract We update the capabilities of software instrument Modules for Experiments in Stellar Astrophysics ( MESA ) and enhance its ease use availability. Our new approach to locating convective boundaries is consistent with physics convection, yields reliable values convective-core mass during both",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.665
+      },
+      {
+        "title": "<b>fastcluster</b>: Fast Hierarchical, Agglomerative Clustering Routines for<i>R</i>and<i>Python</i>",
+        "url": "https://openalex.org/W2146577751",
+        "snippet": "The <b>fastcluster</b> package is a C++ library for hierarchical, agglomerative clustering. It provides fast implementation of the most efficient, current algorithms when input dissimilarity index. Moreover, it features memory-saving routines hierarchical clustering vector data. improves both asympt",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.665
+      },
+      {
+        "title": "LOFAR: The LOw-Frequency ARray",
+        "url": "https://openalex.org/W2147626801",
+        "snippet": "40 LOFAR, the LOw-Frequency ARray, is a new-generation radio interferometer constructed in north of Netherlands and across europe. Utilizing novel phased-array design, LOFAR covers largely unexplored low-frequency range from 10–240 MHz provides number unique observing capabilities. Spreading out cor",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.675
+      },
+      {
+        "title": "Multi-trait analysis of genome-wide association summary statistics using MTAG",
+        "url": "https://openalex.org/W2780560743",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.675
+      },
+      {
+        "title": "The fast azimuthal integration Python library:<i>pyFAI</i>",
+        "url": "https://openalex.org/W2117152322",
+        "snippet": "pyFAI is an open-source software package designed to perform azimuthal integration and, correspondingly, two-dimensional regrouping on area-detector frames for small- and wide-angle X-ray scattering experiments. It written in Python (with binary submodules improved performance), a language widely ac",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.675
+      },
+      {
+        "title": "PyMC: a modern, and comprehensive probabilistic programming framework in Python",
+        "url": "https://openalex.org/W4386373863",
+        "snippet": "PyMC is a probabilistic programming library for Python that provides tools constructing and fitting Bayesian models. It offers an intuitive, readable syntax close to the natural statisticians use describe leverages symbolic computation PyTensor, allowing it be compiled into variety of computational",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.675
+      },
+      {
+        "title": "ChatGPT: Bullshit spewer or the end of traditional assessments in higher education?",
+        "url": "https://openalex.org/W4317910584",
+        "snippet": "ChatGPT is the world’s most advanced chatbot thus far. Unlike other chatbots, it can create impressive prose within seconds, and has created much hype doomsday predictions when comes to student assessment in higher education a host of matters. state-of-the-art language model (a variant OpenAI’s Gene",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.676
+      },
+      {
+        "title": "No Support for Historical Candidate Gene or Candidate Gene-by-Interaction Hypotheses for Major Depression Across Multiple Large Samples",
+        "url": "https://openalex.org/W2919957599",
+        "snippet": "10 18 OBJECTIVE: Interest in candidate gene and gene-by-environment interaction hypotheses regarding major depressive disorder remains strong despite controversy surrounding the validity of previous findings. In response to this controversy, present investigation empirically identified genes for dep",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.676
+      },
+      {
+        "title": "Proceedings of the 8th Python in Science Conference",
+        "url": "https://openalex.org/W4401946486",
+        "snippet": "Cython is a programming language based on Python with extra syntax to provide static type declarations.This takes advantage of the benefits while allowing one achieve speed C. In this paper we describe and show how it can be used both write optimized code interface external C libraries.does not work",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.676
+      },
+      {
+        "title": "Las Cumbres Observatory Global Telescope Network",
+        "url": "https://openalex.org/W4233629529",
+        "snippet": "1 2 17 23 40 Las Cumbres Observatory Global Telescope (LCOGT) is a young organization dedicated to timedomain observations at optical and (potentially) near-IR wavelengths. To this end, LCOGT constructing worldwide network of telescopes, including the two m Faulkes as many cm telescopes. These teles",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.676
+      },
+      {
+        "title": "Dedalus: A flexible framework for numerical simulations with spectral methods",
+        "url": "https://openalex.org/W2944878488",
+        "snippet": "This paper describes Dedalus, an open-source Python code for simulating partial differential equations from all areas of physics. Dedalus translates plain-text into efficient and parallelized solvers using global spectral methods. Here the authors detail numerical methods enabling this translation d",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.676
+      },
+      {
+        "title": "DScribe: Library of descriptors for machine learning in materials science",
+        "url": "https://openalex.org/W2976720228",
+        "snippet": "DScribe is a software package for machine learning that provides popular feature transformations (“descriptors”) atomistic materials simulations. accelerates the application of property prediction by providing user-friendly, off-the-shelf descriptor implementations. The currently contains implementa",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.676
+      },
+      {
+        "title": "Validation of the Crystallography Open Database using the Crystallographic Information Framework",
+        "url": "https://openalex.org/W3129696436",
+        "snippet": "450 Data curation practices of the Crystallography Open Database (COD) are described with additional focus being placed on formal validation using Crystallographic Information Framework (CIF). The cif_validate program, capable validating CIF files against both DDL1 and DDLm dictionaries, is presente",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.677
+      },
+      {
+        "title": "Single-cell and spatial transcriptomics enables probabilistic inference of cell type topography",
+        "url": "https://openalex.org/W3092450854",
+        "snippet": "The field of spatial transcriptomics is rapidly expanding, and with it the repertoire available technologies. However, several transcriptome-wide assays do not operate on a single cell level, but rather produce data comprised contributions from - potentially heterogeneous mixture cells. Still, these",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.677
+      },
+      {
+        "title": "Relative Citation Ratio (RCR): A New Metric That Uses Citation Rates to Measure Influence at the Article Level",
+        "url": "https://openalex.org/W2953304564",
+        "snippet": "2003 2010 Despite their recognized limitations, bibliometric assessments of scientific productivity have been widely adopted. We describe here an improved method to quantify the influence a research article by making novel use its co-citation network field-normalize number citations it has received.",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.677
+      },
+      {
+        "title": "The Colony Predation Algorithm",
+        "url": "https://openalex.org/W3169902780",
+        "snippet": "Abstract This paper proposes a new stochastic optimizer called the Colony Predation Algorithm (CPA) based on corporate predation of animals in nature. CPA utilizes mathematical mapping following strategies used by animal hunting groups, such as dispersing prey, encircling supporting most likely succ",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.677
+      },
+      {
+        "title": "Do not blame it on the algorithm: an empirical assessment of multiple recommender systems and their impact on content diversity",
+        "url": "https://openalex.org/W2790980374",
+        "snippet": "In the debate about filter bubbles caused by algorithmic news recommendation, conceptualization of two core concepts in this debate, diversity and algorithms, has received little attention social scientific research. This paper examines effect multiple recommender systems on different dimensions. To",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.677
+      },
+      {
+        "title": "SIMA: Python software for analysis of dynamic fluorescence imaging data",
+        "url": "https://openalex.org/W1993355218",
+        "snippet": "Fluorescence imaging is a powerful method for monitoring dynamic signals in the nervous system. However, analysis of fluorescence data remains burdensome, part due to shortage available software tools. To address this need, we have developed SIMA, an open source Python package that facilitates commo",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.677
+      }
+    ],
+    "timestamp": 1779047498.677
+  },
+  "openalex:python lists index bounds": {
+    "data": [
+      {
+        "title": "The Astropy Project: Building an Open-science Project and Status of the v2.0 Core Package<sup>*</sup>",
+        "url": "https://openalex.org/W2888532099",
+        "snippet": "Abstract The Astropy Project supports and fosters the development of open-source openly developed Python packages that provide commonly needed functionality to astronomical community. A key element is core package astropy , which serves as foundation for more specialized projects packages. In this a",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.925
+      },
+      {
+        "title": "Benchmarking atlas-level data integration in single-cell genomics",
+        "url": "https://openalex.org/W4225598893",
+        "snippet": "13 14 23 68 85 Single-cell atlases often include samples that span locations, laboratories and conditions, leading to complex, nested batch effects in data. Thus, joint analysis of atlas datasets requires reliable data integration. To guide integration method choice, we benchmarked preprocessing com",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.925
+      },
+      {
+        "title": "Modules for Experiments in Stellar Astrophysics ( ): Convective Boundaries, Element Diffusion, and Massive Star Explosions",
+        "url": "https://openalex.org/W2767058944",
+        "snippet": "Abstract We update the capabilities of software instrument Modules for Experiments in Stellar Astrophysics ( MESA ) and enhance its ease use availability. Our new approach to locating convective boundaries is consistent with physics convection, yields reliable values convective-core mass during both",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.925
+      },
+      {
+        "title": "<b>fastcluster</b>: Fast Hierarchical, Agglomerative Clustering Routines for<i>R</i>and<i>Python</i>",
+        "url": "https://openalex.org/W2146577751",
+        "snippet": "The <b>fastcluster</b> package is a C++ library for hierarchical, agglomerative clustering. It provides fast implementation of the most efficient, current algorithms when input dissimilarity index. Moreover, it features memory-saving routines hierarchical clustering vector data. improves both asympt",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.925
+      },
+      {
+        "title": "The fast azimuthal integration Python library:<i>pyFAI</i>",
+        "url": "https://openalex.org/W2117152322",
+        "snippet": "pyFAI is an open-source software package designed to perform azimuthal integration and, correspondingly, two-dimensional regrouping on area-detector frames for small- and wide-angle X-ray scattering experiments. It written in Python (with binary submodules improved performance), a language widely ac",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.925
+      },
+      {
+        "title": "Multi-trait analysis of genome-wide association summary statistics using MTAG",
+        "url": "https://openalex.org/W2780560743",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.925
+      },
+      {
+        "title": "PyMC: a modern, and comprehensive probabilistic programming framework in Python",
+        "url": "https://openalex.org/W4386373863",
+        "snippet": "PyMC is a probabilistic programming library for Python that provides tools constructing and fitting Bayesian models. It offers an intuitive, readable syntax close to the natural statisticians use describe leverages symbolic computation PyTensor, allowing it be compiled into variety of computational",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.925
+      },
+      {
+        "title": "LOFAR: The LOw-Frequency ARray",
+        "url": "https://openalex.org/W2147626801",
+        "snippet": "40 LOFAR, the LOw-Frequency ARray, is a new-generation radio interferometer constructed in north of Netherlands and across europe. Utilizing novel phased-array design, LOFAR covers largely unexplored low-frequency range from 10–240 MHz provides number unique observing capabilities. Spreading out cor",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.925
+      },
+      {
+        "title": "No Support for Historical Candidate Gene or Candidate Gene-by-Interaction Hypotheses for Major Depression Across Multiple Large Samples",
+        "url": "https://openalex.org/W2919957599",
+        "snippet": "10 18 OBJECTIVE: Interest in candidate gene and gene-by-environment interaction hypotheses regarding major depressive disorder remains strong despite controversy surrounding the validity of previous findings. In response to this controversy, present investigation empirically identified genes for dep",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "Proceedings of the 8th Python in Science Conference",
+        "url": "https://openalex.org/W4401946486",
+        "snippet": "Cython is a programming language based on Python with extra syntax to provide static type declarations.This takes advantage of the benefits while allowing one achieve speed C. In this paper we describe and show how it can be used both write optimized code interface external C libraries.does not work",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "ChatGPT: Bullshit spewer or the end of traditional assessments in higher education?",
+        "url": "https://openalex.org/W4317910584",
+        "snippet": "ChatGPT is the world’s most advanced chatbot thus far. Unlike other chatbots, it can create impressive prose within seconds, and has created much hype doomsday predictions when comes to student assessment in higher education a host of matters. state-of-the-art language model (a variant OpenAI’s Gene",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "Dedalus: A flexible framework for numerical simulations with spectral methods",
+        "url": "https://openalex.org/W2944878488",
+        "snippet": "This paper describes Dedalus, an open-source Python code for simulating partial differential equations from all areas of physics. Dedalus translates plain-text into efficient and parallelized solvers using global spectral methods. Here the authors detail numerical methods enabling this translation d",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "Validation of the Crystallography Open Database using the Crystallographic Information Framework",
+        "url": "https://openalex.org/W3129696436",
+        "snippet": "450 Data curation practices of the Crystallography Open Database (COD) are described with additional focus being placed on formal validation using Crystallographic Information Framework (CIF). The cif_validate program, capable validating CIF files against both DDL1 and DDLm dictionaries, is presente",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "All you need to know about model predictive control for buildings",
+        "url": "https://openalex.org/W3090789943",
+        "snippet": "It has been proven that advanced building control, like model predictive control (MPC), can notably reduce the energy use and mitigate greenhouse gas emissions. However, despite intensive research efforts, practical applications are still in early stages. There is a growing need for multidisciplinar",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "Las Cumbres Observatory Global Telescope Network",
+        "url": "https://openalex.org/W4233629529",
+        "snippet": "1 2 17 23 40 Las Cumbres Observatory Global Telescope (LCOGT) is a young organization dedicated to timedomain observations at optical and (potentially) near-IR wavelengths. To this end, LCOGT constructing worldwide network of telescopes, including the two m Faulkes as many cm telescopes. These teles",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "Code-pointer integrity",
+        "url": "https://openalex.org/W2124360577",
+        "snippet": "100 Systems code is often written in low-level languages like C/C++, which offer many benefits but also dele-gate memory management to programmers. This invites safety bugs that attackers can exploit divert control flow and compromise the system. Deployed de-fense mechanisms (e.g., ASLR, DEP) are in",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "Single-cell and spatial transcriptomics enables probabilistic inference of cell type topography",
+        "url": "https://openalex.org/W3092450854",
+        "snippet": "The field of spatial transcriptomics is rapidly expanding, and with it the repertoire available technologies. However, several transcriptome-wide assays do not operate on a single cell level, but rather produce data comprised contributions from - potentially heterogeneous mixture cells. Still, these",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "DScribe: Library of descriptors for machine learning in materials science",
+        "url": "https://openalex.org/W2976720228",
+        "snippet": "DScribe is a software package for machine learning that provides popular feature transformations (“descriptors”) atomistic materials simulations. accelerates the application of property prediction by providing user-friendly, off-the-shelf descriptor implementations. The currently contains implementa",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "Relative Citation Ratio (RCR): A New Metric That Uses Citation Rates to Measure Influence at the Article Level",
+        "url": "https://openalex.org/W2953304564",
+        "snippet": "2003 2010 Despite their recognized limitations, bibliometric assessments of scientific productivity have been widely adopted. We describe here an improved method to quantify the influence a research article by making novel use its co-citation network field-normalize number citations it has received.",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      },
+      {
+        "title": "TMVA - Toolkit for Multivariate Data Analysis",
+        "url": "https://openalex.org/W2126889979",
+        "snippet": "4 In high-energy physics, with the search for ever smaller signals in larger data sets, it has become essential to extract a maximum of available information from data. Multivariate classification methods based on machine learning techniques have fundamental ingredient most analyses. Also multivaria",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.926
+      }
+    ],
+    "timestamp": 1779047498.926
+  },
+  "crossref:python lists index bounds data science": {
+    "data": [
+      {
+        "title": "Built-in Data Structures: Lists",
+        "url": "https://doi.org/10.1007/978-3-031-52473-8_4",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Python Lists, Strings, And Other Data Sequences",
+        "url": "https://doi.org/10.1201/b18861-14",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Index",
+        "url": "https://doi.org/10.1002/9781394213276.index",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Chapter 5: Linked Lists",
+        "url": "https://doi.org/10.1515/9781683927563-006",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "INDEX",
+        "url": "https://doi.org/10.1002/9781119526865.index",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Basic Data Types: Lists and Tuples",
+        "url": "https://doi.org/10.1007/978-3-319-18398-5_4",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "R's lists versus Python's lists and dicts",
+        "url": "https://doi.org/10.1201/9781003263241-5",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Index",
+        "url": "https://doi.org/10.1002/9781119126805.index",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Chapter 6: Linked Lists and Common Tasks",
+        "url": "https://doi.org/10.1515/9781683927563-007",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "BioVenn – an R and Python package for the comparison and visualization of biological lists using area-proportional Venn diagrams",
+        "url": "https://doi.org/10.3233/ds-210032",
+        "snippet": "One of the most popular methods to visualize the overlap and differences between data sets is the Venn diagram. Venn diagrams are especially useful when they are ‘area-proportional’ i.e. the sizes of the circles and the overlaps correspond to the sizes of the data sets. In 2007, the BioVenn web inte",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Index",
+        "url": "https://doi.org/10.1017/9781009588911.023",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Lists and Tuples",
+        "url": "https://doi.org/10.1007/978-1-4302-0072-7_2",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Chapter 3: Arrays/Lists",
+        "url": "https://doi.org/10.1515/9781683926382-005",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Chapter 4: Linked Lists",
+        "url": "https://doi.org/10.1515/9781683926382-006",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Index",
+        "url": "https://doi.org/10.1017/9781009509435.010",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.978
+      },
+      {
+        "title": "Index",
+        "url": "https://doi.org/10.1017/9781108903578.010",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.979
+      },
+      {
+        "title": "Linked Lists",
+        "url": "https://doi.org/10.1007/978-981-96-3201-5_8",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.979
+      },
+      {
+        "title": "Lists",
+        "url": "https://doi.org/10.1002/9781119643845.ch8",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.979
+      },
+      {
+        "title": "Strings, Lists, Arrays, and Dictionaries",
+        "url": "https://doi.org/10.1201/9781032673950-4",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.979
+      },
+      {
+        "title": "Strings, Lists, Arrays, and Dictionaries",
+        "url": "https://doi.org/10.1201/9780429506413-3",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047498.979
+      }
+    ],
+    "timestamp": 1779047498.979
+  },
+  "openalex:python lists index bounds machine learning": {
+    "data": [
+      {
+        "title": "The Astropy Project: Building an Open-science Project and Status of the v2.0 Core Package<sup>*</sup>",
+        "url": "https://openalex.org/W2888532099",
+        "snippet": "Abstract The Astropy Project supports and fosters the development of open-source openly developed Python packages that provide commonly needed functionality to astronomical community. A key element is core package astropy , which serves as foundation for more specialized projects packages. In this a",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.272
+      },
+      {
+        "title": "Benchmarking atlas-level data integration in single-cell genomics",
+        "url": "https://openalex.org/W4225598893",
+        "snippet": "13 14 23 68 85 Single-cell atlases often include samples that span locations, laboratories and conditions, leading to complex, nested batch effects in data. Thus, joint analysis of atlas datasets requires reliable data integration. To guide integration method choice, we benchmarked preprocessing com",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.272
+      },
+      {
+        "title": "ChatGPT: Bullshit spewer or the end of traditional assessments in higher education?",
+        "url": "https://openalex.org/W4317910584",
+        "snippet": "ChatGPT is the world’s most advanced chatbot thus far. Unlike other chatbots, it can create impressive prose within seconds, and has created much hype doomsday predictions when comes to student assessment in higher education a host of matters. state-of-the-art language model (a variant OpenAI’s Gene",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.273
+      },
+      {
+        "title": "PyMC: a modern, and comprehensive probabilistic programming framework in Python",
+        "url": "https://openalex.org/W4386373863",
+        "snippet": "PyMC is a probabilistic programming library for Python that provides tools constructing and fitting Bayesian models. It offers an intuitive, readable syntax close to the natural statisticians use describe leverages symbolic computation PyTensor, allowing it be compiled into variety of computational",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.273
+      },
+      {
+        "title": "DScribe: Library of descriptors for machine learning in materials science",
+        "url": "https://openalex.org/W2976720228",
+        "snippet": "DScribe is a software package for machine learning that provides popular feature transformations (“descriptors”) atomistic materials simulations. accelerates the application of property prediction by providing user-friendly, off-the-shelf descriptor implementations. The currently contains implementa",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.273
+      },
+      {
+        "title": "LOFAR: The LOw-Frequency ARray",
+        "url": "https://openalex.org/W2147626801",
+        "snippet": "40 LOFAR, the LOw-Frequency ARray, is a new-generation radio interferometer constructed in north of Netherlands and across europe. Utilizing novel phased-array design, LOFAR covers largely unexplored low-frequency range from 10–240 MHz provides number unique observing capabilities. Spreading out cor",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.273
+      },
+      {
+        "title": "All you need to know about model predictive control for buildings",
+        "url": "https://openalex.org/W3090789943",
+        "snippet": "It has been proven that advanced building control, like model predictive control (MPC), can notably reduce the energy use and mitigate greenhouse gas emissions. However, despite intensive research efforts, practical applications are still in early stages. There is a growing need for multidisciplinar",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.273
+      },
+      {
+        "title": "Proceedings of the 8th Python in Science Conference",
+        "url": "https://openalex.org/W4401946486",
+        "snippet": "Cython is a programming language based on Python with extra syntax to provide static type declarations.This takes advantage of the benefits while allowing one achieve speed C. In this paper we describe and show how it can be used both write optimized code interface external C libraries.does not work",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.273
+      },
+      {
+        "title": "The Colony Predation Algorithm",
+        "url": "https://openalex.org/W3169902780",
+        "snippet": "Abstract This paper proposes a new stochastic optimizer called the Colony Predation Algorithm (CPA) based on corporate predation of animals in nature. CPA utilizes mathematical mapping following strategies used by animal hunting groups, such as dispersing prey, encircling supporting most likely succ",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.274
+      },
+      {
+        "title": "TMVA - Toolkit for Multivariate Data Analysis",
+        "url": "https://openalex.org/W2126889979",
+        "snippet": "4 In high-energy physics, with the search for ever smaller signals in larger data sets, it has become essential to extract a maximum of available information from data. Multivariate classification methods based on machine learning techniques have fundamental ingredient most analyses. Also multivaria",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.274
+      },
+      {
+        "title": "A Survey on Causal Inference",
+        "url": "https://openalex.org/W3160537436",
+        "snippet": "Causal inference is a critical research topic across many domains, such as statistics, computer science, education, public policy, and economics, for decades. Nowadays, estimating causal effect from observational data has become an appealing direction owing to the large amount of available low budge",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.274
+      },
+      {
+        "title": "Do not blame it on the algorithm: an empirical assessment of multiple recommender systems and their impact on content diversity",
+        "url": "https://openalex.org/W2790980374",
+        "snippet": "In the debate about filter bubbles caused by algorithmic news recommendation, conceptualization of two core concepts in this debate, diversity and algorithms, has received little attention social scientific research. This paper examines effect multiple recommender systems on different dimensions. To",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.274
+      },
+      {
+        "title": "Distributional Semantics Resources for Biomedical Text Processing",
+        "url": "https://openalex.org/W2527896214",
+        "snippet": "Dear LBM symposium participant, It is a great pleasure to welcome you the fifth on languages in biology and medicine (LBM 2013) introduce these proceedings biennial interdisciplinary forum that brings together researchers biology, chemistry, medicine, public health informatics discuss exploit cuttin",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.274
+      },
+      {
+        "title": "FISTA-Net: Learning a Fast Iterative Shrinkage Thresholding Network for Inverse Problems in Imaging",
+        "url": "https://openalex.org/W3047238636",
+        "snippet": "Inverse problems are essential to imaging applications. In this letter, we propose a model-based deep learning network, named FISTA-Net, by combining the merits of interpretability and generality Fast Iterative Shrinkage/Thresholding Algorithm (FISTA) strong regularization tuning-free advantages dat",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.274
+      },
+      {
+        "title": "CVEfixes: automated collection of vulnerabilities and their fixes from open-source software",
+        "url": "https://openalex.org/W3183469243",
+        "snippet": "9 1754 5365 5495 Data-driven research on the automated discovery and repair of security vulnerabilities in source code requires comprehensive datasets real-life vulnerable their fixes. To assist such research, we propose a method to automatically collect curate vulnerability dataset from Common Vuln",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.274
+      },
+      {
+        "title": "Sentiment Analysis and Social Cognition Engine (SEANCE): An automatic tool for sentiment, social cognition, and social-order analysis",
+        "url": "https://openalex.org/W2406501289",
+        "snippet": "",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.274
+      },
+      {
+        "title": "From Deterministic to Generative: Multimodal Stochastic RNNs for Video Captioning",
+        "url": "https://openalex.org/W2962958773",
+        "snippet": "Video captioning, in essential, is a complex natural process, which affected by various uncertainties stemming from video content, subjective judgment, and so on. In this paper, we build on the recent progress using encoder-decoder framework for captioning address what find to be critical deficiency",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.275
+      },
+      {
+        "title": "Quantitative single-cell proteomics as a tool to characterize cellular hierarchies",
+        "url": "https://openalex.org/W3166627873",
+        "snippet": "Large-scale single-cell analyses are of fundamental importance in order to capture biological heterogeneity within complex cell systems, but have largely been limited RNA-based technologies. Here we present a comprehensive benchmarked experimental and computational workflow, which establishes global",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.275
+      },
+      {
+        "title": "Taichi",
+        "url": "https://openalex.org/W2977371611",
+        "snippet": "0 1 3D visual computing data are often spatially sparse. To exploit such sparsity, people have developed hierarchical sparse structures, as multi-level voxel grids, particles, and hash tables. However, developing using these high-performance structures is challenging, due to their intrinsic complexi",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.275
+      },
+      {
+        "title": "Evaluating the Stability of Embedding-based Word Similarities",
+        "url": "https://openalex.org/W2789202651",
+        "snippet": "Word embeddings are increasingly being used as a tool to study word associations in specific corpora. However, it is unclear whether such reflect enduring properties of language or if they sensitive inconsequential variations the source documents. We find that nearest-neighbor distances highly small",
+        "source": "OpenAlex (openalex)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.275
+      }
+    ],
+    "timestamp": 1779047499.275
+  },
+  "crossref:python lists index bounds": {
+    "data": [
+      {
+        "title": "Lists and Tuples",
+        "url": "https://doi.org/10.1007/978-1-4302-0072-7_2",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Python Lists, Strings, And Other Data Sequences",
+        "url": "https://doi.org/10.1201/b18861-14",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists",
+        "url": "https://doi.org/10.1002/9781119643845.ch8",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists and Loops",
+        "url": "https://doi.org/10.1017/9781009106696.004",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists and Tuples",
+        "url": "https://doi.org/10.1007/978-1-4842-5831-6_11",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Linked Lists",
+        "url": "https://doi.org/10.1201/b18861-17",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Using Lists",
+        "url": "https://doi.org/10.1007/978-1-4302-1633-9_5",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists",
+        "url": "https://doi.org/10.1201/9781351013239-6",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists",
+        "url": "https://doi.org/10.1002/9781119573364.ch7",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists and Tuples",
+        "url": "https://doi.org/10.1007/978-1-4842-0028-5_2",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists and Tuples",
+        "url": "https://doi.org/10.1007/978-1-4302-0634-7_2",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists",
+        "url": "https://doi.org/10.1007/978-1-4842-2172-3_7",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists and Loops",
+        "url": "https://doi.org/10.1007/978-1-4842-5355-7_4",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "◾ Iteration and Lists",
+        "url": "https://doi.org/10.1201/b15104-10",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.372
+      },
+      {
+        "title": "Lists",
+        "url": "https://doi.org/10.1007/978-1-4842-3231-6_6",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.373
+      },
+      {
+        "title": "Lists",
+        "url": "https://doi.org/10.1017/cbo9780511813832.012",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.373
+      },
+      {
+        "title": "Tuples, Lists and Dictionaries",
+        "url": "https://doi.org/10.1017/9781108591942.012",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.373
+      },
+      {
+        "title": "2D Lists and Dictionaries",
+        "url": "https://doi.org/10.1017/9781108591942.015",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.373
+      },
+      {
+        "title": "R's lists versus Python's lists and dicts",
+        "url": "https://doi.org/10.1201/9781003263241-5",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.373
+      },
+      {
+        "title": "Chapter 5: Linked Lists",
+        "url": "https://doi.org/10.1515/9781683927563-006",
+        "snippet": "",
+        "source": "CrossRef (crossref)",
+        "relevance_score": 0,
+        "content_type": "paper",
+        "timestamp": 1779047499.373
+      }
+    ],
+    "timestamp": 1779047499.373
+  }
+}

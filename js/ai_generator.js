@@ -18,7 +18,9 @@ const ProceduralAI = {
     ops:       ['+', '-', '*'],
     verbs:     ['conectar', 'injetar', 'processar', 'validar', 'encriptar', 'compilar', 'hackear', 'sniffar', 'debugar'],
     cyber:     ['sql_injection', 'xss_payload', 'bruteforce', 'handshake', 'overflow', 'encryption_key'],
-    devops:    ['docker_image', 'pod_status', 'pipeline_id', 'git_ref', 'env_var', 'deployment']
+    devops:    ['docker_image', 'pod_status', 'pipeline_id', 'git_ref', 'env_var', 'deployment'],
+    oop:       ['Agente', 'Conexao', 'Processo', 'Malware', 'Scanner', 'Node'],
+    data:      ['dataset', 'dataframe', 'matriz', 'tensor', 'series', 'payloads']
   },
 
   // Anti-repeat state
@@ -351,6 +353,58 @@ const ProceduralAI = {
         answer: 1,
         explain: `⚙️ [DevOps/Portability] Hardcoding de separadores ('/') quebra em sistemas diferentes. O 'pathlib' do Python é a forma moderna e segura de manipular sistemas de arquivos.`,
         category: 'devops'
+      };
+    },
+
+    // ════════ ORIENTAÇÃO A OBJETOS (OOP) ════════
+
+    oop_init_missing: function(sys, num, str, sm, verb) {
+      const cls = this.getRandom(this.dicts.oop);
+      return {
+        code: `class ${cls}:\n    def __init__(id):\n        self.id = id\n\nobj = ${cls}(${num})`,
+        choices: [
+          `A classe deve herdar de object (class ${cls}(object):).`,
+          `TypeError: __init__() não declara 'self'. O correto é def __init__(self, id):`,
+          `Atributos de classe devem ser declarados fora do construtor.`,
+          `Falta declarar o retorno do construtor com 'return self'.`
+        ],
+        answer: 1,
+        explain: `🤖 [TypeError] Métodos de instância em Python devem receber a referência da própria instância (convencionalmente 'self') como primeiro parâmetro.`,
+        category: 'oop'
+      };
+    },
+
+    oop_class_var_mutation: function(sys, num, str, sm, verb) {
+      const cls = this.getRandom(this.dicts.oop);
+      return {
+        code: `class ${cls}:\n    logs = []\n\na = ${cls}()\nb = ${cls}()\na.logs.append("${str}")\nprint(b.logs)`,
+        choices: [
+          `Imprime [] — atributos são sempre isolados por instância.`,
+          `AttributeError: 'b' não tem o atributo logs.`,
+          `Imprime ['${str}'] — 'logs' é uma variável de classe (compartilhada entre instâncias) porque foi criada fora do __init__.`,
+          `SyntaxError: a criação da classe não possui um construtor __init__.`
+        ],
+        answer: 2,
+        explain: `🤖 [Class Variable] Variáveis definidas fora do __init__ pertencem à classe, não à instância. A lista 'logs' é a mesma para 'a' e 'b'. Defina dentro de __init__ com 'self.logs = []' para isolar.`,
+        category: 'oop'
+      };
+    },
+
+    // ════════ DATA SCIENCE (PANDAS/NUMPY MOCKS) ════════
+
+    data_pandas_copy: function(sys, num, str, sm, verb) {
+      const df = this.getRandom(this.dicts.data);
+      return {
+        code: `import pandas as pd\n${df} = pd.DataFrame({'val': [1, 2, 3]})\nsub_df = ${df}[${df}['val'] > 1]\nsub_df['val'] = 0`,
+        choices: [
+          `O código executa sem nenhum problema ou aviso.`,
+          `Lança um SettingWithCopyWarning — sub_df é uma 'view', e modificar ela pode não alterar o dataframe original. Use .copy().`,
+          `KeyError: 'val' não é um índice válido.`,
+          `A comparação ${df}['val'] > 1 retorna ValueError em DataFrames.`
+        ],
+        answer: 1,
+        explain: `📊 [SettingWithCopyWarning] Ao filtrar um DataFrame do Pandas, é retornado uma View. Modificá-la gera um aviso para prevenir bugs ocultos. Faça: sub_df = ${df}[...].copy()`,
+        category: 'data'
       };
     }
   },

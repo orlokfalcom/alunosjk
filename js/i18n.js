@@ -12,6 +12,7 @@ const translations = {
         coins: "Cyber Coins",
         mission_select: "SELECIONE SUA MISSÃO",
         logout: "SAIR",
+        nav_hq: "QG (Dashboard)",
         login_placeholder: "Digite seu codinome",
         tut_welcome: "🕵️‍♂️ Bem-vindo, Jovem Detetive!",
         tut_welcome_desc: "Sua missão aqui é simples: Encontrar as falhas que outros programadores deixaram no código Python.",
@@ -78,8 +79,15 @@ const translations = {
         store_buy_protocol: "ADQUIRIR PROTOCOLO",
         store_stock: "EM ESTOQUE",
         store_acquired: "ADQUIRIDO",
-        store_insufficient: "CRÉDITOS INSUFICIENTES"
+        store_insufficient: "CRÉDITOS INSUFICIENTES",
+        search_terminal_title: "TERMINAL DE BUSCA ONYX",
+        search_terminal_desc: "Explore a rede interna e base acadêmica do CPython (arXiv, GitHub, Coursera, Kaggle) diretamente do seu terminal.",
+        search_placeholder: "Digite sua busca acadêmica ou técnica...",
+        search_waiting: "Aguardando sinal de consulta do operador.",
+        search_running: "🔎 Varrendo bancos de dados indexados...",
+        search_no_results: "Nenhum registro encontrado na rede CPython."
     },
+
     en: {
         title: "PYTHON DETECTIVE",
         hero_title: "BECOME AN <span class='highlight'>ELITE BUG HUNTER</span>",
@@ -93,6 +101,7 @@ const translations = {
         coins: "Cyber Coins",
         mission_select: "SELECT YOUR MISSION",
         logout: "LOGOUT",
+        nav_hq: "HQ (Dashboard)",
         login_placeholder: "Enter your codename",
         tut_welcome: "🕵️‍♂️ Welcome, Young Detective!",
         tut_welcome_desc: "Your mission is simple: Find the flaws other programmers left in Python code.",
@@ -159,8 +168,15 @@ const translations = {
         store_buy_protocol: "ACQUIRE PROTOCOL",
         store_stock: "IN STOCK",
         store_acquired: "ACQUIRED",
-        store_insufficient: "INSUFFICIENT CREDITS"
+        store_insufficient: "INSUFFICIENT CREDITS",
+        search_terminal_title: "ONYX SEARCH TERMINAL",
+        search_terminal_desc: "Explore CPython's internal network and academic database (arXiv, GitHub, Coursera, Kaggle) directly from your terminal.",
+        search_placeholder: "Type your academic or technical search query...",
+        search_waiting: "Awaiting operator query signal.",
+        search_running: "🔎 Scanning indexed databases...",
+        search_no_results: "No records found on the CPython network."
     },
+
     es: {
         title: "PYTHON DETECTIVE",
         hero_title: "SÉ UN <span class='highlight'>ELITE BUG HUNTER</span>",
@@ -174,6 +190,7 @@ const translations = {
         coins: "Cyber Coins",
         mission_select: "SELECCIONA TU MISIÓN",
         logout: "SALIR",
+        nav_hq: "CG (Dashboard)",
         login_placeholder: "Introduce tu nombre en clave",
         tut_welcome: "🕵️‍♂️ ¡Bienvenido, Joven Detective!",
         tut_welcome_desc: "Tu misión es simple: encontrar los fallos que otros programadores dejaron en el código Python.",
@@ -240,7 +257,13 @@ const translations = {
         store_buy_protocol: "ADQUIRIR PROTOCOLO",
         store_stock: "EN STOCK",
         store_acquired: "ADQUIRIDO",
-        store_insufficient: "CRÉDITOS INSUFICIENTES"
+        store_insufficient: "CRÉDITOS INSUFICIENTES",
+        search_terminal_title: "TERMINAL DE BÚSQUEDA ONYX",
+        search_terminal_desc: "Explore la red interna de CPython y la base de datos académica (arXiv, GitHub, Coursera, Kaggle) directamente desde su terminal.",
+        search_placeholder: "Escriba su consulta de búsqueda académica o técnica...",
+        search_waiting: "Esperando señal de consulta del operador.",
+        search_running: "🔎 Escaneando bases de datos indexadas...",
+        search_no_results: "No se encontraron registros en la red CPython."
     }
 };
 

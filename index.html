@@ -71,21 +71,33 @@
                         <i class="fas fa-bolt text-warning"></i>
                         <span id="streakCount" class="fw-bold">0</span>
                     </div>
-                    <select id="langSelect" class="form-select form-select-sm bg-dark text-white border-primary border-opacity-50" style="width: auto;" onchange="if(typeof setLanguage === 'function') setLanguage(this.value)">
+                    <select id="langSelect" class="form-select form-select-sm bg-dark text-white border-primary border-opacity-50" title="Selecionar Idioma / Select Language" onchange="if(typeof setLanguage === 'function') setLanguage(this.value)">
                         <option value="pt">🌐 PT</option>
                         <option value="en">🌐 EN</option>
                         <option value="es">🌐 ES</option>
                     </select>
-                    <button id="muteBtn" class="btn-cyber" title="Toggle Sound" onclick="toggleMute(this)" style="padding: 6px 12px; font-size: 13px;">
+                    <button id="muteBtn" class="btn-cyber" title="Toggle Sound" onclick="toggleMute(this)">
                         <i class="fas fa-volume-up"></i>
                     </button>
                 </div>
+            </div>
+            <!-- Navigation Menu (only shown when logged in) -->
+            <div id="headerNav" class="d-none justify-content-center justify-content-md-start gap-2 mt-1 mb-2 nav-menu flex-wrap">
+                <button class="nav-btn active" id="navDash" onclick="showDashboard()">
+                    <i class="fas fa-home me-1"></i> <span data-i18n="nav_hq">QG</span>
+                </button>
+                <button class="nav-btn" id="navSandbox" onclick="showSandbox()">
+                    <i class="fas fa-code me-1"></i> <span data-i18n="sandbox_title">MODO SANDBOX</span>
+                </button>
+                <button class="nav-btn" id="navStore" onclick="showStore()">
+                    <i class="fas fa-shopping-cart me-1"></i> <span data-i18n="shop_btn">LOJA</span>
+                </button>
             </div>
             <!-- Progress / XP Bar -->
             <div class="d-flex align-items-center gap-3">
                 <div class="small text-muted fw-bold">LVL <span id="userLevel">1</span></div>
                 <div class="xp-bar-container flex-grow-1">
-                    <div id="xpBar" class="xp-bar-fill" style="width: 0%"></div>
+                    <div id="xpBar" class="xp-bar-fill"></div>
                 </div>
                 <div class="small text-muted fw-bold"><span id="userXP">0</span>/1000 XP</div>
             </div>
@@ -151,7 +163,7 @@
                                     <div class="ms-auto badge bg-success small">LIVE</div>
                                 </div>
                                 <div class="terminal-body p-4">
-                                    <div class="bg-black rounded p-3 mb-3 font-monospace small" style="min-height: 120px; border: 1px solid hsla(0,0%,100%,0.05)">
+                                    <div class="bg-black rounded p-3 mb-3 font-monospace small mock-terminal-screen">
                                         <div class="text-success">>>> def onyx_v3_init():</div>
                                         <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;engine = "Procedural_AI"</div>
                                         <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;mode = "Supernova"</div>

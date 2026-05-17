@@ -1821,6 +1821,7 @@ img, video, iframe {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -1870,3 +1871,101 @@ img, video, iframe {
 /* Specialized Domain Badges */
 .badge-cyber { background: var(--secondary); color: white; }
 .badge-devops { background: var(--accent); color: white; }
+
+/* Navigation Bar Styling */
+.nav-menu {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 10px;
+    width: 100%;
+}
+
+.nav-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: var(--transition-fast);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn i {
+    font-size: 0.9rem;
+    transition: var(--transition-fast);
+}
+
+.nav-btn:hover {
+    border-color: hsla(var(--neon-cyan), 0.5);
+    color: var(--text-white);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.nav-btn.active {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(0, 209, 255, 0.06);
+    box-shadow: 0 0 15px rgba(0, 209, 255, 0.2);
+    text-shadow: 0 0 8px rgba(0, 209, 255, 0.4);
+}
+
+.nav-btn.active i {
+    color: var(--primary);
+    filter: drop-shadow(0 0 3px rgba(0, 209, 255, 0.8));
+}
+
+/* Custom Interactive Sandbox UI */
+#sandboxCode:focus {
+    background-color: #000000 !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 15px rgba(0, 209, 255, 0.15) !important;
+    outline: none !important;
+}
+
+#sandboxTerminal {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    background-color: #000000 !important;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9);
+    position: relative;
+    border-radius: var(--radius-sm);
+}
+
+#sandboxTerminal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+#scopeVariables tr {
+    transition: var(--transition-fast);
+}
+
+#scopeVariables tr:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Accessibility & Refactored Inline Styles */
+#langSelect {
+    width: auto;
+}
+
+#muteBtn {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.mock-terminal-screen {
+    min-height: 120px;
+    border: 1px solid hsla(0, 0%, 100%, 0.05);
+}
